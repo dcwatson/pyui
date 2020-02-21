@@ -1,0 +1,24 @@
+from sdl2.sdlgfx import boxRGBA
+
+from pyui.geom import Size
+
+from .base import View
+
+
+class Rectangle(View):
+    def __init__(self, width=None, height=None):
+        self.width = width
+        self.height = height
+        super().__init__()
+
+    def content_size(self, available):
+        if self.width and self.height:
+            return Size(self.width, self.height)
+        elif self.width:
+            return Size(self.width, available.h)
+        elif self.height:
+            return Size(available.w, self.height)
+        return available
+
+    def draw(self, renderer, rect):
+        boxRGBA(renderer, self.frame.left, self.frame.top, self.frame.right, self.frame.bottom, 30, 32, 33, 255)

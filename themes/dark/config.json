@@ -1,0 +1,108 @@
+{
+    "name": "Dark",
+    "background": [48, 50, 51],
+    "assets": {
+        "button": {
+            "file": "button.png",
+            "color": [255, 255, 255],
+            "padding": [10, 40, 10, 40],
+            "slice": [[12, 12], [1, 1]]
+        },
+        "button.pressed": {
+            "file": "button_pressed.png",
+            "color": [255, 255, 255],
+            "padding": [10, 40, 10, 40],
+            "slice": [[12, 12], [1, 1]]
+        },
+        "button.primary": {
+            "file": "button_primary.png",
+            "color": [255, 255, 255],
+            "padding": [10, 40, 10, 40],
+            "slice": [[12, 12], [1, 1]]
+        },
+        "button.primary.pressed": {
+            "file": "button_primary_pressed.png",
+            "color": [255, 255, 255],
+            "padding": [10, 40, 10, 40],
+            "slice": [[12, 12], [1, 1]]
+        },
+        "segment.left": {
+            "file": "segment_left.png",
+            "color": [255, 255, 255],
+            "padding": [10, 40, 10, 40],
+            "slice": [[12, 12], [1, 1]]
+        },
+        "segment.left.pressed": {
+            "file": "segment_left_pressed.png",
+            "color": [255, 255, 255],
+            "padding": [10, 40, 10, 40],
+            "slice": [[12, 12], [1, 1]]
+        },
+        "segment.left.selected": {
+            "file": "segment_left_selected.png",
+            "color": [255, 255, 255],
+            "padding": [10, 40, 10, 40],
+            "slice": [[12, 12], [1, 1]]
+        },
+        "segment.left.selected.pressed": {
+            "file": "segment_left_selected.png",
+            "color": [255, 255, 255],
+            "padding": [10, 40, 10, 40],
+            "slice": [[12, 12], [1, 1]]
+        },
+        "segment.center": {
+            "file": "segment_center.png",
+            "color": [255, 255, 255],
+            "padding": [10, 40, 10, 40],
+            "slice": [[1, 12], [1, 1]]
+        },
+        "segment.center.pressed": {
+            "file": "segment_center_pressed.png",
+            "color": [255, 255, 255],
+            "padding": [10, 40, 10, 40],
+            "slice": [[1, 12], [1, 1]]
+        },
+        "segment.center.selected": {
+            "file": "segment_center_selected.png",
+            "color": [255, 255, 255],
+            "padding": [10, 40, 10, 40],
+            "slice": [[1, 12], [1, 1]]
+        },
+        "segment.center.selected.pressed": {
+            "file": "segment_center_selected.png",
+            "color": [255, 255, 255],
+            "padding": [10, 40, 10, 40],
+            "slice": [[1, 12], [1, 1]]
+        },
+        "segment.right": {
+            "file": "segment_right.png",
+            "color": [255, 255, 255],
+            "padding": [10, 40, 10, 40],
+            "slice": [[1, 12], [1, 1]]
+        },
+        "segment.right.pressed": {
+            "file": "segment_right_pressed.png",
+            "color": [255, 255, 255],
+            "padding": [10, 40, 10, 40],
+            "slice": [[1, 12], [1, 1]]
+        },
+        "segment.right.selected": {
+            "file": "segment_right_selected.png",
+            "color": [255, 255, 255],
+            "padding": [10, 40, 10, 40],
+            "slice": [[1, 12], [1, 1]]
+        },
+        "segment.right.selected.pressed": {
+            "file": "segment_right_selected.png",
+            "color": [255, 255, 255],
+            "padding": [10, 40, 10, 40],
+            "slice": [[1, 12], [1, 1]]
+        },
+        "textfield": {
+            "file": "textfield.png",
+            "color": [255, 255, 255],
+            "padding": [10, 40, 10, 40],
+            "slice": [[12, 12], [1, 1]]
+        }
+    }
+}
