@@ -1,5 +1,5 @@
 from .base import Alignment, Priority, View
-from .control import Button
+from .control import Button, Slider
 from .image import Image
 from .nav import TabView
 from .shape import Rectangle

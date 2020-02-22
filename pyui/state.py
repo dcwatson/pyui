@@ -1,18 +1,31 @@
+class Binding:
+    def __init__(self, state, instance):
+        self.state = state
+        self.instance = instance
+
+    @property
+    def value(self):
+        return self.instance.__dict__[self.state.name]
+
+    @value.setter
+    def value(self, new_value):
+        self.state.__set__(self.instance, new_value)
+
+
 class State:
     def __init__(self, python_type=None, default=None):
         self.python_type = python_type
-        self.multi = False
         self.name = None
         self.default = default
 
-    def __get__(self, instance, owner):
+    def __get__(self, instance, owner=None):
         if not instance:
             return self
         if self.name not in instance.__dict__:
             value = self.get_default()
             # Set the default value the first time it's accessed, so it's not changing on every access.
             self.__set__(instance, value)
-        return instance.__dict__[self.name]
+        return Binding(self, instance)
 
     def __set__(self, instance, value):
         instance.__dict__[self.name] = self.check_value(instance, value)

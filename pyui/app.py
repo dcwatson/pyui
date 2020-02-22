@@ -40,6 +40,7 @@ class Window:
         # Listen for events
         self.listen(sdl2.SDL_MOUSEBUTTONDOWN, "button", self.mousedown)
         self.listen(sdl2.SDL_MOUSEBUTTONUP, "button", self.mouseup, check_window=False)
+        self.listen(sdl2.SDL_MOUSEMOTION, "motion", self.mousemotion)
         self.listen(sdl2.SDL_WINDOWEVENT, "window", self.window_event)
 
     def listen(self, event_type, event_attr, handler, check_window=True):
@@ -96,6 +97,11 @@ class Window:
         if found:
             found.mousedown(pt)
             self.tracking = found
+
+    def mousemotion(self, event):
+        pt = self.point(event.x, event.y)
+        if self.tracking:
+            self.tracking.mousemotion(pt)
 
     def mouseup(self, event):
         pt = self.point(event.x, event.y)

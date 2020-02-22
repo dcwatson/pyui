@@ -98,6 +98,14 @@
             "padding": [10, 40, 10, 40],
             "slice": [[1, 12], [1, 1]]
         },
+        "slider.track": {
+            "file": "slider_track.png",
+            "slice": [[6, 6], [2, 2]]
+        },
+        "slider.knob": {
+            "file": "slider_knob.png",
+            "slice": [[20, 20], [0, 0]]
+        },
         "textfield": {
             "file": "textfield.png",
             "color": [255, 255, 255],

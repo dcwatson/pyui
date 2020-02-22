@@ -59,15 +59,15 @@ class TabView(View):
         else:
             assets[0] = "segment.left"
             assets[len(self.tabs) - 1] = "segment.right"
-        if self.selected in assets:
-            assets[self.selected] += ".selected"
+        if self.selected.value in assets:
+            assets[self.selected.value] += ".selected"
         else:
-            assets[self.selected] = "segment.center.selected"
+            assets[self.selected.value] = "segment.center.selected"
         buttons = [
             Button(t.item_view, action=lambda idx=idx: self.select(idx), asset=assets.get(idx, "segment.center"))
             for idx, t in enumerate(self.tabs)
         ]
-        show = self.tabs[self.selected] if self.tabs else View()
+        show = self.tabs[self.selected.value] if self.tabs else View()
         # fmt: off
         yield VStack(spacing=0)(
             HStack(spacing=0)(

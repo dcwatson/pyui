@@ -12,10 +12,10 @@ class TimestampView(pyui.View):
     def content(self):
         # fmt: off
         yield pyui.HStack()(
-            pyui.Text(self.timestamp.strftime("%H:%M:%S.%f")),
+            pyui.Text(self.timestamp.value.strftime("%H:%M:%S.%f")),
             pyui.Button(action=self.update_timestamp)(
                 pyui.Image("images/python.svg").height(30),
-                pyui.Text("Update")
+                pyui.Text("Update"),
             )
         )
         # fmt: on
@@ -34,13 +34,27 @@ class BarChartView(pyui.View):
         self.bars = random_bars()
 
     def content(self):
-        bars = [pyui.Rectangle(height=h) for h in self.bars]
+        # fmt: off
+        bars = [pyui.Rectangle(height=h) for h in self.bars.value]
         yield pyui.VStack(spacing=20)(
             pyui.Text("Bar Chart"),
             pyui.Spacer(),
             pyui.HStack(alignment=pyui.Alignment.TRAILING)(*bars),
             pyui.Button("Randomize", action=self.randomize),
         )
+        # fmt: on
+
+
+class ImageSizerView(pyui.View):
+    scale = pyui.State(int, default=100)
+
+    def content(self):
+        # fmt: off
+        yield pyui.VStack(
+            pyui.Slider(self.scale, 0, 100),
+            pyui.Image("images/python.png").scale(self.scale.value / 100),
+        )
+        # fmt: on
 
 
 class DemoView(pyui.View):
@@ -49,7 +63,7 @@ class DemoView(pyui.View):
         yield pyui.TabView()(
             TimestampView().pad(40).item("Timestamp"),
             BarChartView().pad(40).item("Bar Chart"),
-            pyui.Image("images/python.png").pad(40).item("Image")
+            ImageSizerView().pad(40).item("Image"),
         ).pad(40)
         # fmt: on
 

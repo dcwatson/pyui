@@ -1,4 +1,5 @@
 from pyui.geom import Insets, Rect, Size
+from pyui.state import Binding, State
 from pyui.theme import Theme
 
 from .base import View
@@ -34,6 +35,42 @@ class Button(HStack):
     def click(self, pt):
         if self.action:
             self.action()
+
+
+class Slider(View):
+    interactive = True
+
+    def __init__(self, value: Binding, minimum=0, maximum=100):
+        self.minimum = minimum
+        self.maximum = maximum
+        self.current = value
+        super().__init__()
+        theme = Theme("themes/dark/config.json")
+        self.slider = theme.load_asset("slider.track")
+        self.knob = theme.load_asset("slider.knob")
+
+    @property
+    def span(self):
+        return self.maximum - self.minimum
+
+    def content_size(self, available):
+        return Size(available.w, 40)
+
+    def draw(self, renderer, rect):
+        offset = int(self.current.value * rect.width / self.span) - 20
+        slider_rect = Rect(origin=(rect.left, rect.top + 14), size=(rect.width, 12))
+        knob_rect = Rect(origin=(rect.left + offset, rect.top), size=(40, 40))
+        self.slider.render(renderer, slider_rect)
+        self.knob.render(renderer, knob_rect)
+
+    def mousemotion(self, pt):
+        inner = self.frame - self.padding - self.border
+        if pt.x >= inner.left and pt.x <= inner.right:
+            pct = (pt.x - inner.left) / inner.width
+            self.current.value = int(self.minimum + (pct * self.span))
+
+    def click(self, pt):
+        self.mousemotion(pt)
 
 
 class TextField(View):

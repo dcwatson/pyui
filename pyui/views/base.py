@@ -147,6 +147,9 @@ class View:
     def mousedown(self, pt):
         pass
 
+    def mousemotion(self, pt):
+        pass
+
     def mouseup(self, pt):
         pass
 
