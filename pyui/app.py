@@ -7,6 +7,7 @@ import sdl2
 from sdl2.sdlimage import IMG_INIT_PNG, IMG_Init
 from sdl2.sdlttf import TTF_Init
 
+from .env import Environment
 from .geom import Point, Rect, Size
 
 
@@ -130,6 +131,29 @@ class Application:
         sdl2.SDL_Init(sdl2.SDL_INIT_EVERYTHING)
         IMG_Init(IMG_INIT_PNG)
         TTF_Init()
+        # Ugly hack to determine resolution scaling factor as early as possible.
+        win = sdl2.SDL_CreateWindow(
+            "ResolutionTest".encode("utf-8"),
+            sdl2.SDL_WINDOWPOS_UNDEFINED,
+            sdl2.SDL_WINDOWPOS_UNDEFINED,
+            100,
+            100,
+            sdl2.SDL_WINDOW_HIDDEN | sdl2.SDL_WINDOW_ALLOW_HIGHDPI,
+        )
+        rend = sdl2.SDL_CreateRenderer(win, -1, sdl2.SDL_RENDERER_ACCELERATED)
+        win_w = ctypes.c_int()
+        win_h = ctypes.c_int()
+        rend_w = ctypes.c_int()
+        rend_h = ctypes.c_int()
+        sdl2.SDL_GetWindowSize(win, ctypes.byref(win_w), ctypes.byref(win_h))
+        sdl2.SDL_GetRendererOutputSize(rend, ctypes.byref(rend_w), ctypes.byref(rend_h))
+        scale_w = rend_w.value / win_w.value
+        scale_h = rend_h.value / win_h.value
+        # Will this ever not be the case?
+        assert scale_w == scale_h
+        Environment.scale.default = scale_w
+        sdl2.SDL_DestroyRenderer(rend)
+        sdl2.SDL_DestroyWindow(win)
 
     def window(self, title, view):
         self.windows.append(Window(self, title, view))

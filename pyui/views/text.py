@@ -23,7 +23,7 @@ class Text(View):
         self.shadow = None
         self.texture = None
         self.utf8 = str(text).encode("utf-8")
-        self.font = TTF_OpenFont(self.fontfile, 28)
+        self.font = TTF_OpenFont(self.fontfile, self.env.scaled(14))
         self.color = sdl2.SDL_Color(230, 230, 230)
         self.create_surface()
 
@@ -35,7 +35,7 @@ class Text(View):
 
     def size(self, pts):
         TTF_CloseFont(self.font)
-        self.font = TTF_OpenFont(self.fontfile, pts)
+        self.font = TTF_OpenFont(self.fontfile, self.env.scaled(pts))
         self.create_surface()
         return self
 

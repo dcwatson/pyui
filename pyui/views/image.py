@@ -33,7 +33,7 @@ class Image(View):
         return self
 
     def height(self, h):
-        return self.scale(h / self.surface.contents.h)
+        return self.scale(self.env.scaled(h) / self.surface.contents.h)
 
     def width(self, w):
-        return self.scale(w / self.surface.contents.w)
+        return self.scale(self.env.scaled(w) / self.surface.contents.w)

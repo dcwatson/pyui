@@ -17,7 +17,7 @@ class Stack(View):
         super().__init__(*subviews)
         self.cross = self.axis.cross
         self.alignment = alignment
-        self.spacing = spacing
+        self.spacing = self.env.scaled(spacing)
 
     def __call__(self, *subviews):
         # Allows for HStack(spacing=5)(view1, view2, ...)

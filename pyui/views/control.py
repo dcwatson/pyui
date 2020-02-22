@@ -1,6 +1,5 @@
 from pyui.geom import Insets, Rect, Size
 from pyui.state import Binding, State
-from pyui.theme import Theme
 
 from .base import View
 from .stack import HStack
@@ -14,12 +13,11 @@ class Button(HStack):
         if not isinstance(label, View):
             label = Text(label)
         super().__init__(label)
-        self.padding = Insets(9, 40, 11, 40)
+        self.padding = Insets(5, 20, 6, 20).scale(self.env.scale)
         self.action = action
         self.pressed = False
-        theme = Theme("themes/dark/config.json")
-        self.asset = theme.load_asset(asset)
-        self.down = theme.load_asset(asset + ".pressed")
+        self.asset = self.env.theme.load_asset(asset)
+        self.down = self.env.theme.load_asset(asset + ".pressed")
 
     def draw(self, renderer, rect):
         asset = self.down if self.pressed else self.asset
@@ -41,25 +39,24 @@ class Slider(View):
     interactive = True
 
     def __init__(self, value: Binding, minimum=0, maximum=100):
+        super().__init__()
         self.minimum = minimum
         self.maximum = maximum
         self.current = value
-        super().__init__()
-        theme = Theme("themes/dark/config.json")
-        self.slider = theme.load_asset("slider.track")
-        self.knob = theme.load_asset("slider.knob")
+        self.slider = self.env.theme.load_asset("slider.track")
+        self.knob = self.env.theme.load_asset("slider.knob")
 
     @property
     def span(self):
         return self.maximum - self.minimum
 
     def content_size(self, available):
-        return Size(available.w, 40)
+        return Size(available.w, self.env.scaled(20))
 
     def draw(self, renderer, rect):
-        offset = int(self.current.value * rect.width / self.span) - 20
-        slider_rect = Rect(origin=(rect.left, rect.top + 14), size=(rect.width, 12))
-        knob_rect = Rect(origin=(rect.left + offset, rect.top), size=(40, 40))
+        offset = int(self.current.value * rect.width / self.span) - self.env.scaled(20)
+        slider_rect = Rect(origin=(rect.left, rect.top + self.env.scaled(7)), size=(rect.width, self.env.scaled(6)))
+        knob_rect = Rect(origin=(rect.left + offset, rect.top), size=(self.env.scaled(20), self.env.scaled(20)))
         self.slider.render(renderer, slider_rect)
         self.knob.render(renderer, knob_rect)
 
@@ -79,9 +76,8 @@ class TextField(View):
     def __init__(self, placeholder="Enter some text"):
         self.placeholder = Text(placeholder).foreground(200, 200, 200)
         super().__init__(self.placeholder)
-        self.padding = Insets(9, 40, 11, 40)
-        theme = Theme("themes/dark/config.json")
-        self.asset = theme.load_asset("textfield")
+        self.padding = Insets(4, 20, 5, 20).scale(self.env.scale)
+        self.asset = self.env.theme.load_asset("textfield")
 
     # def content_size(self, available):
     #    return Size(available.w, 28)

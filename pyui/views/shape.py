@@ -7,8 +7,9 @@ from .base import View
 
 class Rectangle(View):
     def __init__(self, width=None, height=None):
-        self.width = width
-        self.height = height
+        # TODO: make these Bindings
+        self.width = self.env.scaled(width) if width else None
+        self.height = self.env.scaled(height) if height else None
         super().__init__()
 
     def content_size(self, available):

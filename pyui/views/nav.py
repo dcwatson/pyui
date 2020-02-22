@@ -46,8 +46,9 @@ class TabView(View):
         return available
 
     def draw(self, renderer, rect):
-        roundedBoxRGBA(renderer, rect.left, rect.top + 26, rect.right, rect.bottom, 4, 79, 81, 81, 64)
-        roundedRectangleRGBA(renderer, rect.left, rect.top + 26, rect.right, rect.bottom, 4, 79, 81, 81, 255)
+        mid = self.env.scaled(13)
+        roundedBoxRGBA(renderer, rect.left, rect.top + mid, rect.right, rect.bottom, 4, 79, 81, 81, 64)
+        roundedRectangleRGBA(renderer, rect.left, rect.top + mid, rect.right, rect.bottom, 4, 79, 81, 81, 255)
 
     def select(self, idx):
         self.selected = idx

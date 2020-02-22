@@ -94,6 +94,9 @@ class Insets:
     def height(self):
         return self.top + self.bottom
 
+    def scale(self, by):
+        return self.__class__(int(self.top * by), int(self.left * by), int(self.bottom * by), int(self.right * by))
+
     def __getitem__(self, axis):
         if isinstance(axis, Axis):
             if axis == Axis.HORIZONTAL:

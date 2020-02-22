@@ -1,5 +1,6 @@
 import enum
 
+from pyui.env import Environment
 from pyui.geom import Axis, Insets, Point, Rect, Size
 
 
@@ -24,6 +25,8 @@ class View:
     # Hierarchy information.
     parent = None
     index = None
+
+    env = Environment()
 
     def __init__(self, *subviews, **options):
         # Overall frame of the View, including padding and border.
@@ -50,6 +53,7 @@ class View:
                 raise ValueError("Subviews must be instances of View.")
             view.parent = self
             view.index = idx
+            view.env.inherit(self.env)
             self.subviews.append(view)
         return self
 
@@ -120,7 +124,7 @@ class View:
             view.render(renderer)
 
     def pad(self, *args):
-        self.padding = Insets(*args)
+        self.padding = Insets(*args).scale(self.env.scale)
         return self
 
     def item(self, label_or_view):
