@@ -56,6 +56,32 @@ class ImageSizerView(pyui.View):
         # fmt: on
 
 
+class FormView(pyui.View):
+    languages = pyui.State(default=["Python", "Jengascript", "Other"])
+    selection = pyui.State(default=0)
+
+    def new_language(self):
+        self.languages = self.languages.value + ["New"]
+
+    def content(self):
+        # fmt: off
+        yield pyui.VStack(spacing=20)(
+            pyui.Button("New Language", action=self.new_language),
+            pyui.ForEach(self.languages.value, lambda lang: (
+                pyui.VStack(alignment=pyui.Alignment.LEADING, spacing=5)(
+                    pyui.Text(lang),
+                    pyui.TextField("Description for {}".format(lang)),
+                    pyui.SegmentedButton(self.selection)(
+                        pyui.ForEach(self.languages.value, lambda lang: (
+                            pyui.Text(lang)
+                        ))
+                    )
+                )
+            ))
+        )
+        # fmt: on
+
+
 class DemoView(pyui.View):
     def content(self):
         # fmt: off
@@ -63,6 +89,7 @@ class DemoView(pyui.View):
             TimestampView().pad(20).item("Timestamp"),
             BarChartView().pad(20).item("Bar Chart"),
             ImageSizerView().pad(20).item("Image"),
+            FormView().pad(20).item("Form"),
         ).pad(20)
         # fmt: on
 

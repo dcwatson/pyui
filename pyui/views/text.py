@@ -3,7 +3,7 @@ import ctypes
 import sdl2
 from sdl2.sdlttf import TTF_CloseFont, TTF_OpenFont, TTF_RenderUTF8_Blended, TTF_RenderUTF8_Blended_Wrapped
 
-from pyui.geom import Insets, Rect, Size
+from pyui.geom import Insets, Size
 
 from .base import View
 
@@ -32,6 +32,8 @@ class Text(View):
             sdl2.SDL_FreeSurface(self.surface)
         if self.texture:
             sdl2.SDL_DestroyTexture(self.texture)
+        if self.font:
+            TTF_CloseFont(self.font)
 
     def size(self, pts):
         TTF_CloseFont(self.font)
@@ -53,7 +55,7 @@ class Text(View):
         if self.texture:
             sdl2.SDL_DestroyTexture(self.texture)
             self.texture = None
-        shadow_color = sdl2.SDL_Color(0, 0, 0, 192)
+        shadow_color = sdl2.SDL_Color(0, 0, 0, 128)
         if width:
             self.surface = TTF_RenderUTF8_Blended_Wrapped(self.font, self.utf8, self.color, width)
             self.shadow = TTF_RenderUTF8_Blended_Wrapped(self.font, self.utf8, shadow_color, width)

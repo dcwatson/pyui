@@ -1,7 +1,7 @@
 import enum
 
 from pyui.env import Environment
-from pyui.geom import Axis, Insets, Point, Rect, Size
+from pyui.geom import Insets, Rect, Size
 
 
 class Priority(enum.IntEnum):
@@ -17,6 +17,16 @@ class Alignment(enum.Enum):
     TRAILING = 1.0
 
 
+class ForEach:
+    def __init__(self, items, builder):
+        self.items = items
+        self.builder = builder
+
+    def __iter__(self):
+        for item in self.items:
+            yield self.builder(item)
+
+
 class View:
     priority = Priority.NORMAL
     interactive = False
@@ -24,17 +34,17 @@ class View:
 
     # Hierarchy information.
     parent = None
-    index = None
 
     env = Environment()
 
-    def __init__(self, *subviews, **options):
+    def __init__(self, *contents, **options):
         # Overall frame of the View, including padding and border.
         self.frame = Rect()
         self.padding = Insets()
         self.border = Insets()
-        self.rebuild(subviews)
         self.item_view = None
+        self.contents = contents
+        self.rebuild()
 
     @property
     def root(self):
@@ -46,19 +56,26 @@ class View:
     def __repr__(self):
         return "{} frame={} padding={}".format(self.__class__.__name__, self.frame, self.padding)
 
-    def rebuild(self, views=None):
+    def __call__(self, *contents):
+        self.contents = contents
+        self.rebuild()
+        return self
+
+    def __iter__(self):
+        yield self
+
+    def rebuild(self):
         self.subviews = []
-        for idx, view in enumerate(views or self.content()):
+        for view in self.content():
             if not isinstance(view, View):
                 raise ValueError("Subviews must be instances of View.")
             view.parent = self
-            view.index = idx
             view.env.inherit(self.env)
             self.subviews.append(view)
-        return self
 
     def content(self):
-        return []
+        for item in self.contents:
+            yield from item
 
     def dump(self, level=0):
         indent = "  " * level

@@ -1,6 +1,7 @@
 import unittest
 
 from pyui.geom import Insets, Point, Rect, Size
+from pyui.utils import enumerate_last
 
 
 class MeasurementTests(unittest.TestCase):
@@ -12,6 +13,11 @@ class MeasurementTests(unittest.TestCase):
         r3 = r1 - Insets(10)
         self.assertEqual(r3.origin, Point(110, 110))
         self.assertEqual(r3.size, Size(130, 30))
+
+    def test_enumerate_last(self):
+        values = list(enumerate_last([100, 200, 300]))
+        self.assertEqual(values, [(0, 100, False), (1, 200, False), (2, 300, True)])
+        self.assertEqual(list(enumerate_last([])), [])
 
 
 if __name__ == "__main__":

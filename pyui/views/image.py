@@ -16,7 +16,8 @@ class Image(View):
         self._scale = 1.0
 
     def __del__(self):
-        sdl2.SDL_FreeSurface(self.surface)
+        if self.surface:
+            sdl2.SDL_FreeSurface(self.surface)
         if self.texture:
             sdl2.SDL_DestroyTexture(self.texture)
 

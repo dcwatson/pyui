@@ -22,6 +22,12 @@ class SlicedAsset:
         self.center = Rect(*center) if center else Rect(self.w, self.h)
         self.texture = None
 
+    def __del__(self):
+        if self.surface:
+            sdl2.SDL_FreeSurface(self.surface)
+        if self.texture:
+            sdl2.SDL_DestroyTexture(self.texture)
+
     def slice_rects(self):
         yield Rect((0, 0), (self.center.left, self.center.top))
         yield Rect((self.center.left, 0), (self.center.width, self.center.top))

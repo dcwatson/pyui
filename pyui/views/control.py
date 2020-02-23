@@ -1,5 +1,6 @@
 from pyui.geom import Insets, Rect, Size
-from pyui.state import Binding, State
+from pyui.state import Binding
+from pyui.utils import enumerate_last
 
 from .base import View
 from .stack import HStack
@@ -74,7 +75,7 @@ class TextField(View):
     interactive = True
 
     def __init__(self, placeholder="Enter some text"):
-        self.placeholder = Text(placeholder).foreground(200, 200, 200)
+        self.placeholder = Text(placeholder).foreground(150, 150, 150)
         super().__init__(self.placeholder)
         self.padding = Insets(4, 20, 5, 20).scale(self.env.scale)
         self.asset = self.env.theme.load_asset("textfield")
@@ -85,3 +86,25 @@ class TextField(View):
     def draw(self, renderer, rect):
         self.asset.render(renderer, self.frame)
         super().draw(renderer, rect)
+
+
+class SegmentedButton(HStack):
+    def __init__(self, selection: Binding, *contents):
+        self.selection = selection
+        super().__init__(*contents, spacing=0)
+
+    def _index_asset(self, idx, is_last):
+        if idx == 0:
+            return "button" if is_last else "segment.left"
+        else:
+            return "segment.right" if is_last else "segment.center"
+
+    def select(self, idx):
+        self.selection.value = idx
+
+    def content(self):
+        for idx, item, is_last in enumerate_last(super().content()):
+            asset = self._index_asset(idx, is_last)
+            if idx == self.selection.value:
+                asset += ".selected"
+            yield Button(item, action=lambda idx=idx: self.select(idx), asset=asset)

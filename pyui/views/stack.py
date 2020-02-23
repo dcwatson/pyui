@@ -1,4 +1,4 @@
-from pyui.geom import Axis, Insets, Rect, Size
+from pyui.geom import Axis, Rect, Size
 
 from .base import Alignment, Priority, View
 
@@ -13,15 +13,11 @@ class Spacer(View):
 class Stack(View):
     axis = None
 
-    def __init__(self, *subviews, alignment=Alignment.CENTER, spacing=10):
-        super().__init__(*subviews)
+    def __init__(self, *contents, alignment=Alignment.CENTER, spacing=10):
+        super().__init__(*contents)
         self.cross = self.axis.cross
         self.alignment = alignment
         self.spacing = self.env.scaled(spacing)
-
-    def __call__(self, *subviews):
-        # Allows for HStack(spacing=5)(view1, view2, ...)
-        return self.rebuild(subviews)
 
     def resize(self, available: Size):
         # https://kean.github.io/post/swiftui-layout-system
