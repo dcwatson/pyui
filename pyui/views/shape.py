@@ -1,5 +1,3 @@
-from sdl2.sdlgfx import boxRGBA
-
 from pyui.geom import Size
 
 from .base import View
@@ -20,6 +18,3 @@ class Rectangle(View):
         elif self.height:
             return Size(available.w, self.height)
         return available
-
-    def draw(self, renderer, rect):
-        boxRGBA(renderer, self.frame.left, self.frame.top, self.frame.right, self.frame.bottom, 30, 32, 33, 255)

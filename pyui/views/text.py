@@ -1,49 +1,35 @@
 import ctypes
 
 import sdl2
-from sdl2.sdlttf import TTF_CloseFont, TTF_OpenFont, TTF_RenderUTF8_Blended, TTF_RenderUTF8_Blended_Wrapped
+from sdl2.sdlttf import TTF_RenderUTF8_Blended, TTF_RenderUTF8_Blended_Wrapped
 
-from pyui.geom import Insets, Size
+from pyui.geom import Rect, Size
 
 from .base import View
 
 
 class Text(View):
-    # fontfile = b"fonts/lato/Lato-Regular.ttf"
-    # fontfile = b"fonts/noto/NotoSans-Regular.ttf"
-    # fontfile = b"fonts/roboto/Roboto-Regular.ttf"
-    fontfile = b"fonts/dejavu/DejaVuSans.ttf"
-    # fontfile = b"fonts/clearsans/ClearSans-Regular.ttf"
-    # fontfile = b"fonts/ubuntu/Ubuntu-Regular.ttf"
-    # fontfile = b"/System/Library/Fonts/SFCompactDisplay.ttf"
-
     def __init__(self, text):
         super().__init__()
         self.surface = None
         self.shadow = None
         self.texture = None
         self.utf8 = str(text).encode("utf-8")
-        self.font = TTF_OpenFont(self.fontfile, self.env.scaled(14))
+        self.font = self.env.theme.font()
         self.color = sdl2.SDL_Color(230, 230, 230)
-        self.create_surface()
 
     def __del__(self):
         if self.surface:
             sdl2.SDL_FreeSurface(self.surface)
         if self.texture:
             sdl2.SDL_DestroyTexture(self.texture)
-        if self.font:
-            TTF_CloseFont(self.font)
 
     def size(self, pts):
-        TTF_CloseFont(self.font)
-        self.font = TTF_OpenFont(self.fontfile, self.env.scaled(pts))
-        self.create_surface()
+        self.font = self.env.theme.font(size=pts)
         return self
 
     def foreground(self, r, g, b):
         self.color = sdl2.SDL_Color(r, g, b)
-        self.create_surface()
         return self
 
     def create_surface(self, width=None):
@@ -74,6 +60,7 @@ class Text(View):
 
     def draw(self, renderer, rect):
         self.update_texture(renderer)
-        sr = rect + Insets(right=1, bottom=1)
+        # sr = rect + Insets(right=1, bottom=1)
+        sr = Rect(origin=(rect.left + 1, rect.top + 1), size=(rect.width, rect.height))
         sdl2.SDL_RenderCopy(renderer, self.shadowtex, None, ctypes.byref(sr.sdl))
         sdl2.SDL_RenderCopy(renderer, self.texture, None, ctypes.byref(rect.sdl))

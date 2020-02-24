@@ -24,7 +24,9 @@ class State:
         if self.name not in instance.__dict__:
             value = self.get_default()
             # Set the default value the first time it's accessed, so it's not changing on every access.
-            self.__set__(instance, value)
+            instance.__dict__[self.name] = self.check_value(instance, value)
+            # TODO: firing the state_changed for default values seems unnecessary?
+            # self.__set__(instance, value)
         return Binding(self, instance)
 
     def __set__(self, instance, value):

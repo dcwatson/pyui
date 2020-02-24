@@ -10,10 +10,13 @@ from .text import Text
 class Button(HStack):
     interactive = True
 
-    def __init__(self, label="", action=None, asset="button"):
-        if not isinstance(label, View):
-            label = Text(label)
-        super().__init__(label)
+    def __init__(self, label=None, action=None, asset="button"):
+        contents = []
+        if label is not None:
+            if not isinstance(label, View):
+                label = Text(label)
+            contents = [label]
+        super().__init__(*contents)
         self.padding = Insets(5, 20, 6, 20).scale(self.env.scale)
         self.action = action
         self.pressed = False
@@ -55,7 +58,7 @@ class Slider(View):
         return Size(available.w, self.env.scaled(20))
 
     def draw(self, renderer, rect):
-        offset = int(self.current.value * rect.width / self.span) - self.env.scaled(20)
+        offset = int(self.current.value * rect.width / self.span) - self.env.scaled(10)
         slider_rect = Rect(origin=(rect.left, rect.top + self.env.scaled(7)), size=(rect.width, self.env.scaled(6)))
         knob_rect = Rect(origin=(rect.left + offset, rect.top), size=(self.env.scaled(20), self.env.scaled(20)))
         self.slider.render(renderer, slider_rect)

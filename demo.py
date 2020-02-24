@@ -22,24 +22,41 @@ class TimestampView(pyui.View):
         # fmt: on
 
 
-def random_bars():
-    return [random.randint(20, 200) for i in range(10)]
+def random_bars(num=10):
+    return [random.randint(20, 200) for i in range(num)]
 
 
 class BarChartView(pyui.View):
     bars = pyui.State(default=random_bars)
 
     def randomize(self):
-        self.bars = random_bars()
+        self.bars = random_bars(len(self.bars.value))
+
+    def more_bars(self):
+        self.bars = random_bars(len(self.bars.value) + 1)
+
+    def fewer_bars(self):
+        self.bars = random_bars(len(self.bars.value) - 1)
 
     def content(self):
         # fmt: off
-        bars = [pyui.Rectangle(height=h) for h in self.bars.value]
         yield pyui.VStack(spacing=10)(
             pyui.Text("Bar Chart"),
             pyui.Spacer(),
-            pyui.HStack(alignment=pyui.Alignment.TRAILING)(*bars),
-            pyui.Button("Randomize", action=self.randomize),
+            pyui.HStack(alignment=pyui.Alignment.TRAILING)(
+                pyui.ForEach(self.bars.value, lambda height: (
+                    pyui.Rectangle(height=height).background(
+                        random.randint(0, 255),
+                        random.randint(0, 255),
+                        random.randint(0, 255)
+                    )
+                )),
+            ),
+            pyui.HStack()(
+                pyui.Button("Fewer Bars", action=self.fewer_bars),
+                pyui.Button("Randomize", action=self.randomize),
+                pyui.Button("More Bars", action=self.more_bars),
+            ),
         )
         # fmt: on
 
@@ -82,6 +99,32 @@ class FormView(pyui.View):
         # fmt: on
 
 
+class ListView(pyui.View):
+    dynamic_items = pyui.State(default=list)
+    selection = pyui.State(default=list)
+
+    def create_row(self):
+        self.dynamic_items.value = self.dynamic_items.value + ["New Item"]
+
+    def clear(self):
+        self.dynamic_items.value = []
+        self.selection.value = []
+
+    def content(self):
+        yield pyui.HStack()(
+            pyui.VStack(spacing=10, alignment=pyui.Alignment.LEADING)(
+                pyui.List(selection=self.selection)(
+                    pyui.Text("First Row"), pyui.ForEach(self.dynamic_items.value, lambda item: (pyui.Text(item),)),
+                ),
+                pyui.HStack()(
+                    pyui.Spacer(), pyui.Button("Clear", action=self.clear), pyui.Button("+", action=self.create_row),
+                ),
+            ),
+            pyui.Text("Selected rows: {}".format(self.selection.value)),
+            pyui.Spacer(),
+        )
+
+
 class DemoView(pyui.View):
     def content(self):
         # fmt: off
@@ -90,6 +133,7 @@ class DemoView(pyui.View):
             BarChartView().pad(20).item("Bar Chart"),
             ImageSizerView().pad(20).item("Image"),
             FormView().pad(20).item("Form"),
+            ListView().pad(20).item("Lists"),
         ).pad(20)
         # fmt: on
 

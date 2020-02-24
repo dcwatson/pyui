@@ -8,6 +8,7 @@ from sdl2.sdlimage import IMG_INIT_PNG, IMG_Init
 from sdl2.sdlttf import TTF_Init
 
 from .env import Environment
+from .font import Font
 from .geom import Point, Rect, Size
 
 
@@ -97,21 +98,23 @@ class Window:
         found = self.view.find(pt, interactive=True)
         if found:
             found.mousedown(pt)
-            self.tracking = found
+            self.tracking = found.id_path
 
     def mousemotion(self, event):
         pt = self.point(event.x, event.y)
-        if self.tracking:
-            self.tracking.mousemotion(pt)
+        tracking_view = self.view.resolve(self.tracking)
+        if tracking_view:
+            tracking_view.mousemotion(pt)
 
     def mouseup(self, event):
         pt = self.point(event.x, event.y)
         found = self.view.find(pt, interactive=True)
-        if self.tracking:
-            self.tracking.mouseup(pt)
-            if self.tracking == found:
+        tracking_view = self.view.resolve(self.tracking)
+        if tracking_view:
+            tracking_view.mouseup(pt)
+            if tracking_view == found:
                 found.click(pt)
-            self.tracking = None
+        self.tracking = None
 
     def window_event(self, event):
         if event.event == sdl2.SDL_WINDOWEVENT_SIZE_CHANGED:
@@ -131,6 +134,8 @@ class Application:
         sdl2.SDL_Init(sdl2.SDL_INIT_EVERYTHING)
         IMG_Init(IMG_INIT_PNG)
         TTF_Init()
+        # Initialize our font cache and calculate DPI scaling.
+        Font.initialize()
         # Ugly hack to determine resolution scaling factor as early as possible.
         win = sdl2.SDL_CreateWindow(
             "ResolutionTest".encode("utf-8"),
@@ -178,3 +183,4 @@ class Application:
     def cleanup(self):
         for window in self.windows:
             window.cleanup()
+        Font.cleanup()

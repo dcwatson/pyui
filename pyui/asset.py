@@ -1,7 +1,6 @@
 import ctypes
 
 import sdl2
-from sdl2.sdlimage import IMG_Load
 
 from .geom import Rect
 
@@ -15,16 +14,14 @@ class SlicedAsset:
         6 7 8
     """
 
-    def __init__(self, asset_path, center=None):
-        self.surface = IMG_Load(asset_path.encode("utf-8"))
+    def __init__(self, surface, center=None):
+        self.surface = surface
         self.w = self.surface.contents.w
         self.h = self.surface.contents.h
         self.center = Rect(*center) if center else Rect(self.w, self.h)
         self.texture = None
 
     def __del__(self):
-        if self.surface:
-            sdl2.SDL_FreeSurface(self.surface)
         if self.texture:
             sdl2.SDL_DestroyTexture(self.texture)
 

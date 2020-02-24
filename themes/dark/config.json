@@ -1,6 +1,12 @@
 {
     "name": "Dark",
     "background": [48, 50, 51],
+    "fonts": {
+        "default": {
+            "file": "fonts/dejavu/DejaVuSans.ttf",
+            "size": 16
+        }
+    },
     "assets": {
         "button": {
             "file": "button.png",
