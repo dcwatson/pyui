@@ -14,6 +14,7 @@ class Text(View):
         self.surface = None
         self.shadow = None
         self.texture = None
+        self.shadowtex = None
         self.utf8 = str(text).encode("utf-8")
         self.font = self.env.theme.font()
         self.color = sdl2.SDL_Color(230, 230, 230)
@@ -21,8 +22,12 @@ class Text(View):
     def __del__(self):
         if self.surface:
             sdl2.SDL_FreeSurface(self.surface)
+        if self.shadow:
+            sdl2.SDL_FreeSurface(self.shadow)
         if self.texture:
             sdl2.SDL_DestroyTexture(self.texture)
+        if self.shadowtex:
+            sdl2.SDL_DestroyTexture(self.shadowtex)
 
     def size(self, pts):
         self.font = self.env.theme.font(size=pts)
@@ -38,9 +43,15 @@ class Text(View):
         if self.surface:
             sdl2.SDL_FreeSurface(self.surface)
             self.surface = None
+        if self.shadow:
+            sdl2.SDL_FreeSurface(self.shadow)
+            self.shadow = None
         if self.texture:
             sdl2.SDL_DestroyTexture(self.texture)
             self.texture = None
+        if self.shadowtex:
+            sdl2.SDL_DestroyTexture(self.shadowtex)
+            self.shadowtex = None
         shadow_color = sdl2.SDL_Color(0, 0, 0, 128)
         if width:
             self.surface = TTF_RenderUTF8_Blended_Wrapped(self.font, self.utf8, self.color, width)
