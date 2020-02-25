@@ -46,7 +46,7 @@ class BarChartView(pyui.View):
             pyui.HStack(alignment=pyui.Alignment.TRAILING, priority=pyui.Priority.HIGH)(
                 pyui.ForEach(self.bars.value, lambda height: (
                     pyui.Rectangle(height=height)(
-                        pyui.Text("{:.0f}%".format(height * 100.0)).background(0, 0, 0, 128).pad(3).size(11)
+                        pyui.Text("{:.0f}%".format(height * 100.0)).background(0, 0, 0, 128).pad(3).size(11).radius(2)
                     ).background(
                         random.randint(0, 255),
                         random.randint(0, 255),
@@ -125,7 +125,7 @@ class ListView(pyui.View):
 
     def content(self):
         # fmt: off
-        yield pyui.HStack()(
+        yield pyui.HStack(alignment=pyui.Alignment.LEADING)(
             pyui.VStack(spacing=10, alignment=pyui.Alignment.LEADING)(
                 pyui.List(selection=self.selection, priority=pyui.Priority.HIGH)(
                     pyui.Text("First Row"),
@@ -140,6 +140,7 @@ class ListView(pyui.View):
                 ),
             ),
             pyui.Text("Selected rows: {}".format(self.selection.value)),
+            pyui.Spacer(),
         )
         # fmt: on
 

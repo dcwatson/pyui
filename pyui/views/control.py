@@ -74,14 +74,24 @@ class Slider(View):
         self.slider.render(renderer, slider_rect)
         self.knob.render(renderer, knob_rect)
 
+    def _set(self, value):
+        self.current.value = min(max(int(value), self.minimum), self.maximum)
+
     def mousemotion(self, pt):
         inner = self.frame - self.padding - self.border
         if pt.x >= inner.left and pt.x <= inner.right:
             pct = (pt.x - inner.left) / inner.width
-            self.current.value = int(self.minimum + (pct * self.span))
+            self._set(self.minimum + (pct * self.span))
 
     def click(self, pt):
         self.mousemotion(pt)
+
+    def keydown(self, key, mods):
+        amt = self.span // 10 if mods & sdl2.KMOD_SHIFT else 1
+        if key == sdl2.SDLK_LEFT:
+            self._set(self.current.value - amt)
+        elif key == sdl2.SDLK_RIGHT:
+            self._set(self.current.value + amt)
 
 
 class TextField(View):

@@ -1,7 +1,7 @@
 import enum
 
 import sdl2
-from sdl2.sdlgfx import boxRGBA
+from sdl2.sdlgfx import boxRGBA, roundedBoxRGBA
 
 from pyui.env import Environment
 from pyui.geom import Axis, Insets, Point, Rect, Size
@@ -39,6 +39,7 @@ class View:
         self.padding = Insets()
         self.border = Insets()
         self.background_color = None
+        self.corner_radius = 0
         self.item_view = None
         for name, value in options.items():
             setattr(self, name, value)
@@ -132,17 +133,31 @@ class View:
 
     def draw(self, renderer, rect):
         if self.background_color:
-            boxRGBA(
-                renderer,
-                self.frame.left,
-                self.frame.top,
-                self.frame.right,
-                self.frame.bottom,
-                self.background_color.r,
-                self.background_color.g,
-                self.background_color.b,
-                self.background_color.a,
-            )
+            if self.corner_radius:
+                roundedBoxRGBA(
+                    renderer,
+                    self.frame.left,
+                    self.frame.top,
+                    self.frame.right,
+                    self.frame.bottom,
+                    self.corner_radius,
+                    self.background_color.r,
+                    self.background_color.g,
+                    self.background_color.b,
+                    self.background_color.a,
+                )
+            else:
+                boxRGBA(
+                    renderer,
+                    self.frame.left,
+                    self.frame.top,
+                    self.frame.right,
+                    self.frame.bottom,
+                    self.background_color.r,
+                    self.background_color.g,
+                    self.background_color.b,
+                    self.background_color.a,
+                )
 
     def resize(self, available: Size):
         """
@@ -200,6 +215,10 @@ class View:
 
     def background(self, r, g, b, a=255):
         self.background_color = sdl2.SDL_Color(r, g, b, a)
+        return self
+
+    def radius(self, r):
+        self.corner_radius = self.env.scaled(int(r))
         return self
 
     def item(self, label_or_view):
