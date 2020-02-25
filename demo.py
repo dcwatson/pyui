@@ -22,8 +22,8 @@ class TimestampView(pyui.View):
         # fmt: on
 
 
-def random_bars(num=10):
-    return [random.randint(20, 200) for i in range(num)]
+def random_bars(num=5):
+    return [random.random() for i in range(num)]
 
 
 class BarChartView(pyui.View):
@@ -43,16 +43,16 @@ class BarChartView(pyui.View):
         yield pyui.VStack(spacing=10)(
             pyui.Text("Bar Chart"),
             pyui.Spacer(),
-            pyui.HStack(alignment=pyui.Alignment.TRAILING)(
+            pyui.HStack(alignment=pyui.Alignment.TRAILING, priority=pyui.Priority.HIGH)(
                 pyui.ForEach(self.bars.value, lambda height: (
                     pyui.Rectangle(height=height)(
-                        pyui.Text(height).background(0, 0, 0, 128).pad(3).size(11)
+                        pyui.Text("{:.0f}%".format(height * 100.0)).background(0, 0, 0, 128).pad(3).size(11)
                     ).background(
                         random.randint(0, 255),
                         random.randint(0, 255),
                         random.randint(0, 255)
                     )
-                )),
+                ))
             ),
             pyui.HStack()(
                 pyui.Button("Fewer Bars", action=self.fewer_bars),
@@ -127,7 +127,7 @@ class ListView(pyui.View):
         # fmt: off
         yield pyui.HStack()(
             pyui.VStack(spacing=10, alignment=pyui.Alignment.LEADING)(
-                pyui.List(selection=self.selection)(
+                pyui.List(selection=self.selection, priority=pyui.Priority.HIGH)(
                     pyui.Text("First Row"),
                     pyui.ForEach(self.dynamic_items.value, lambda item: (
                         pyui.Text(item),
@@ -140,7 +140,6 @@ class ListView(pyui.View):
                 ),
             ),
             pyui.Text("Selected rows: {}".format(self.selection.value)),
-            pyui.Spacer(),
         )
         # fmt: on
 

@@ -4,7 +4,7 @@ import sdl2
 from sdl2.sdlgfx import boxRGBA
 
 from pyui.env import Environment
-from pyui.geom import Insets, Rect, Size
+from pyui.geom import Axis, Insets, Point, Rect, Size
 
 
 class Priority(enum.IntEnum):
@@ -18,16 +18,6 @@ class Alignment(enum.Enum):
     LEADING = 0.0
     CENTER = 0.5
     TRAILING = 1.0
-
-
-class ForEach:
-    def __init__(self, items, builder):
-        self.items = items
-        self.builder = builder
-
-    def __iter__(self):
-        for item in self.items:
-            yield self.builder(item)
 
 
 class View:
@@ -54,7 +44,7 @@ class View:
             setattr(self, name, value)
         self.contents = contents
         self.subviews = []
-        self.rebuild()
+        # self.rebuild()
 
     @property
     def id(self):
@@ -85,7 +75,7 @@ class View:
 
     def __call__(self, *contents):
         self.contents = contents
-        self.rebuild()
+        # self.rebuild()
         return self
 
     def __iter__(self):
@@ -102,21 +92,22 @@ class View:
         new_subviews = []
         for idx, view in enumerate(self.content()):
             if not isinstance(view, View):
-                raise ValueError("Subviews must be instances of View.")
+                raise ValueError("Subviews must be instances of View (got {}).".format(view.__class__.__name__))
             view.parent = self
             view.index = idx
             view.env.inherit(self.env)
             new_subviews.append(view)
+            view.rebuild()
         # At some point, it may be worth diffing the subview tree and only replacing those that changed.
         self.subviews = new_subviews
 
     def content(self):
-        for item in self.contents:
-            yield from item
+        for view in self.contents:
+            yield from view
 
     def dump(self, level=0):
         indent = "  " * level
-        print("{}{}".format(indent, self))
+        print("{}{} {}".format(indent, self, self.frame))
         for view in self.subviews:
             view.dump(level + 1)
 
@@ -124,7 +115,13 @@ class View:
         """
         Returns the minimum size in each dimension of this view's content, not including any padding or borders.
         """
-        return Size()
+        min_w = 0
+        min_h = 0
+        for view in self.subviews:
+            m = view.minimum_size()
+            min_w = max(m.w, min_w + view.padding[Axis.HORIZONTAL] + view.border[Axis.HORIZONTAL])
+            min_h = max(m.h, min_h + view.padding[Axis.VERTICAL] + view.border[Axis.VERTICAL])
+        return Size(min_w, min_h)
 
     def content_size(self, available: Size):
         """
@@ -172,12 +169,17 @@ class View:
         """
         Sets the view's frame origin.
         """
-        self.frame.origin = inside.origin
+        self.frame.origin = Point(
+            inside.left + ((inside.width - self.frame.width) // 2),
+            inside.top + ((inside.height - self.frame.height) // 2),
+        )
         inner = inside - self.padding - self.border
         for view in self.subviews:
             view.reposition(inner)
 
     def layout(self, rect: Rect):
+        if not self.subviews:
+            self.rebuild()
         self.resize(rect.size)
         self.reposition(rect)
         self.dirty = False
@@ -269,3 +271,12 @@ class View:
     def state_changed(self, name, value):
         self.rebuild()
         self.root.dirty = True
+
+
+class ForEach(View):
+    def __init__(self, items, builder):
+        super().__init__(items=items, builder=builder)
+
+    def __iter__(self):
+        for item in self.items:
+            yield from self.builder(item)

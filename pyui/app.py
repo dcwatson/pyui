@@ -18,7 +18,7 @@ class Settings:
 
 
 class Window:
-    def __init__(self, app, title, view, width=640, height=480, pack=True):
+    def __init__(self, app, title, view, width=640, height=480, pack=False):
         self.app = app
         self.win = sdl2.SDL_CreateWindow(
             title.encode("utf-8"),
@@ -32,6 +32,7 @@ class Window:
         self.renderer = sdl2.SDL_CreateRenderer(self.win, -1, sdl2.SDL_RENDERER_ACCELERATED)
         self.view = view
         self.view._window = self
+        self.background = self.view.env.theme.config["background"]
         # self.view.dump()
         # Which view is currently tracking mouse events (i.e. was clicked but not released yet)
         self.tracking = None
@@ -98,7 +99,7 @@ class Window:
     def render(self):
         if self.view.dirty:
             self.layout()
-        sdl2.SDL_SetRenderDrawColor(self.renderer, 48, 50, 51, sdl2.SDL_ALPHA_OPAQUE)
+        sdl2.SDL_SetRenderDrawColor(self.renderer, *self.background, sdl2.SDL_ALPHA_OPAQUE)
         sdl2.SDL_RenderClear(self.renderer)
         self.view.render(self.renderer)
         focus_view = self.view.resolve(self.focus)

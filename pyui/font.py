@@ -1,4 +1,5 @@
 import ctypes
+import math
 
 import sdl2
 from sdl2.sdlttf import TTF_CloseFont, TTF_OpenFont
@@ -18,7 +19,7 @@ class Font:
     def load(cls, path, size):
         key = "{}-{}".format(path, size)
         if key not in cls.cache:
-            font = TTF_OpenFont(path.encode("utf-8"), int(size * cls.scale))
+            font = TTF_OpenFont(path.encode("utf-8"), math.ceil(size * cls.scale))
             cls.cache[key] = font
         return cls.cache[key]
 

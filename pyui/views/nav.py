@@ -25,12 +25,12 @@ class ListItem(HStack):
 class List(VStack):
     interactive = True
 
-    def __init__(self, items=None, builder=None, selection: Binding = None):
+    def __init__(self, items=None, builder=None, selection: Binding = None, **options):
         self.selection = selection
         contents = []
         if items is not None:
             contents.append(ForEach(items, builder or self.default_builder))
-        super().__init__(*contents, spacing=0, alignment=Alignment.LEADING)
+        super().__init__(*contents, spacing=0, alignment=Alignment.LEADING, **options)
 
     def default_builder(self, item):
         return Text(item)
@@ -87,6 +87,7 @@ class TabView(View):
                 SegmentedButton(self.selected, *[t.item_view for t in tabs]),
                 Spacer(),
             ),
-            show
+            show,
+            Spacer()
         )
         # fmt: on

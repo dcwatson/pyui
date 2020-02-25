@@ -21,6 +21,9 @@ class Image(View):
         if self.texture:
             sdl2.SDL_DestroyTexture(self.texture)
 
+    def minimum_size(self):
+        return Size(int(self.surface.contents.w * self._scale), int(self.surface.contents.h * self._scale))
+
     def content_size(self, available: Size):
         return Size(int(self.surface.contents.w * self._scale), int(self.surface.contents.h * self._scale))
 

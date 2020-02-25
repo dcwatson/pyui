@@ -61,6 +61,9 @@ class Slider(View):
     def span(self):
         return self.maximum - self.minimum
 
+    def minimum_size(self):
+        return Size(self.env.scaled(40), self.env.scaled(20))
+
     def content_size(self, available):
         return Size(available.w, self.env.scaled(20))
 
@@ -90,6 +93,9 @@ class TextField(View):
         super().__init__(**options)
         self.padding = Insets(5, 10, 5, 10).scale(self.env.scale)
         self.asset = self.env.theme.load_asset("textfield")
+
+    def minimum_size(self):
+        return Text(self.text.value).minimum_size()
 
     def content_size(self, available):
         return Size(available.w, 0)

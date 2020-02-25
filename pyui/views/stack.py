@@ -1,4 +1,4 @@
-from pyui.geom import Axis, Rect, Size
+from pyui.geom import Axis, Point, Rect, Size
 
 from .base import Alignment, Priority, View
 
@@ -13,11 +13,23 @@ class Spacer(View):
 class Stack(View):
     axis = None
 
-    def __init__(self, *contents, alignment=Alignment.CENTER, spacing=10):
-        super().__init__(*contents)
+    def __init__(self, *contents, alignment=Alignment.CENTER, spacing=10, **options):
+        super().__init__(*contents, **options)
         self.cross = self.axis.cross
         self.alignment = alignment
         self.spacing = self.env.scaled(spacing)
+
+    def minimum_size(self):
+        """
+        Returns the minimum size in each dimension of this view's content, not including any padding or borders.
+        """
+        main = self.spacing * (len(self.subviews) - 1)
+        cross = 0
+        for view in self.subviews:
+            min_size = view.minimum_size()
+            main += min_size[self.axis] + view.padding[self.axis] + view.border[self.axis]
+            cross = max(cross, min_size[self.cross] + view.padding[self.cross] + view.border[self.cross])
+        return self.axis.size(main, cross)
 
     def resize(self, available: Size):
         # https://kean.github.io/post/swiftui-layout-system
@@ -56,7 +68,10 @@ class Stack(View):
 
     def reposition(self, inside: Rect):
         origin = inside.origin
-        self.frame.origin = origin
+        self.frame.origin = Point(
+            inside.left + ((inside.width - self.frame.width) // 2),
+            inside.top + ((inside.height - self.frame.height) // 2),
+        )
         current = origin[self.axis] + self.padding.leading(self.axis) + self.border.leading(self.axis)
         # Align based on the content size without the padding and borders.
         inner = self.frame - self.padding - self.border
@@ -66,7 +81,7 @@ class Stack(View):
             cross = inner.origin[self.cross] + int(
                 self.alignment.value * (inner.size[self.cross] - view.frame.size[self.cross])
             )
-            view.reposition(Rect(origin=self.axis.point(current, cross), size=inside.size))
+            view.reposition(Rect(origin=self.axis.point(current, cross), size=view.frame.size))
             current += view.frame.size[self.axis]
 
 

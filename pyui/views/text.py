@@ -1,7 +1,7 @@
 import ctypes
 
 import sdl2
-from sdl2.sdlttf import TTF_RenderUTF8_Blended, TTF_RenderUTF8_Blended_Wrapped
+from sdl2.sdlttf import TTF_FontHeight, TTF_RenderUTF8_Blended, TTF_RenderUTF8_Blended_Wrapped
 
 from pyui.geom import Rect, Size
 
@@ -9,8 +9,8 @@ from .base import View
 
 
 class Text(View):
-    def __init__(self, text, shadow=True):
-        super().__init__()
+    def __init__(self, text, shadow=True, **options):
+        super().__init__(**options)
         self.surface = None
         self.shadow = None
         self.texture = None
@@ -65,6 +65,9 @@ class Text(View):
         if self.surface and not self.texture:
             self.texture = sdl2.SDL_CreateTextureFromSurface(renderer, self.surface)
             self.shadowtex = sdl2.SDL_CreateTextureFromSurface(renderer, self.shadow)
+
+    def minimum_size(self):
+        return Size(0, TTF_FontHeight(self.font))
 
     def content_size(self, available: Size):
         self.create_surface(available.w)
