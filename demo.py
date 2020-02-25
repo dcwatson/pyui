@@ -111,18 +111,25 @@ class ListView(pyui.View):
         self.selection.value = []
 
     def content(self):
+        # fmt: off
         yield pyui.HStack()(
             pyui.VStack(spacing=10, alignment=pyui.Alignment.LEADING)(
                 pyui.List(selection=self.selection)(
-                    pyui.Text("First Row"), pyui.ForEach(self.dynamic_items.value, lambda item: (pyui.Text(item),)),
+                    pyui.Text("First Row"),
+                    pyui.ForEach(self.dynamic_items.value, lambda item: (
+                        pyui.Text(item),
+                    )),
                 ),
                 pyui.HStack()(
-                    pyui.Spacer(), pyui.Button("Clear", action=self.clear), pyui.Button("+", action=self.create_row),
+                    pyui.Spacer(),
+                    pyui.Button("Clear", action=self.clear),
+                    pyui.Button("+", action=self.create_row),
                 ),
             ),
             pyui.Text("Selected rows: {}".format(self.selection.value)),
             pyui.Spacer(),
         )
+        # fmt: on
 
 
 class DemoView(pyui.View):

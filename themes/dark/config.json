@@ -8,6 +8,10 @@
         }
     },
     "assets": {
+        "focus": {
+            "file": "focus.png",
+            "slice": [[12, 12], [1, 1]]
+        },
         "button": {
             "file": "button.png",
             "color": [255, 255, 255],

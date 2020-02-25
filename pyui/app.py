@@ -9,7 +9,7 @@ from sdl2.sdlttf import TTF_Init
 
 from .env import Environment
 from .font import Font
-from .geom import Point, Rect, Size
+from .geom import Insets, Point, Rect, Size
 
 
 class Settings:
@@ -31,9 +31,13 @@ class Window:
         self.id = sdl2.SDL_GetWindowID(self.win)
         self.renderer = sdl2.SDL_CreateRenderer(self.win, -1, sdl2.SDL_RENDERER_ACCELERATED)
         self.view = view
+        self.view._window = self
         # self.view.dump()
         # Which view is currently tracking mouse events (i.e. was clicked but not released yet)
         self.tracking = None
+        # Which view has keyboard focus.
+        self.focus = None
+        self.focus_ring = self.view.env.theme.load_asset("focus")
         self.layout()
         if pack:
             scale = self.window_size.w / self.render_size.w
@@ -44,6 +48,7 @@ class Window:
         self.listen(sdl2.SDL_MOUSEBUTTONUP, "button", self.mouseup, check_window=False)
         self.listen(sdl2.SDL_MOUSEMOTION, "motion", self.mousemotion)
         self.listen(sdl2.SDL_WINDOWEVENT, "window", self.window_event)
+        self.listen(sdl2.SDL_KEYDOWN, "key", self.key_event)
 
     def listen(self, event_type, event_attr, handler, check_window=True):
         stream = self.app.events.pipe(ops.filter(lambda event: event.type == event_type), ops.pluck_attr(event_attr))
@@ -66,6 +71,15 @@ class Window:
         sdl2.SDL_GetRendererOutputSize(self.renderer, ctypes.byref(w), ctypes.byref(h))
         return Size(w.value, h.value)
 
+    def advance_focus(self, by=1):
+        chain = self.view.find_all(interactive=True)
+        current = self.view.resolve(self.focus)
+        try:
+            idx = (chain.index(current) + by) % len(chain)
+        except ValueError:
+            idx = by - 1 if by > 0 else by
+        self.focus = chain[idx].id_path
+
     def resize(self, width, height):
         sdl2.SDL_SetWindowSize(self.win, int(width), int(height))
 
@@ -85,6 +99,10 @@ class Window:
         sdl2.SDL_SetRenderDrawColor(self.renderer, 48, 50, 51, sdl2.SDL_ALPHA_OPAQUE)
         sdl2.SDL_RenderClear(self.renderer)
         self.view.render(self.renderer)
+        focus_view = self.view.resolve(self.focus)
+        if focus_view:
+            focus_rect = focus_view.frame + Insets(focus_view.env.scaled(1))
+            self.focus_ring.render(self.renderer, focus_rect)
         sdl2.SDL_RenderPresent(self.renderer)
 
     def cleanup(self):
@@ -113,12 +131,22 @@ class Window:
         if tracking_view:
             tracking_view.mouseup(pt)
             if tracking_view == found:
+                self.focus = found.id_path
                 found.click(pt)
         self.tracking = None
 
     def window_event(self, event):
         if event.event == sdl2.SDL_WINDOWEVENT_SIZE_CHANGED:
             self.layout()
+
+    def key_event(self, event):
+        if event.type == sdl2.SDL_KEYDOWN:
+            if event.keysym.sym == sdl2.SDLK_TAB:
+                self.advance_focus(-1 if (event.keysym.mod & sdl2.KMOD_SHIFT) != 0 else 1)
+            elif event.keysym.sym == sdl2.SDLK_SPACE:
+                focus_view = self.view.resolve(self.focus)
+                if focus_view:
+                    focus_view.click(focus_view.frame.center)
 
 
 class Application:

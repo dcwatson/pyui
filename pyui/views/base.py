@@ -36,6 +36,7 @@ class View:
     dirty = False
 
     # Hierarchy information.
+    _window = None
     parent = None
     index = 0
 
@@ -71,6 +72,10 @@ class View:
         while view.parent:
             view = view.parent
         return view
+
+    @property
+    def window(self):
+        return self.root._window
 
     def __repr__(self):
         return self.id
@@ -218,6 +223,14 @@ class View:
             if all(getattr(self, attr, None) == value for attr, value in filters.items()):
                 return self
         return None
+
+    def find_all(self, **filters):
+        found = []
+        if all(getattr(self, attr, None) == value for attr, value in filters.items()):
+            found.append(self)
+        for view in self.subviews:
+            found.extend(view.find_all(**filters))
+        return found
 
     def mousedown(self, pt):
         pass

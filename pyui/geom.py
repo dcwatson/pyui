@@ -41,6 +41,10 @@ class Rect:
     height = property(lambda self: self.size.h)
 
     @property
+    def center(self):
+        return Point(self.left + (self.width // 2), self.top + (self.height // 2))
+
+    @property
     def sdl(self):
         # TODO: what are the memory implications of making this a property?
         return sdl2.SDL_Rect(self.origin.x, self.origin.y, self.size.w, self.size.h)
