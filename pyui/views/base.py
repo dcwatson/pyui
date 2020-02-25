@@ -34,6 +34,7 @@ class View:
     priority = Priority.NORMAL
     interactive = False
     dirty = False
+    disabled = False
 
     # Hierarchy information.
     _window = None
@@ -49,6 +50,8 @@ class View:
         self.border = Insets()
         self.background_color = None
         self.item_view = None
+        for name, value in options.items():
+            setattr(self, name, value)
         self.contents = contents
         self.subviews = []
         self.rebuild()
@@ -189,6 +192,10 @@ class View:
         self.padding = Insets(*args).scale(self.env.scale)
         return self
 
+    def disable(self, d):
+        self.disabled = bool(d)
+        return self
+
     def background(self, r, g, b, a=255):
         self.background_color = sdl2.SDL_Color(r, g, b, a)
         return self
@@ -242,6 +249,21 @@ class View:
         pass
 
     def click(self, pt):
+        pass
+
+    def focus(self):
+        pass
+
+    def blur(self):
+        pass
+
+    def keydown(self, key, mods):
+        pass
+
+    def keyup(self, key, mods):
+        pass
+
+    def textinput(self, text):
         pass
 
     def state_changed(self, name, value):

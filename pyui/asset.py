@@ -40,7 +40,7 @@ class SlicedAsset:
         if not self.texture:
             self.texture = sdl2.SDL_CreateTextureFromSurface(renderer, self.surface)
 
-    def render(self, renderer, rect):
+    def render(self, renderer, rect, alpha=255):
         self.create_texture(renderer, rect)
         s = list(self.slice_rects())
         mid_w = rect.width - s[0].width - s[2].width
@@ -60,6 +60,7 @@ class SlicedAsset:
             Rect([x1, y2], [mid_w, s[7].height]),
             Rect([x2, y2], [s[8].width, s[8].height]),
         ]
+        # sdl2.SDL_SetTextureAlphaMod(self.texture, alpha)
         for idx in range(len(s)):
             src = s[idx]
             dst = rects[idx]

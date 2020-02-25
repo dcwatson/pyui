@@ -49,6 +49,8 @@ class Window:
         self.listen(sdl2.SDL_MOUSEMOTION, "motion", self.mousemotion)
         self.listen(sdl2.SDL_WINDOWEVENT, "window", self.window_event)
         self.listen(sdl2.SDL_KEYDOWN, "key", self.key_event)
+        self.listen(sdl2.SDL_KEYUP, "key", self.key_event)
+        self.listen(sdl2.SDL_TEXTINPUT, "text", self.text_event)
 
     def listen(self, event_type, event_attr, handler, check_window=True):
         stream = self.app.events.pipe(ops.filter(lambda event: event.type == event_type), ops.pluck_attr(event_attr))
@@ -72,7 +74,7 @@ class Window:
         return Size(w.value, h.value)
 
     def advance_focus(self, by=1):
-        chain = self.view.find_all(interactive=True)
+        chain = self.view.find_all(interactive=True, disabled=False)
         current = self.view.resolve(self.focus)
         try:
             idx = (chain.index(current) + by) % len(chain)
@@ -114,7 +116,7 @@ class Window:
     def mousedown(self, event):
         pt = self.point(event.x, event.y)
         found = self.view.find(pt, interactive=True)
-        if found:
+        if found and not found.disabled:
             found.mousedown(pt)
             self.tracking = found.id_path
 
@@ -127,11 +129,16 @@ class Window:
     def mouseup(self, event):
         pt = self.point(event.x, event.y)
         found = self.view.find(pt, interactive=True)
+        focus_view = self.view.resolve(self.focus)
+        if focus_view and not found:
+            self.focus = None
+            focus_view.blur()
         tracking_view = self.view.resolve(self.tracking)
         if tracking_view:
             tracking_view.mouseup(pt)
             if tracking_view == found:
                 self.focus = found.id_path
+                found.focus()
                 found.click(pt)
         self.tracking = None
 
@@ -140,13 +147,23 @@ class Window:
             self.layout()
 
     def key_event(self, event):
+        focus_view = self.view.resolve(self.focus)
         if event.type == sdl2.SDL_KEYDOWN:
             if event.keysym.sym == sdl2.SDLK_TAB:
                 self.advance_focus(-1 if (event.keysym.mod & sdl2.KMOD_SHIFT) != 0 else 1)
             elif event.keysym.sym == sdl2.SDLK_SPACE:
-                focus_view = self.view.resolve(self.focus)
-                if focus_view:
+                if focus_view and not focus_view.disabled:
                     focus_view.click(focus_view.frame.center)
+            if focus_view and not focus_view.disabled:
+                focus_view.keydown(event.keysym.sym, event.keysym.mod)
+        elif event.type == sdl2.SDL_KEYUP:
+            if focus_view and not focus_view.disabled:
+                focus_view.keyup(event.keysym.sym, event.keysym.mod)
+
+    def text_event(self, event):
+        focus_view = self.view.resolve(self.focus)
+        if focus_view and not focus_view.disabled:
+            focus_view.textinput(event.text.decode("utf-8"))
 
 
 class Application:

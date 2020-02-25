@@ -1,3 +1,7 @@
+import ctypes
+
+import sdl2
+
 from pyui.geom import Insets, Rect, Size
 from pyui.state import Binding
 from pyui.utils import enumerate_last
@@ -10,13 +14,13 @@ from .text import Text
 class Button(HStack):
     interactive = True
 
-    def __init__(self, label=None, action=None, asset="button"):
+    def __init__(self, label=None, action=None, asset="button", **options):
         contents = []
         if label is not None:
             if not isinstance(label, View):
                 label = Text(label)
             contents = [label]
-        super().__init__(*contents)
+        super().__init__(*contents, **options)
         self.padding = Insets(5, 20, 6, 20).scale(self.env.scale)
         self.action = action
         self.pressed = False
@@ -24,12 +28,15 @@ class Button(HStack):
         self.down = self.env.theme.load_asset(asset + ".pressed")
 
     def draw(self, renderer, rect):
+        super().draw(renderer, rect)
         asset = self.down if self.pressed else self.asset
         asset.render(renderer, self.frame)
-        super().draw(renderer, rect)
 
     def mousedown(self, pt):
         self.pressed = True
+
+    def mousemotion(self, pt):
+        self.pressed = pt in self.frame
 
     def mouseup(self, pt):
         self.pressed = False
@@ -42,8 +49,8 @@ class Button(HStack):
 class Slider(View):
     interactive = True
 
-    def __init__(self, value: Binding, minimum=0, maximum=100):
-        super().__init__()
+    def __init__(self, value: Binding, minimum=0, maximum=100, **options):
+        super().__init__(**options)
         self.minimum = minimum
         self.maximum = maximum
         self.current = value
@@ -77,24 +84,42 @@ class Slider(View):
 class TextField(View):
     interactive = True
 
-    def __init__(self, placeholder="Enter some text"):
-        self.placeholder = Text(placeholder).foreground(150, 150, 150)
-        super().__init__(self.placeholder)
-        self.padding = Insets(4, 20, 5, 20).scale(self.env.scale)
+    def __init__(self, text: Binding, placeholder="Enter some text", **options):
+        self.text = text
+        self.placeholder = Text(placeholder, shadow=False).foreground(150, 150, 150)
+        super().__init__(**options)
+        self.padding = Insets(5, 10, 5, 10).scale(self.env.scale)
         self.asset = self.env.theme.load_asset("textfield")
 
-    # def content_size(self, available):
-    #    return Size(available.w, 28)
+    def content_size(self, available):
+        return Size(available.w, 0)
+
+    def content(self):
+        yield Text(self.text.value) if self.text.value else self.placeholder
 
     def draw(self, renderer, rect):
-        self.asset.render(renderer, self.frame)
         super().draw(renderer, rect)
+        self.asset.render(renderer, self.frame)
+
+    def focus(self):
+        sdl2.SDL_StartTextInput()
+        sdl2.SDL_SetTextInputRect(ctypes.byref(self.frame.sdl))
+
+    def blur(self):
+        sdl2.SDL_StopTextInput()
+
+    def keydown(self, key, mods):
+        if key == sdl2.SDLK_BACKSPACE:
+            self.text.value = self.text.value[:-1]
+
+    def textinput(self, text):
+        self.text.value = self.text.value + text
 
 
 class SegmentedButton(HStack):
-    def __init__(self, selection: Binding, *contents):
+    def __init__(self, selection: Binding, *contents, **options):
         self.selection = selection
-        super().__init__(*contents, spacing=0)
+        super().__init__(*contents, spacing=0, **options)
 
     def _index_asset(self, idx, is_last):
         if idx == 0:

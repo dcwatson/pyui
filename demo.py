@@ -45,7 +45,9 @@ class BarChartView(pyui.View):
             pyui.Spacer(),
             pyui.HStack(alignment=pyui.Alignment.TRAILING)(
                 pyui.ForEach(self.bars.value, lambda height: (
-                    pyui.Rectangle(height=height).background(
+                    pyui.Rectangle(height=height)(
+                        pyui.Text(height).background(0, 0, 0, 128).pad(3).size(11)
+                    ).background(
                         random.randint(0, 255),
                         random.randint(0, 255),
                         random.randint(0, 255)
@@ -73,28 +75,39 @@ class ImageSizerView(pyui.View):
         # fmt: on
 
 
-class FormView(pyui.View):
-    languages = pyui.State(default=["Python", "Jengascript", "Other"])
-    selection = pyui.State(default=0)
-
-    def new_language(self):
-        self.languages = self.languages.value + ["New"]
+class DescriptionView(pyui.View):
+    description = pyui.State(str, default="")
 
     def content(self):
         # fmt: off
+        yield pyui.VStack(alignment=pyui.Alignment.LEADING, spacing=5)(
+            pyui.Text(self.lang),
+            pyui.TextField(self.description, "Description for {}".format(self.lang)),
+        )
+        # fmt: on
+
+
+class FormView(pyui.View):
+    language = pyui.State(str, default="")
+    languages = pyui.State(default=["Python"])
+
+    def new_language(self):
+        self.languages = self.languages.value + [self.language.value]
+        self.language = ""
+
+    def content(self):
+        # fmt: off
+        fg = (230, 230, 230) if self.language.value else (150, 150, 150)
         yield pyui.VStack(spacing=20)(
-            pyui.Button("New Language", action=self.new_language),
+            pyui.HStack()(
+                pyui.TextField(self.language, "Add a new language"),
+                pyui.Button(action=self.new_language)(
+                    pyui.Text("Add {}".format(self.language.value)).foreground(*fg),
+                ).disable(self.language.value == ""),
+            ),
             pyui.ForEach(self.languages.value, lambda lang: (
-                pyui.VStack(alignment=pyui.Alignment.LEADING, spacing=5)(
-                    pyui.Text(lang),
-                    pyui.TextField("Description for {}".format(lang)),
-                    pyui.SegmentedButton(self.selection)(
-                        pyui.ForEach(self.languages.value, lambda lang: (
-                            pyui.Text(lang)
-                        ))
-                    )
-                )
-            ))
+                DescriptionView(lang=lang)
+            )),
         )
         # fmt: on
 

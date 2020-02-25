@@ -9,15 +9,16 @@ from .base import View
 
 
 class Text(View):
-    def __init__(self, text):
+    def __init__(self, text, shadow=True):
         super().__init__()
         self.surface = None
         self.shadow = None
         self.texture = None
         self.shadowtex = None
-        self.utf8 = str(text).encode("utf-8")
+        self.utf8 = str(text).encode("utf-8") or b" "
         self.font = self.env.theme.font()
         self.color = sdl2.SDL_Color(230, 230, 230)
+        self.draw_shadow = shadow
 
     def __del__(self):
         if self.surface:
@@ -71,7 +72,8 @@ class Text(View):
 
     def draw(self, renderer, rect):
         self.update_texture(renderer)
-        # sr = rect + Insets(right=1, bottom=1)
-        sr = Rect(origin=(rect.left + 1, rect.top + 1), size=(rect.width, rect.height))
-        sdl2.SDL_RenderCopy(renderer, self.shadowtex, None, ctypes.byref(sr.sdl))
+        super().draw(renderer, rect)
+        if self.draw_shadow:
+            sr = Rect(origin=(rect.left + 1, rect.top + 1), size=(rect.width, rect.height))
+            sdl2.SDL_RenderCopy(renderer, self.shadowtex, None, ctypes.byref(sr.sdl))
         sdl2.SDL_RenderCopy(renderer, self.texture, None, ctypes.byref(rect.sdl))
