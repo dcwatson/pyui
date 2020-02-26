@@ -1,5 +1,6 @@
 import unittest
 
+from pyui.env import Environment
 from pyui.geom import Insets, Point, Rect, Size
 from pyui.utils import enumerate_last
 
@@ -18,6 +19,15 @@ class MeasurementTests(unittest.TestCase):
         values = list(enumerate_last([100, 200, 300]))
         self.assertEqual(values, [(0, 100, False), (1, 200, False), (2, 300, True)])
         self.assertEqual(list(enumerate_last([])), [])
+
+
+class EnvironmentTests(unittest.TestCase):
+    def test_inheritance(self):
+        parent = Environment(font_size=24)
+        child = Environment()
+        self.assertEqual(child.font_size, Environment.font_size.default)
+        child.inherit(parent)
+        self.assertEqual(child.font_size, 24)
 
 
 if __name__ == "__main__":

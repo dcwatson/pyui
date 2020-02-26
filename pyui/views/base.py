@@ -1,27 +1,70 @@
-import enum
-
 import sdl2
 from sdl2.sdlgfx import boxRGBA, roundedBoxRGBA
 
 from pyui.env import Environment
-from pyui.geom import Axis, Insets, Point, Rect, Size
+from pyui.geom import Alignment, Axis, Insets, Point, Priority, Rect, Size
 
 
-class Priority(enum.IntEnum):
-    OPTIONAL = 0
-    LOW = 1
-    NORMAL = 2
-    HIGH = 3
+class EnvironmentalView:
+    def __init__(self):
+        self.env = Environment(self.__class__.__name__)
+
+    def font(self, font=None, size=None):
+        if font:
+            self.env.font = font
+        if size:
+            self.env.font_size = int(size)
+        return self
+
+    def shadow(self, *rgba):
+        if not rgba or rgba[0] is None:
+            self.env.text_shadow = None
+        else:
+            self.env.text_shadow = sdl2.SDL_Color(*rgba)
+        return self
+
+    def color(self, *rgba):
+        if not rgba or rgba[0] is None:
+            self.env.color = None
+        elif isinstance(rgba[0], sdl2.SDL_Color):
+            self.env.color = rgba[0]
+        else:
+            self.env.color = sdl2.SDL_Color(*rgba)
+        return self
+
+    def background(self, *rgba):
+        if not rgba or rgba[0] is None:
+            self.env.background = None
+        else:
+            self.env.background = sdl2.SDL_Color(*rgba)
+        return self
+
+    def radius(self, r):
+        self.env.radius = self.env.scaled(int(r))
+        return self
+
+    def padding(self, *tlbr):
+        self.env.padding = Insets(*tlbr).scaled(self.env.scale)
+        return self
+
+    def border(self, *tlbr):
+        self.env.border = Insets(*tlbr).scaled(self.env.scale)
+        return self
+
+    def priority(self, p):
+        self.env.priority = Priority[p.upper()] if isinstance(p, str) else Priority(p)
+        return self
+
+    def alignment(self, a):
+        self.env.alignment = Alignment[a.upper()] if isinstance(a, str) else Alignment(a)
+        return self
+
+    def spacing(self, s):
+        self.env.spacing = self.env.scaled(int(s))
+        return self
 
 
-class Alignment(enum.Enum):
-    LEADING = 0.0
-    CENTER = 0.5
-    TRAILING = 1.0
-
-
-class View:
-    priority = Priority.NORMAL
+class View(EnvironmentalView):
     interactive = False
     dirty = False
     disabled = False
@@ -31,21 +74,20 @@ class View:
     parent = None
     index = 0
 
-    env = Environment()
-
     def __init__(self, *contents, **options):
+        super().__init__()
         # Overall frame of the View, including padding and border.
         self.frame = Rect()
-        self.padding = Insets()
-        self.border = Insets()
-        self.background_color = None
-        self.corner_radius = 0
+        # How this View is represented in navigation views such as TabView.
         self.item_view = None
+        # Convenience for stashing stuff. Should probably clean this up.
         for name, value in options.items():
             setattr(self, name, value)
+        # The raw (un-built) View instances under this one.
         self.contents = contents
+        # Resolved and built list of subviews, after evaluating e.g. ForEach constructs.
+        # This will be empty until rebuild is called, which happens on first layout and state changes.
         self.subviews = []
-        # self.rebuild()
 
     @property
     def id(self):
@@ -76,7 +118,6 @@ class View:
 
     def __call__(self, *contents):
         self.contents = contents
-        # self.rebuild()
         return self
 
     def __iter__(self):
@@ -97,8 +138,8 @@ class View:
             view.parent = self
             view.index = idx
             view.env.inherit(self.env)
-            new_subviews.append(view)
             view.rebuild()
+            new_subviews.append(view)
         # At some point, it may be worth diffing the subview tree and only replacing those that changed.
         self.subviews = new_subviews
 
@@ -120,8 +161,8 @@ class View:
         min_h = 0
         for view in self.subviews:
             m = view.minimum_size()
-            min_w = max(m.w, min_w + view.padding[Axis.HORIZONTAL] + view.border[Axis.HORIZONTAL])
-            min_h = max(m.h, min_h + view.padding[Axis.VERTICAL] + view.border[Axis.VERTICAL])
+            min_w = max(m.w, min_w + view.env.padding[Axis.HORIZONTAL] + view.env.border[Axis.HORIZONTAL])
+            min_h = max(m.h, min_h + view.env.padding[Axis.VERTICAL] + view.env.border[Axis.VERTICAL])
         return Size(min_w, min_h)
 
     def content_size(self, available: Size):
@@ -132,32 +173,20 @@ class View:
         return Size()
 
     def draw(self, renderer, rect):
-        if self.background_color:
-            if self.corner_radius:
+        if self.env.background:
+            rgba = (self.env.background.r, self.env.background.g, self.env.background.b, self.env.background.a)
+            if self.env.radius:
                 roundedBoxRGBA(
                     renderer,
                     self.frame.left,
                     self.frame.top,
                     self.frame.right,
                     self.frame.bottom,
-                    self.corner_radius,
-                    self.background_color.r,
-                    self.background_color.g,
-                    self.background_color.b,
-                    self.background_color.a,
+                    self.env.radius,
+                    *rgba
                 )
             else:
-                boxRGBA(
-                    renderer,
-                    self.frame.left,
-                    self.frame.top,
-                    self.frame.right,
-                    self.frame.bottom,
-                    self.background_color.r,
-                    self.background_color.g,
-                    self.background_color.b,
-                    self.background_color.a,
-                )
+                boxRGBA(renderer, self.frame.left, self.frame.top, self.frame.right, self.frame.bottom, *rgba)
 
     def resize(self, available: Size):
         """
@@ -166,8 +195,8 @@ class View:
         max_w = 0
         max_h = 0
         inside = Size(
-            max(0, available.w - self.padding.width - self.border.width),
-            max(0, available.h - self.padding.height - self.border.height),
+            max(0, available.w - self.env.padding.width - self.env.border.width),
+            max(0, available.h - self.env.padding.height - self.env.border.height),
         )
         for view in self.subviews:
             view.resize(inside)
@@ -177,7 +206,8 @@ class View:
         max_w = max(max_w, size.w)
         max_h = max(max_h, size.h)
         self.frame.size = Size(
-            max_w + self.padding.width + self.border.width, max_h + self.padding.height + self.border.height
+            max_w + self.env.padding.width + self.env.border.width,
+            max_h + self.env.padding.height + self.env.border.height,
         )
 
     def reposition(self, inside: Rect):
@@ -188,7 +218,7 @@ class View:
             inside.left + ((inside.width - self.frame.width) // 2),
             inside.top + ((inside.height - self.frame.height) // 2),
         )
-        inner = inside - self.padding - self.border
+        inner = inside - self.env.padding - self.env.border
         for view in self.subviews:
             view.reposition(inner)
 
@@ -200,25 +230,13 @@ class View:
         self.dirty = False
 
     def render(self, renderer):
-        inner = self.frame - self.padding - self.border
+        inner = self.frame - self.env.padding - self.env.border
         self.draw(renderer, inner)
         for view in self.subviews:
             view.render(renderer)
 
-    def pad(self, *args):
-        self.padding = Insets(*args).scale(self.env.scale)
-        return self
-
     def disable(self, d):
         self.disabled = bool(d)
-        return self
-
-    def background(self, r, g, b, a=255):
-        self.background_color = sdl2.SDL_Color(r, g, b, a)
-        return self
-
-    def radius(self, r):
-        self.corner_radius = self.env.scaled(int(r))
         return self
 
     def item(self, label_or_view):
@@ -260,6 +278,8 @@ class View:
             found.extend(view.find_all(**filters))
         return found
 
+    # Event handling stubs.
+
     def mousedown(self, pt):
         pass
 
@@ -286,6 +306,8 @@ class View:
 
     def textinput(self, text):
         pass
+
+    # State management.
 
     def state_changed(self, name, value):
         self.rebuild()

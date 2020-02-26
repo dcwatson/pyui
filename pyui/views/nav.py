@@ -1,11 +1,11 @@
-from sdl2.sdlgfx import boxRGBA, rectangleRGBA, roundedBoxRGBA, roundedRectangleRGBA
+from sdl2.sdlgfx import roundedBoxRGBA, roundedRectangleRGBA
 
-from pyui.geom import Size
+from pyui.geom import Alignment, Size
 from pyui.state import Binding, State
 
 from .base import ForEach, View
 from .control import SegmentedButton
-from .stack import Alignment, HStack, Spacer, VStack
+from .stack import HStack, Spacer, VStack
 from .text import Text
 
 
@@ -46,7 +46,7 @@ class List(VStack):
                 self.selection.value = [index]
 
     def wrap(self, item, index):
-        wrapped = ListItem(spacing=0)(item, Spacer()).action(self.item_click).pad(10)
+        wrapped = ListItem(spacing=0)(item, Spacer()).action(self.item_click).padding(10)
         if self.selection and index in self.selection.value:
             wrapped.background(200, 200, 255, 16)
         return wrapped
@@ -59,12 +59,6 @@ class List(VStack):
             yield self.wrap(item, idx)
         yield Spacer()
 
-    def draw(self, renderer, rect):
-        boxRGBA(renderer, self.frame.left, self.frame.top, self.frame.right, self.frame.bottom, 30, 32, 33, 255)
-        rectangleRGBA(
-            renderer, self.frame.left, self.frame.top, self.frame.right + 1, self.frame.bottom + 1, 79, 81, 81, 200
-        )
-
 
 class TabView(View):
     selected = State(int, default=0)
@@ -73,20 +67,22 @@ class TabView(View):
         return available
 
     def draw(self, renderer, rect):
-        mid = self.env.scaled(13)
-        roundedBoxRGBA(renderer, rect.left, rect.top + mid, rect.right, rect.bottom, 4, 79, 81, 81, 64)
-        roundedRectangleRGBA(renderer, rect.left, rect.top + mid, rect.right, rect.bottom, 4, 79, 81, 81, 255)
+        if self.env.background:
+            rgb = (
+                self.env.background.r,
+                self.env.background.g,
+                self.env.background.b,
+            )
+            mid = self.env.scaled(13)
+            roundedBoxRGBA(renderer, rect.left, rect.top + mid, rect.right, rect.bottom, 4, *rgb, 64)
+            roundedRectangleRGBA(renderer, rect.left, rect.top + mid, rect.right, rect.bottom, 4, *rgb, 255)
 
     def content(self):
         tabs = list(super().content())
         show = tabs[self.selected.value] if tabs else View()
         # fmt: off
-        yield VStack(spacing=0)(
-            HStack(spacing=0)(
-                Spacer(),
-                SegmentedButton(self.selected, *[t.item_view for t in tabs]),
-                Spacer(),
-            ),
+        yield VStack(alignment=self.env.alignment, spacing=0)(
+            SegmentedButton(self.selected, *[t.item_view for t in tabs]),
             show,
             Spacer()
         )

@@ -2,7 +2,7 @@ import ctypes
 
 import sdl2
 
-from pyui.geom import Insets, Rect, Size
+from pyui.geom import Rect, Size
 from pyui.state import Binding
 from pyui.utils import enumerate_last
 
@@ -21,7 +21,6 @@ class Button(HStack):
                 label = Text(label)
             contents = [label]
         super().__init__(*contents, **options)
-        self.padding = Insets(5, 20, 6, 20).scale(self.env.scale)
         self.action = action
         self.pressed = False
         self.asset = self.env.theme.load_asset(asset)
@@ -78,7 +77,7 @@ class Slider(View):
         self.current.value = min(max(int(value), self.minimum), self.maximum)
 
     def mousemotion(self, pt):
-        inner = self.frame - self.padding - self.border
+        inner = self.frame - self.env.padding - self.env.border
         if pt.x >= inner.left and pt.x <= inner.right:
             pct = (pt.x - inner.left) / inner.width
             self._set(self.minimum + (pct * self.span))
@@ -99,9 +98,8 @@ class TextField(View):
 
     def __init__(self, text: Binding, placeholder="Enter some text", **options):
         self.text = text
-        self.placeholder = Text(placeholder, shadow=False).foreground(150, 150, 150)
+        self.placeholder = Text(placeholder, shadow=False).color(150, 150, 150)
         super().__init__(**options)
-        self.padding = Insets(5, 10, 5, 10).scale(self.env.scale)
         self.asset = self.env.theme.load_asset("textfield")
 
     def minimum_size(self):

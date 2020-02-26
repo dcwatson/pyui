@@ -1,6 +1,8 @@
 import datetime
 import random
 
+import sdl2
+
 import pyui
 
 
@@ -13,11 +15,13 @@ class TimestampView(pyui.View):
     def content(self):
         # fmt: off
         yield pyui.HStack()(
+            pyui.Spacer(),
             pyui.Text(self.timestamp.value.strftime("%H:%M:%S.%f")),
             pyui.Button(action=self.update_timestamp)(
                 pyui.Image("images/python.svg").height(14),
                 pyui.Text("Update"),
-            )
+            ),
+            pyui.Spacer(),
         )
         # fmt: on
 
@@ -43,17 +47,22 @@ class BarChartView(pyui.View):
         yield pyui.VStack(spacing=10)(
             pyui.Text("Bar Chart"),
             pyui.Spacer(),
-            pyui.HStack(alignment=pyui.Alignment.TRAILING, priority=pyui.Priority.HIGH)(
+            pyui.HStack(alignment=pyui.Alignment.TRAILING)(
                 pyui.ForEach(self.bars.value, lambda height: (
                     pyui.Rectangle(height=height)(
-                        pyui.Text("{:.0f}%".format(height * 100.0)).background(0, 0, 0, 128).pad(3).size(11).radius(2)
+                        pyui.Text("{:.0f}%".format(height * 100.0))
+                            .color(230, 230, 230)
+                            .background(0, 0, 0, 160)
+                            .padding(3)
+                            .font(size=11)
+                            .radius(2)
                     ).background(
                         random.randint(0, 255),
                         random.randint(0, 255),
                         random.randint(0, 255)
                     )
                 ))
-            ),
+            ).priority(pyui.Priority.HIGH),
             pyui.HStack()(
                 pyui.Button("Fewer Bars", action=self.fewer_bars),
                 pyui.Button("Randomize", action=self.randomize),
@@ -97,13 +106,14 @@ class FormView(pyui.View):
 
     def content(self):
         # fmt: off
-        fg = (230, 230, 230) if self.language.value else (150, 150, 150)
+        fg = pyui.Environment("text").color if self.language.value else sdl2.SDL_Color(150, 150, 150)
         yield pyui.VStack(spacing=20)(
             pyui.HStack()(
                 pyui.TextField(self.language, "Add a new language"),
                 pyui.Button(action=self.new_language)(
-                    pyui.Text("Add {}".format(self.language.value)).foreground(*fg),
+                    pyui.Text("Add {}".format(self.language.value)).color(fg),
                 ).disable(self.language.value == ""),
+                pyui.Spacer(),
             ),
             pyui.ForEach(self.languages.value, lambda lang: (
                 DescriptionView(lang=lang)
@@ -125,14 +135,14 @@ class ListView(pyui.View):
 
     def content(self):
         # fmt: off
-        yield pyui.HStack(alignment=pyui.Alignment.LEADING)(
+        yield pyui.HStack(alignment=pyui.Alignment.LEADING, spacing=20)(
             pyui.VStack(spacing=10, alignment=pyui.Alignment.LEADING)(
-                pyui.List(selection=self.selection, priority=pyui.Priority.HIGH)(
+                pyui.List(selection=self.selection)(
                     pyui.Text("First Row"),
                     pyui.ForEach(self.dynamic_items.value, lambda item: (
                         pyui.Text(item),
                     )),
-                ),
+                ).priority(pyui.Priority.HIGH),
                 pyui.HStack()(
                     pyui.Spacer(),
                     pyui.Button("Clear", action=self.clear),
@@ -149,12 +159,12 @@ class DemoView(pyui.View):
     def content(self):
         # fmt: off
         yield pyui.TabView()(
-            TimestampView().pad(20).item("Timestamp"),
-            BarChartView().pad(20).item("Bar Chart"),
-            ImageSizerView().pad(20).item("Image"),
-            FormView().pad(20).item("Form"),
-            ListView().pad(20).item("Lists"),
-        ).pad(20)
+            TimestampView().padding(20).item("Time"),
+            BarChartView().padding(20).item("Bar Chart"),
+            ImageSizerView().padding(20).item("Image"),
+            FormView().padding(20).item("Form"),
+            ListView().padding(20).item("Lists"),
+        )
         # fmt: on
 
 

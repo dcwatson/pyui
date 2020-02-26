@@ -1,9 +1,9 @@
 {
     "name": "Dark",
-    "background": [48, 50, 51],
+    "background": [255, 255, 255],
     "fonts": {
         "default": {
-            "file": "fonts/dejavu/DejaVuSans.ttf",
+            "file": "fonts/ubuntu/Ubuntu-Regular.ttf",
             "size": 16
         }
     },
@@ -15,20 +15,20 @@
             "spacing": 10
         },
         "text": {
-            "color": [230, 230, 230]
+            "color": [30, 30, 30],
+            "shadow": false
         },
         "button": {
-            "padding": [5, 20, 5, 20]
+            "padding": [10, 20, 10, 20]
         },
         "textfield": {
-            "padding": [5, 10, 5, 10]
+            "padding": [10, 20, 10, 20]
         },
         "tabview": {
-            "background": [79, 81, 81],
-            "padding": [20]
+            "alignment": "leading"
         },
         "list": {
-            "background": [30, 32, 33]
+            "background": [247, 247, 247]
         }
     },
     "assets": {
@@ -54,19 +54,19 @@
         },
         "segment.left": {
             "file": "segment_left.png",
-            "slice": [[12, 12], [1, 1]]
+            "slice": [[1, 12], [1, 1]]
         },
         "segment.left.pressed": {
             "file": "segment_left_pressed.png",
-            "slice": [[12, 12], [1, 1]]
+            "slice": [[1, 12], [1, 1]]
         },
         "segment.left.selected": {
             "file": "segment_left_selected.png",
-            "slice": [[12, 12], [1, 1]]
+            "slice": [[1, 12], [1, 1]]
         },
         "segment.left.selected.pressed": {
             "file": "segment_left_selected.png",
-            "slice": [[12, 12], [1, 1]]
+            "slice": [[1, 12], [1, 1]]
         },
         "segment.center": {
             "file": "segment_center.png",

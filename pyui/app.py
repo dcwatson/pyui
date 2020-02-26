@@ -1,4 +1,5 @@
 import ctypes
+import os
 
 import rx
 import rx.operators as ops
@@ -10,6 +11,7 @@ from sdl2.sdlttf import TTF_Init
 from .env import Environment
 from .font import Font
 from .geom import Insets, Point, Rect, Size
+from .theme import Theme
 
 
 class Settings:
@@ -205,6 +207,8 @@ class Application:
         Environment.scale.default = scale_w
         sdl2.SDL_DestroyRenderer(rend)
         sdl2.SDL_DestroyWindow(win)
+        if os.name == "nt":
+            Environment.theme.default = Theme("themes/uwp/config.json")
 
     def window(self, title, view):
         self.windows.append(Window(self, title, view))

@@ -30,3 +30,6 @@ class Theme:
         filename = info["file"] if info else name
         fontsize = size or info["size"]
         return Font.load(filename, fontsize)
+
+    def env(self, name="default"):
+        return self.config.get("env", {}).get(name, {})

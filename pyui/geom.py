@@ -22,6 +22,19 @@ class Axis(enum.IntEnum):
         return Point(main, cross) if self.value == 0 else Point(cross, main)
 
 
+class Priority(enum.IntEnum):
+    OPTIONAL = 0
+    LOW = 1
+    NORMAL = 2
+    HIGH = 3
+
+
+class Alignment(enum.Enum):
+    LEADING = 0.0
+    CENTER = 0.5
+    TRAILING = 1.0
+
+
 class Rect:
     def __init__(self, origin=None, size=None):
         if isinstance(origin, int) and isinstance(size, int):
@@ -82,10 +95,10 @@ class Insets:
             self.bottom = top
             self.right = top
         else:
-            self.top = top or 0
-            self.left = left or 0
-            self.bottom = bottom or 0
-            self.right = right or 0
+            self.top = int(top or 0)
+            self.left = int(left or 0)
+            self.bottom = int(bottom or 0)
+            self.right = int(right or 0)
 
     def __repr__(self):
         return "Insets({}, {}, {}, {})".format(self.top, self.left, self.bottom, self.right)
@@ -98,8 +111,8 @@ class Insets:
     def height(self):
         return self.top + self.bottom
 
-    def scale(self, by):
-        return self.__class__(int(self.top * by), int(self.left * by), int(self.bottom * by), int(self.right * by))
+    def scaled(self, by):
+        return self.__class__(self.top * by, self.left * by, self.bottom * by, self.right * by)
 
     def __getitem__(self, axis):
         if isinstance(axis, Axis):

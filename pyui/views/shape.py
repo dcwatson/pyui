@@ -5,7 +5,6 @@ from .base import View
 
 class Rectangle(View):
     def __init__(self, width=1.0, height=1.0):
-        # TODO: make these Bindings
         self.width = self.env.scaled(width) if isinstance(width, int) else width
         self.height = self.env.scaled(height) if isinstance(height, int) else height
         super().__init__()

@@ -1,4 +1,4 @@
-from .base import Alignment, ForEach, Priority, View
+from .base import ForEach, View
 from .control import Button, SegmentedButton, Slider, TextField
 from .image import Image
 from .nav import List, TabView
@@ -8,9 +8,7 @@ from .text import Text
 
 __all__ = [
     # base
-    "Alignment",
     "ForEach",
-    "Priority",
     "View",
     # control
     "Button",
