@@ -11,6 +11,7 @@ from .text import Text
 
 class ListItem(HStack):
     interactive = True
+    draws_focus = False
     _action = None
 
     def action(self, method):
@@ -24,6 +25,7 @@ class ListItem(HStack):
 
 class List(VStack):
     interactive = True
+    draws_focus = False
 
     def __init__(self, items=None, builder=None, selection: Binding = None, **options):
         self.selection = selection
@@ -40,6 +42,7 @@ class List(VStack):
 
     def item_click(self, index):
         if self.selection:
+            self.window.focus = self.id_path
             if index in self.selection.value:
                 self.selection.value = [idx for idx in self.selection.value if idx != index]
             else:

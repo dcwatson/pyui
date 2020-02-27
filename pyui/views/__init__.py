@@ -2,6 +2,7 @@ from .base import ForEach, View
 from .control import Button, SegmentedButton, Slider, TextField
 from .image import Image
 from .nav import List, TabView
+from .scroll import ScrollView
 from .shape import Rectangle
 from .stack import HStack, Spacer, VStack
 from .text import Text
@@ -20,6 +21,8 @@ __all__ = [
     # nav
     "List",
     "TabView",
+    # scroll
+    "ScrollView",
     # shape
     "Rectangle",
     # stack

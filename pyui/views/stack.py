@@ -73,12 +73,13 @@ class Stack(View):
         self.frame.size = self.axis.size(total, max_cross + self.env.padding[self.cross] + self.env.border[self.cross])
 
     def reposition(self, inside: Rect):
-        origin = inside.origin
         self.frame.origin = Point(
-            inside.left + ((inside.width - self.frame.width) // 2),
-            inside.top + ((inside.height - self.frame.height) // 2),
+            inside.left + max(0, (inside.width - self.frame.width) // 2),
+            inside.top + max(0, (inside.height - self.frame.height) // 2),
         )
-        current = origin[self.axis] + self.env.padding.leading(self.axis) + self.env.border.leading(self.axis)
+        current = (
+            self.frame.origin[self.axis] + self.env.padding.leading(self.axis) + self.env.border.leading(self.axis)
+        )
         # Align based on the content size without the padding and borders.
         inner = self.frame - self.env.padding - self.env.border
         for idx, view in enumerate(self.subviews):

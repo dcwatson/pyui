@@ -50,6 +50,7 @@ class Window:
         self.listen(sdl2.SDL_MOUSEBUTTONDOWN, "button", self.mousedown)
         self.listen(sdl2.SDL_MOUSEBUTTONUP, "button", self.mouseup, check_window=False)
         self.listen(sdl2.SDL_MOUSEMOTION, "motion", self.mousemotion)
+        self.listen(sdl2.SDL_MOUSEWHEEL, "wheel", self.mousewheel)
         self.listen(sdl2.SDL_WINDOWEVENT, "window", self.window_event)
         self.listen(sdl2.SDL_KEYDOWN, "key", self.key_event)
         self.listen(sdl2.SDL_KEYUP, "key", self.key_event)
@@ -105,7 +106,7 @@ class Window:
         sdl2.SDL_RenderClear(self.renderer)
         self.view.render(self.renderer)
         focus_view = self.view.resolve(self.focus)
-        if focus_view:
+        if focus_view and focus_view.draws_focus:
             focus_rect = focus_view.frame + Insets(focus_view.env.scaled(1))
             self.focus_ring.render(self.renderer, focus_rect)
         sdl2.SDL_RenderPresent(self.renderer)
@@ -144,6 +145,15 @@ class Window:
                 found.focus()
                 found.click(pt)
         self.tracking = None
+
+    def mousewheel(self, event):
+        x = ctypes.c_int()
+        y = ctypes.c_int()
+        sdl2.SDL_GetMouseState(ctypes.byref(x), ctypes.byref(y))
+        pt = self.point(x.value, y.value)
+        found = self.view.find(pt, scrollable=True)
+        if found and not found.disabled:
+            found.mousewheel(Point(event.x, event.y))
 
     def window_event(self, event):
         if event.event == sdl2.SDL_WINDOWEVENT_SIZE_CHANGED:
@@ -207,7 +217,7 @@ class Application:
         Environment.scale.default = scale_w
         sdl2.SDL_DestroyRenderer(rend)
         sdl2.SDL_DestroyWindow(win)
-        if os.name == "nt":
+        if os.name == "nt" and False:
             Environment.theme.default = Theme("themes/uwp/config.json")
 
     def window(self, title, view):

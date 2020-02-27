@@ -12,6 +12,7 @@ class Theme:
     def __init__(self, config_path):
         self.path = os.path.dirname(config_path)
         self.config = json.load(open(config_path))
+        self.name = self.config["name"]
         self.surface_cache = {}
 
     def __del__(self):

@@ -111,6 +111,14 @@
         "textfield": {
             "file": "textfield.png",
             "slice": [[12, 12], [1, 1]]
+        },
+        "scroll.vertical.track": {
+            "file": "vscroll_track.png",
+            "slice": [[2, 2], [1, 1]]
+        },
+        "scroll.knob": {
+            "file": "scroll_knob.png",
+            "slice": [[11, 11], [1, 1]]
         }
     }
 }

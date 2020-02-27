@@ -86,6 +86,9 @@ class Rect:
             return other.x >= self.left and other.y >= self.top and other.x <= self.right and other.y <= self.bottom
         raise ValueError()
 
+    def scroll(self, pt):
+        return Rect(origin=(self.left - pt.x, self.top - pt.y), size=self.size)
+
 
 class Insets:
     def __init__(self, top=None, left=None, bottom=None, right=None):

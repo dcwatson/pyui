@@ -33,6 +33,7 @@ class Button(HStack):
 
     def mousedown(self, pt):
         self.pressed = True
+        return True
 
     def mousemotion(self, pt):
         self.pressed = pt in self.frame
@@ -131,8 +132,9 @@ class TextField(View):
 
 
 class SegmentedButton(HStack):
-    def __init__(self, selection: Binding, *contents, **options):
+    def __init__(self, selection: Binding, *contents, action=None, **options):
         self.selection = selection
+        self.action = action
         super().__init__(*contents, spacing=0, **options)
 
     def _index_asset(self, idx, is_last):
@@ -142,6 +144,8 @@ class SegmentedButton(HStack):
             return "segment.right" if is_last else "segment.center"
 
     def select(self, idx):
+        if self.action:
+            self.action(idx)
         self.selection.value = idx
 
     def content(self):

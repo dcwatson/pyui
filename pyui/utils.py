@@ -8,3 +8,7 @@ def enumerate_last(items):
         yield idx, last_val, False
         last_val = value
     yield idx + 1, last_val, True
+
+
+def clamp(value, low, high):
+    return max(min(value, high), low)

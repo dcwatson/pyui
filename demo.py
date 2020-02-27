@@ -14,14 +14,14 @@ class TimestampView(pyui.View):
 
     def content(self):
         # fmt: off
-        yield pyui.HStack()(
-            pyui.Spacer(),
-            pyui.Text(self.timestamp.value.strftime("%H:%M:%S.%f")),
-            pyui.Button(action=self.update_timestamp)(
-                pyui.Image("images/python.svg").height(14),
-                pyui.Text("Update"),
+        yield pyui.VStack()(
+            pyui.HStack()(
+                pyui.Text(self.timestamp.value.strftime("%H:%M:%S.%f")),
+                pyui.Button(action=self.update_timestamp)(
+                    pyui.Image("images/python.svg").height(14),
+                    pyui.Text("Update"),
+                ),
             ),
-            pyui.Spacer(),
         )
         # fmt: on
 
@@ -123,7 +123,7 @@ class FormView(pyui.View):
 
 
 class ListView(pyui.View):
-    dynamic_items = pyui.State(default=list)
+    dynamic_items = pyui.State(default=[i + 1 for i in range(30)])
     selection = pyui.State(default=list)
 
     def create_row(self):
@@ -137,11 +137,13 @@ class ListView(pyui.View):
         # fmt: off
         yield pyui.HStack(alignment=pyui.Alignment.LEADING, spacing=20)(
             pyui.VStack(spacing=10, alignment=pyui.Alignment.LEADING)(
-                pyui.List(selection=self.selection)(
-                    pyui.Text("First Row"),
-                    pyui.ForEach(self.dynamic_items.value, lambda item: (
-                        pyui.Text(item),
-                    )),
+                pyui.ScrollView()(
+                    pyui.List(selection=self.selection)(
+                        pyui.Text("First Row"),
+                        pyui.ForEach(self.dynamic_items.value, lambda item: (
+                            pyui.Text(item),
+                        )),
+                    ),
                 ).priority(pyui.Priority.HIGH),
                 pyui.HStack()(
                     pyui.Spacer(),

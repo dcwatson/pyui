@@ -66,8 +66,10 @@ class EnvironmentalView:
 
 class View(EnvironmentalView):
     interactive = False
+    draws_focus = True
     dirty = False
     disabled = False
+    scrollable = False
 
     # Hierarchy information.
     _window = None
@@ -281,12 +283,15 @@ class View(EnvironmentalView):
     # Event handling stubs.
 
     def mousedown(self, pt):
-        pass
+        return True
 
     def mousemotion(self, pt):
         pass
 
     def mouseup(self, pt):
+        pass
+
+    def mousewheel(self, amt):
         pass
 
     def click(self, pt):

@@ -32,12 +32,12 @@ class Env:
 
 
 class Environment:
-    theme = Env(default=Theme("themes/dark/config.json"))
-    scale = Env(default=1.0)
+    theme = Env(inherit=True, default=Theme("themes/dark/config.json"))
+    scale = Env(inherit=True, default=1.0)
 
-    font = Env(default="default")
-    font_size = Env()
-    text_shadow = Env()
+    font = Env(inherit=True, default="default")
+    font_size = Env(inherit=True)
+    text_shadow = Env(inherit=True)
     color = Env(default=sdl2.SDL_Color(0, 0, 0))
     background = Env()
     radius = Env(default=0)
