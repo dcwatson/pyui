@@ -13,10 +13,9 @@ class ScrollView(View):
     scrollable = True
     draws_focus = False
 
-    axis = None
-
-    def __init__(self, axis=None, **options):
+    def __init__(self, axis=Axis.VERTICAL, **options):
         super().__init__(**options)
+        self.axis = Axis(axis)
         self.scroll_size = Size()
         self.scroll_position = Point()
         self.scroll_interval = self.env.scaled(20)
@@ -64,9 +63,11 @@ class ScrollView(View):
 
     def resize(self, available: Size):
         # Need to account for scrollbars when resizing subviews.
+        h = self.env.scaled(15) if self.axis == Axis.HORIZONTAL else 0
+        w = self.env.scaled(15) if self.axis == Axis.VERTICAL else 0
         inside = Size(
-            max(0, available.w - self.env.padding.width - self.env.border.width - self.env.scaled(15)),
-            max(0, available.h - self.env.padding.height - self.env.border.height),
+            max(0, available.w - self.env.padding.width - self.env.border.width - w),
+            max(0, available.h - self.env.padding.height - self.env.border.height - h),
         )
         super().resize(inside)
         self.frame.size = available
@@ -75,7 +76,8 @@ class ScrollView(View):
         max_w = 0
         max_h = 0
         # Account for scrollbars.
-        adjusted = inside - Insets(right=self.env.scaled(15))
+        bar = Insets(right=self.env.scaled(15)) if self.axis == Axis.VERTICAL else Insets(bottom=self.env.scaled(15))
+        adjusted = inside - bar
         for view in self.subviews:
             max_w = max(max_w, view.frame.width)
             max_h = max(max_h, view.frame.height)
@@ -95,21 +97,22 @@ class ScrollView(View):
         return False
 
     def mousemotion(self, pt):
+        if self.tracking is None:
+            return
         size = self.knob_size()
-        if self.tracking == Axis.VERTICAL:
-            track = self.frame.height - size.h
-            if not track:
-                return
-            pos = pt.y - self.frame.top - self.offset
-            pct = clamp(pos / track, 0.0, 1.0)
-            delta_h = max(0, self.scroll_size[Axis.VERTICAL] - self.frame.height)
-            self.scroll_position = Point(0, int(delta_h * pct))
-            self.reposition(self.frame)
+        track = self.frame.size[self.tracking] - size[self.tracking]
+        if not track:
+            return
+        pos = pt[self.tracking] - self.frame.origin[self.tracking] - self.offset
+        pct = clamp(pos / track, 0.0, 1.0)
+        delta = max(0, self.scroll_size[self.tracking] - self.frame.size[self.tracking])
+        self.scroll_position = self.tracking.point(int(delta * pct), self.scroll_position[self.tracking.cross])
+        self.reposition(self.frame)
 
     def mousewheel(self, amt):
-        new_pos = self.scroll_position.y - (self.env.scaled(amt.y) * self.scroll_interval)
-        delta_h = max(0, self.scroll_size[Axis.VERTICAL] - self.frame.height)
-        self.scroll_position = Point(0, clamp(new_pos, 0, delta_h))
+        new_pos = self.scroll_position[self.axis] - (self.env.scaled(amt[self.axis]) * self.scroll_interval)
+        delta = max(0, self.scroll_size[self.axis] - self.frame.size[self.axis])
+        self.scroll_position = self.axis.point(clamp(new_pos, 0, delta), self.scroll_position[self.axis.cross],)
         self.reposition(self.frame)
 
     def render(self, renderer):
@@ -124,9 +127,17 @@ class ScrollView(View):
     def draw(self, renderer, rect):
         super().draw(renderer, rect)
 
-        vtrack_rect = Rect(origin=(rect.right - self.env.scaled(15), rect.top), size=(self.env.scaled(15), rect.height))
-        self.vtrack.render(renderer, vtrack_rect)
+        if self.axis == Axis.HORIZONTAL:
+            track_rect = Rect(
+                origin=(rect.left, rect.bottom - self.env.scaled(15)), size=(rect.width, self.env.scaled(15))
+            )
+            self.htrack.render(renderer, track_rect)
+        else:
+            track_rect = Rect(
+                origin=(rect.right - self.env.scaled(15), rect.top), size=(self.env.scaled(15), rect.height)
+            )
+            self.vtrack.render(renderer, track_rect)
 
-        knob_rect = self.knob_rect(Axis.VERTICAL)
-        if knob_rect.height:
+        knob_rect = self.knob_rect(self.axis)
+        if (self.axis == Axis.VERTICAL and knob_rect.height) or (self.axis == Axis.HORIZONTAL and knob_rect.width):
             self.knob.render(renderer, knob_rect)

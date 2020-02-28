@@ -153,7 +153,7 @@ class Window:
         pt = self.point(x.value, y.value)
         found = self.view.find(pt, scrollable=True)
         if found and not found.disabled:
-            found.mousewheel(Point(event.x, event.y))
+            found.mousewheel(Point(-event.x, event.y))
 
     def window_event(self, event):
         if event.event == sdl2.SDL_WINDOWEVENT_SIZE_CHANGED:
