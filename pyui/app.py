@@ -158,6 +158,9 @@ class Window:
     def window_event(self, event):
         if event.event == sdl2.SDL_WINDOWEVENT_SIZE_CHANGED:
             self.layout()
+        elif event.event == sdl2.SDL_WINDOWEVENT_RESIZED:
+            self.layout()
+            self.render()
 
     def key_event(self, event):
         focus_view = self.view.resolve(self.focus)
@@ -225,11 +228,20 @@ class Application:
 
     def run(self):
         self.running = True
+        def resize_watcher(data, event_ptr):
+            event = event_ptr.contents
+            if event.type == sdl2.SDL_WINDOWEVENT:
+                if event.window.event == sdl2.SDL_WINDOWEVENT_RESIZED:
+                    self.events.on_next(event)
+            return 0
+        watcher = sdl2.SDL_EventFilter(resize_watcher)
+        sdl2.SDL_AddEventWatch(watcher, None)
         event = sdl2.SDL_Event()
         while self.running:
             if sdl2.SDL_WaitEvent(ctypes.byref(event)) != 0:
                 self.events.on_next(event)
             self.render()
+        sdl2.SDL_DelEventWatch(watcher, None)
         self.cleanup()
         sdl2.SDL_Quit()
 
