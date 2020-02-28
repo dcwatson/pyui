@@ -4,7 +4,7 @@ import sdl2
 
 from pyui.geom import Rect, Size
 from pyui.state import Binding
-from pyui.utils import enumerate_last
+from pyui.utils import clamp, enumerate_last
 
 from .base import View
 from .stack import HStack
@@ -29,7 +29,8 @@ class Button(HStack):
     def draw(self, renderer, rect):
         super().draw(renderer, rect)
         asset = self.down if self.pressed else self.asset
-        asset.render(renderer, self.frame)
+        alpha = 64 if self.disabled else 255
+        asset.render(renderer, self.frame, alpha)
 
     def mousedown(self, pt):
         self.pressed = True
@@ -59,7 +60,7 @@ class Slider(View):
 
     @property
     def span(self):
-        return self.maximum - self.minimum
+        return self.maximum - self.minimum + 1
 
     def minimum_size(self):
         return Size(self.env.scaled(40), self.env.scaled(20))
@@ -68,20 +69,21 @@ class Slider(View):
         return Size(available.w, self.env.scaled(20))
 
     def draw(self, renderer, rect):
-        offset = int(self.current.value * rect.width / self.span) - self.env.scaled(10)
+        offset = int((self.current.value - self.minimum) * (rect.width - self.env.scaled(20)) / (self.span - 1))
         slider_rect = Rect(origin=(rect.left, rect.top + self.env.scaled(7)), size=(rect.width, self.env.scaled(6)))
         knob_rect = Rect(origin=(rect.left + offset, rect.top), size=(self.env.scaled(20), self.env.scaled(20)))
-        self.slider.render(renderer, slider_rect)
-        self.knob.render(renderer, knob_rect)
+        alpha = 64 if self.disabled else 255
+        self.slider.render(renderer, slider_rect, alpha=alpha)
+        self.knob.render(renderer, knob_rect, alpha=alpha)
 
     def _set(self, value):
         self.current.value = min(max(int(value), self.minimum), self.maximum)
 
     def mousemotion(self, pt):
         inner = self.frame - self.env.padding - self.env.border
-        if pt.x >= inner.left and pt.x <= inner.right:
-            pct = (pt.x - inner.left) / inner.width
-            self._set(self.minimum + (pct * self.span))
+        pos = pt.x - inner.left
+        pct = clamp(pos / inner.width, 0.0, 1.0)
+        self._set(self.minimum + (pct * self.span))
 
     def click(self, pt):
         self.mousemotion(pt)
@@ -153,4 +155,4 @@ class SegmentedButton(HStack):
             asset = self._index_asset(idx, is_last)
             if idx == self.selection.value:
                 asset += ".selected"
-            yield Button(item, action=lambda idx=idx: self.select(idx), asset=asset)
+            yield Button(item, action=lambda idx=idx: self.select(idx), asset=asset, disabled=self.disabled)

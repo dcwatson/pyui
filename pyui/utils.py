@@ -12,3 +12,14 @@ def enumerate_last(items):
 
 def clamp(value, low, high):
     return max(min(value, high), low)
+
+
+def chunked(items, size):
+    chunk = []
+    for item in items:
+        chunk.append(item)
+        if len(chunk) == size:
+            yield chunk
+            chunk = []
+    if chunk:
+        yield chunk

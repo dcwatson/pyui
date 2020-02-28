@@ -22,6 +22,7 @@ class ScrollView(View):
         self.scroll_interval = self.env.scaled(20)
         self.tracking = None
         self.offset = 0
+        self.htrack = self.env.theme.load_asset("scroll.horizontal.track")
         self.vtrack = self.env.theme.load_asset("scroll.vertical.track")
         self.knob = self.env.theme.load_asset("scroll.knob")
 

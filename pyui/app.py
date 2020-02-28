@@ -228,12 +228,14 @@ class Application:
 
     def run(self):
         self.running = True
+
         def resize_watcher(data, event_ptr):
             event = event_ptr.contents
             if event.type == sdl2.SDL_WINDOWEVENT:
                 if event.window.event == sdl2.SDL_WINDOWEVENT_RESIZED:
                     self.events.on_next(event)
             return 0
+
         watcher = sdl2.SDL_EventFilter(resize_watcher)
         sdl2.SDL_AddEventWatch(watcher, None)
         event = sdl2.SDL_Event()
