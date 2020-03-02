@@ -26,8 +26,8 @@ class Window:
             title.encode("utf-8"),
             sdl2.SDL_WINDOWPOS_CENTERED,
             sdl2.SDL_WINDOWPOS_CENTERED,
-            width,
-            height,
+            int(width * app.win_scale),
+            int(height * app.win_scale),
             sdl2.SDL_WINDOW_RESIZABLE | sdl2.SDL_WINDOW_ALLOW_HIGHDPI,
         )
         self.id = sdl2.SDL_GetWindowID(self.win)
@@ -192,6 +192,9 @@ class Application:
         self.events.pipe(ops.filter(lambda event: event.type == sdl2.SDL_QUIT)).subscribe(self.quit)
 
     def initialize(self):
+        if os.name == "nt":
+            # Environment.theme.default = Theme("themes/uwp/config.json")
+            ctypes.windll.shcore.SetProcessDpiAwareness(1)
         sdl2.SDL_Init(sdl2.SDL_INIT_EVERYTHING)
         IMG_Init(IMG_INIT_PNG)
         TTF_Init()
@@ -208,20 +211,14 @@ class Application:
         )
         rend = sdl2.SDL_CreateRenderer(win, -1, sdl2.SDL_RENDERER_ACCELERATED)
         win_w = ctypes.c_int()
-        win_h = ctypes.c_int()
         rend_w = ctypes.c_int()
-        rend_h = ctypes.c_int()
-        sdl2.SDL_GetWindowSize(win, ctypes.byref(win_w), ctypes.byref(win_h))
-        sdl2.SDL_GetRendererOutputSize(rend, ctypes.byref(rend_w), ctypes.byref(rend_h))
-        scale_w = rend_w.value / win_w.value
-        scale_h = rend_h.value / win_h.value
-        # Will this ever not be the case?
-        assert scale_w == scale_h
-        Environment.scale.default = scale_w
+        sdl2.SDL_GetWindowSize(win, ctypes.byref(win_w), None)
+        sdl2.SDL_GetRendererOutputSize(rend, ctypes.byref(rend_w), None)
+        # Windows HiDPI is silly like this. You get back different window sizes than you put in.
+        self.win_scale = win_w.value / 100.0
+        Environment.scale.default = rend_w.value / 100.0
         sdl2.SDL_DestroyRenderer(rend)
         sdl2.SDL_DestroyWindow(win)
-        if os.name == "nt" and False:
-            Environment.theme.default = Theme("themes/uwp/config.json")
 
     def window(self, title, view):
         self.windows.append(Window(self, title, view))

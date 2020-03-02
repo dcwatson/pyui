@@ -1,8 +1,16 @@
 import ctypes
+import math
 
 import sdl2
 
 from .geom import Rect
+
+
+def _scale(v):
+    # TODO: rethink this. Assets should probably know what scaling factor the source is. I created
+    # all the theme assets thus far at 2x on OSX.
+    from .env import Environment
+    return int(math.ceil(v / (2.0 / Environment.scale.default)))
 
 
 class SlicedAsset:
@@ -43,22 +51,22 @@ class SlicedAsset:
     def render(self, renderer, rect, alpha=255):
         self.create_texture(renderer, rect)
         s = list(self.slice_rects())
-        mid_w = rect.width - s[0].width - s[2].width
-        mid_h = rect.height - s[0].height - s[6].height
-        x1 = rect.left + s[0].width
-        x2 = rect.right - s[2].width
-        y1 = rect.top + s[0].height
-        y2 = rect.bottom - s[6].height
+        mid_w = rect.width - _scale(s[0].width) - _scale(s[2].width)
+        mid_h = rect.height - _scale(s[0].height) - _scale(s[6].height)
+        x1 = rect.left + _scale(s[0].width)
+        x2 = rect.right - _scale(s[2].width)
+        y1 = rect.top + _scale(s[0].height)
+        y2 = rect.bottom - _scale(s[6].height)
         rects = [
-            Rect([rect.left, rect.top], [s[0].width, s[0].height]),
-            Rect([x1, rect.top], [mid_w, s[1].height]),
-            Rect([x2, rect.top], [s[2].width, s[2].height]),
-            Rect([rect.left, y1], [s[3].width, mid_h]),
+            Rect([rect.left, rect.top], [_scale(s[0].width), _scale(s[0].height)]),
+            Rect([x1, rect.top], [mid_w, _scale(s[1].height)]),
+            Rect([x2, rect.top], [_scale(s[2].width), _scale(s[2].height)]),
+            Rect([rect.left, y1], [_scale(s[3].width), mid_h]),
             Rect([x1, y1], [mid_w, mid_h]),
-            Rect([x2, y1], [s[5].width, mid_h]),
-            Rect([rect.left, y2], [s[6].width, s[6].height]),
-            Rect([x1, y2], [mid_w, s[7].height]),
-            Rect([x2, y2], [s[8].width, s[8].height]),
+            Rect([x2, y1], [_scale(s[5].width), mid_h]),
+            Rect([rect.left, y2], [_scale(s[6].width), _scale(s[6].height)]),
+            Rect([x1, y2], [mid_w, _scale(s[7].height)]),
+            Rect([x2, y2], [_scale(s[8].width), _scale(s[8].height)]),
         ]
         sdl2.SDL_SetTextureAlphaMod(self.texture, alpha)
         for idx in range(len(s)):

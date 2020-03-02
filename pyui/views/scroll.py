@@ -122,7 +122,10 @@ class ScrollView(View):
         for view in self.subviews:
             view.render(renderer)
         self.draw(renderer, inner)
-        sdl2.SDL_RenderSetClipRect(renderer, None)
+        # sdl2.SDL_RenderSetClipRect(renderer, None)
+        # Setting the clip rect to None/NULL work on OSX, but does strange things on Windows.
+        # This is a hack, but seems to work.
+        sdl2.SDL_RenderSetClipRect(renderer, ctypes.byref(self.root.frame.sdl))
 
     def draw(self, renderer, rect):
         super().draw(renderer, rect)
