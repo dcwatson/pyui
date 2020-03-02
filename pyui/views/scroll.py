@@ -54,14 +54,15 @@ class ScrollView(View):
         inner = self.frame - self.env.padding - self.env.border
         if axis == Axis.VERTICAL:
             return Rect(
-                origin=(inner.right - self.env.scaled(13), inner.top + pos.y), size=(self.env.scaled(11), size.h),
+                origin=(inner.right - self.env.scaled(13), inner.top + pos.y), size=(self.env.scaled(11), size.h)
             )
         else:
             return Rect(
-                origin=(inner.left + pos.x, inner.bottom - self.env.scaled(13)), size=(size.w, self.env.scaled(11)),
+                origin=(inner.left + pos.x, inner.bottom - self.env.scaled(13)), size=(size.w, self.env.scaled(11))
             )
 
     def resize(self, available: Size):
+        available = self.env.constrain(available)
         # Need to account for scrollbars when resizing subviews.
         h = self.env.scaled(15) if self.axis == Axis.HORIZONTAL else 0
         w = self.env.scaled(15) if self.axis == Axis.VERTICAL else 0

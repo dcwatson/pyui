@@ -67,7 +67,7 @@ class GridTest(pyui.View):
                     pyui.Text("No"),
                     pyui.Text("Yes"),
                 ).disable(self.size_or_num.value == 0),
-            ).padding(10),
+            ).padding(10).size(width=300),
             ItemGridView(
                 item_count=self.item_count.value,
                 size=size,

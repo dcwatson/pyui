@@ -41,6 +41,7 @@ class Stack(View):
         total = self.env.padding[self.axis] + self.env.border[self.axis] + (self.env.spacing * (len(self.subviews) - 1))
         # How much space along the layout axis we have remaining.
         # TODO: what to do when remaining < 0, i.e. no room for subviews?
+        available = self.env.constrain(available)
         remaining = available[self.axis] - total
         # How much space is available on the cross axis.
         available_cross = available[self.cross] - self.env.padding[self.cross] - self.env.border[self.cross]
@@ -60,6 +61,7 @@ class Stack(View):
         for priority in sorted(groups, reverse=True):
             reserved = sum(groups[p]["minimum"] for p in groups if p < priority)
             views = groups[priority]["views"]
+            # TODO: sort views within a priority by whether they have fixed sizes?
             for idx, view in enumerate(views):
                 # Take the remaining unreserved space, and divide it by how many views are left in this group.
                 # TODO: we could make sure we offer at least the view's minimal space, but that may be unnecessary.

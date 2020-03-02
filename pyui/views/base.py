@@ -63,6 +63,14 @@ class EnvironmentalView:
         self.env.spacing = self.env.scaled(int(s))
         return self
 
+    def size(self, width=None, height=None):
+        if isinstance(width, int):
+            width = self.env.scaled(width)
+        if isinstance(height, int):
+            height = self.env.scaled(height)
+        self.env.size = Size(width or self.env.size.w, height or self.env.size.h)
+        return self
+
 
 class View(EnvironmentalView):
     interactive = False
@@ -194,6 +202,7 @@ class View(EnvironmentalView):
         """
         Sets the view's frame size, taking into account content size, padding, and borders.
         """
+        available = self.env.constrain(available)
         max_w = 0
         max_h = 0
         inside = Size(

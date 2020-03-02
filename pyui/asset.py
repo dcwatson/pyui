@@ -10,6 +10,7 @@ def _scale(v):
     # TODO: rethink this. Assets should probably know what scaling factor the source is. I created
     # all the theme assets thus far at 2x on OSX.
     from .env import Environment
+
     return int(math.ceil(v / (2.0 / Environment.scale.default)))
 
 

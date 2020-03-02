@@ -67,6 +67,7 @@ class Grid(View):
             raise ValueError("Please specify num or size.")
 
     def resize(self, available: Size):
+        available = self.env.constrain(available)
         self.count = self.cross_count(available)
         available_cross = (
             available[self.cross]
@@ -84,7 +85,7 @@ class Grid(View):
                 view.resize(self.cross.size(offer, offer))
                 max_main = max(max_main, view.frame.size[self.axis])
             main += max_main
-        self.frame.size = self.axis.size(main, available[self.cross],)
+        self.frame.size = self.axis.size(main, available[self.cross])
 
     def reposition(self, inside: Rect):
         self.frame.origin = Point(

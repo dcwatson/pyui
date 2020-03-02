@@ -1,6 +1,6 @@
 import sdl2
 
-from pyui.geom import Alignment, Insets, Priority
+from pyui.geom import Alignment, Axis, Insets, Priority, Size
 
 from .theme import Theme
 
@@ -46,6 +46,7 @@ class Environment:
     priority = Env(default=Priority.NORMAL)
     alignment = Env(default=Alignment.CENTER)
     spacing = Env(default=0)
+    size = Env(default=Size())
 
     def __init__(self, class_name=None, **overrides):
         self.parent = None
@@ -59,6 +60,14 @@ class Environment:
 
     def scaled(self, value):
         return value.__class__(value * self.scale)
+
+    def constrain(self, available, value=None):
+        final = list(value or available)
+        for a in Axis:
+            v = self.size[a]
+            if v:
+                final[a] = v if isinstance(v, int) else int(v * available[a])
+        return Size(*final)
 
     def load(self, class_name):
         for key, value in self.theme.env(class_name.lower()).items():
