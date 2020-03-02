@@ -1,3 +1,5 @@
+import inspect
+
 import sdl2
 from sdl2.sdlgfx import boxRGBA, roundedBoxRGBA
 
@@ -331,7 +333,9 @@ class View(EnvironmentalView):
 class ForEach(View):
     def __init__(self, items, builder):
         super().__init__(items=items, builder=builder)
+        self._has_index = len(inspect.signature(builder).parameters) == 2
 
     def __iter__(self):
-        for item in self.items:
-            yield from self.builder(item)
+        for idx, item in enumerate(self.items):
+            args = [item, idx] if self._has_index else [item]
+            yield from self.builder(*args)

@@ -43,14 +43,14 @@ class List(VStack):
     def item_click(self, index):
         if self.selection:
             self.window.focus = self.id_path
-            if index in self.selection.value:
+            if self.selection.value and index in self.selection.value:
                 self.selection.value = [idx for idx in self.selection.value if idx != index]
             else:
                 self.selection.value = [index]
 
     def wrap(self, item, index):
         wrapped = ListItem(spacing=0)(item, Spacer()).action(self.item_click).padding(10)
-        if self.selection and index in self.selection.value:
+        if self.selection and self.selection.value and index in self.selection.value:
             wrapped.background(200, 200, 255, 16)
         return wrapped
 

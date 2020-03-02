@@ -15,7 +15,7 @@ class ScrollView(View):
 
     def __init__(self, axis=Axis.VERTICAL, **options):
         super().__init__(**options)
-        self.axis = Axis(axis)
+        self.axis = Axis(axis) if axis is not None else None
         self.scroll_size = Size()
         self.scroll_position = Point()
         self.scroll_interval = self.env.scaled(20)
@@ -24,16 +24,18 @@ class ScrollView(View):
         self.htrack = self.env.theme.load_asset("scroll.horizontal.track")
         self.vtrack = self.env.theme.load_asset("scroll.vertical.track")
         self.knob = self.env.theme.load_asset("scroll.knob")
+        self.corner = self.env.theme.load_asset("scroll.corner")
+        self.track_size = self.env.scaled(15)
 
     def content_size(self, available: Size):
         return available
 
     def knob_size(self):
         return Size(
-            min(self.frame.width, int(self.frame.width * self.frame.width / self.scroll_size[Axis.HORIZONTAL]))
+            int(self.frame.width * self.frame.width / self.scroll_size[Axis.HORIZONTAL])
             if self.scroll_size[Axis.HORIZONTAL] > self.frame.width
             else 0,
-            min(self.frame.height, int(self.frame.height * self.frame.height / self.scroll_size[Axis.VERTICAL]))
+            int(self.frame.height * self.frame.height / self.scroll_size[Axis.VERTICAL])
             if self.scroll_size[Axis.VERTICAL] > self.frame.height
             else 0,
         )
@@ -64,8 +66,8 @@ class ScrollView(View):
     def resize(self, available: Size):
         available = self.env.constrain(available)
         # Need to account for scrollbars when resizing subviews.
-        h = self.env.scaled(15) if self.axis == Axis.HORIZONTAL else 0
-        w = self.env.scaled(15) if self.axis == Axis.VERTICAL else 0
+        h = self.track_size if self.axis in (Axis.HORIZONTAL, None) else 0
+        w = self.track_size if self.axis in (Axis.VERTICAL, None) else 0
         inside = Size(
             max(0, available.w - self.env.padding.width - self.env.border.width - w),
             max(0, available.h - self.env.padding.height - self.env.border.height - h),
@@ -77,14 +79,19 @@ class ScrollView(View):
         max_w = 0
         max_h = 0
         # Account for scrollbars.
-        bar = Insets(right=self.env.scaled(15)) if self.axis == Axis.VERTICAL else Insets(bottom=self.env.scaled(15))
-        adjusted = inside - bar
+        bars = Insets()
+        if self.axis in (Axis.VERTICAL, None):
+            bars.right = self.track_size
+        if self.axis in (Axis.HORIZONTAL, None):
+            bars.bottom = self.track_size
+        adjusted = inside - bars
         for view in self.subviews:
             max_w = max(max_w, view.frame.width)
             max_h = max(max_h, view.frame.height)
             scrolled = adjusted.scroll(self.scroll_position)
             view.frame.origin = scrolled.origin
             view.reposition(scrolled)
+            view.frame.origin = scrolled.origin
         self.frame.origin = inside.origin
         self.scroll_size = Size(max_w, max_h)
 
@@ -110,10 +117,14 @@ class ScrollView(View):
         self.scroll_position = self.tracking.point(int(delta * pct), self.scroll_position[self.tracking.cross])
         self.reposition(self.frame)
 
+    def mouseup(self, pt):
+        self.tracking = None
+
     def mousewheel(self, amt):
-        new_pos = self.scroll_position[self.axis] - (self.env.scaled(amt[self.axis]) * self.scroll_interval)
-        delta = max(0, self.scroll_size[self.axis] - self.frame.size[self.axis])
-        self.scroll_position = self.axis.point(clamp(new_pos, 0, delta), self.scroll_position[self.axis.cross],)
+        axis = Axis.VERTICAL if amt.y != 0 else Axis.HORIZONTAL
+        new_pos = self.scroll_position[axis] - (self.env.scaled(amt[axis]) * self.scroll_interval)
+        delta = max(0, self.scroll_size[axis] - self.frame.size[axis])
+        self.scroll_position = axis.point(clamp(new_pos, 0, delta), self.scroll_position[axis.cross])
         self.reposition(self.frame)
 
     def render(self, renderer):
@@ -131,17 +142,25 @@ class ScrollView(View):
     def draw(self, renderer, rect):
         super().draw(renderer, rect)
 
-        if self.axis == Axis.HORIZONTAL:
-            track_rect = Rect(
-                origin=(rect.left, rect.bottom - self.env.scaled(15)), size=(rect.width, self.env.scaled(15))
-            )
+        if self.axis in (Axis.HORIZONTAL, None):
+            w = rect.width - (0 if self.axis == Axis.HORIZONTAL else self.track_size)
+            track_rect = Rect(origin=(rect.left, rect.bottom - self.track_size), size=(w, self.track_size))
             self.htrack.render(renderer, track_rect)
-        else:
-            track_rect = Rect(
-                origin=(rect.right - self.env.scaled(15), rect.top), size=(self.env.scaled(15), rect.height)
-            )
-            self.vtrack.render(renderer, track_rect)
+            knob_rect = self.knob_rect(Axis.HORIZONTAL)
+            if knob_rect.width:
+                self.knob.render(renderer, knob_rect)
 
-        knob_rect = self.knob_rect(self.axis)
-        if (self.axis == Axis.VERTICAL and knob_rect.height) or (self.axis == Axis.HORIZONTAL and knob_rect.width):
-            self.knob.render(renderer, knob_rect)
+        if self.axis in (Axis.VERTICAL, None):
+            h = rect.height - (0 if self.axis == Axis.VERTICAL else self.track_size)
+            track_rect = Rect(origin=(rect.right - self.track_size, rect.top), size=(self.track_size, h))
+            self.vtrack.render(renderer, track_rect)
+            knob_rect = self.knob_rect(Axis.VERTICAL)
+            if knob_rect.height:
+                self.knob.render(renderer, knob_rect)
+
+        if self.axis is None:
+            corner_rect = Rect(
+                origin=(rect.right - self.track_size, rect.bottom - self.track_size),
+                size=(self.track_size, self.track_size),
+            )
+            self.corner.render(renderer, corner_rect)

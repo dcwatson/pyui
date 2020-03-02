@@ -5,6 +5,10 @@
         "default": {
             "file": "fonts/dejavu/DejaVuSans.ttf",
             "size": 16
+        },
+        "bold": {
+            "file": "fonts/dejavu/DejaVuSans-Bold.ttf",
+            "size": 16
         }
     },
     "env": {
@@ -123,6 +127,10 @@
         "scroll.knob": {
             "file": "scroll_knob.png",
             "slice": [[11, 11], [1, 1]]
+        },
+        "scroll.corner": {
+            "file": "scroll_corner.png",
+            "slice": [[1, 1], [1, 1]]
         }
     }
 }

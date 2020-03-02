@@ -1,7 +1,7 @@
 import ctypes
 
 import sdl2
-from sdl2.sdlttf import TTF_FontHeight, TTF_RenderUTF8_Blended, TTF_RenderUTF8_Blended_Wrapped
+from sdl2.sdlttf import TTF_FontHeight, TTF_RenderUTF8_Blended, TTF_RenderUTF8_Blended_Wrapped, TTF_SizeUTF8
 
 from pyui.geom import Rect, Size
 
@@ -58,10 +58,15 @@ class Text(View):
                 self.shadowtex = sdl2.SDL_CreateTextureFromSurface(renderer, self.shadow)
 
     def minimum_size(self):
-        return Size(0, TTF_FontHeight(self.sdl_font))
+        w = ctypes.c_int()
+        h = ctypes.c_int()
+        if TTF_SizeUTF8(self.sdl_font, self.utf8, ctypes.byref(w), ctypes.byref(h)) == 0:
+            return Size(w.value, h.value)
+        else:
+            return Size(0, TTF_FontHeight(self.sdl_font))
 
     def content_size(self, available: Size):
-        self.create_surface(available.w)
+        self.create_surface()
         return Size(self.surface.contents.w, self.surface.contents.h)
 
     def draw(self, renderer, rect):
