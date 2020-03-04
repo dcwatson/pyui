@@ -107,12 +107,7 @@ class View(EnvironmentalView):
 
     @property
     def id_path(self):
-        path = []
-        view = self
-        while view:
-            path.insert(0, view.id)
-            view = view.parent
-        return path
+        return self.parent.id_path + (self.id,) if self.parent else (self.id,)
 
     @property
     def root(self):
@@ -152,8 +147,30 @@ class View(EnvironmentalView):
             view.env.inherit(self.env)
             view.rebuild()
             new_subviews.append(view)
-        # At some point, it may be worth diffing the subview tree and only replacing those that changed.
-        self.subviews = new_subviews
+        self.subviews = self.diff_subviews(new_subviews)
+
+    def diff_subviews(self, new_subviews):
+        if not self.subviews:
+            return new_subviews
+        # TODO: this is not great. I'm using id_path out of convenience, but ideally this would use some sort of
+        # View hash value and equality testing to be able to detect if a view moves around in the hierarchy.
+        old = {v.id_path: v for v in self.subviews}
+        subviews = []
+        for idx, new_view in enumerate(new_subviews):
+            view = old.get(new_view.id_path)
+            # Let existing views decide if they can be re-used.
+            if view and view.reuse(new_view):
+                # Since it's an existing view, need to diff down the tree against the new subtree.
+                view.subviews = view.diff_subviews(new_view.subviews)
+            else:
+                # This view is new to the hierarchy, nothing else to do.
+                view = new_view
+            view.index = idx
+            subviews.append(view)
+        return subviews
+
+    def reuse(self, other):
+        return True
 
     def content(self):
         for view in self.contents:

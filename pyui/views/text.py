@@ -17,6 +17,9 @@ class Text(View):
         self.texture = None
         self.shadowtex = None
 
+    def reuse(self, other):
+        return self.utf8 == other.utf8
+
     @property
     def sdl_font(self):
         return self.env.theme.font(self.env.font, self.env.font_size)

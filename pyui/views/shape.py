@@ -13,3 +13,8 @@ class Rectangle(View):
         w = self.width if isinstance(self.width, int) else int(self.width * available.w)
         h = self.height if isinstance(self.height, int) else int(self.height * available.h)
         return Size(w, h)
+
+    def reuse(self, other):
+        self.width = other.width
+        self.height = other.height
+        return True

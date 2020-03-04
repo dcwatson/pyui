@@ -21,6 +21,10 @@ class Image(View):
         if self.texture:
             sdl2.SDL_DestroyTexture(self.texture)
 
+    def reuse(self, other):
+        self._scale = other._scale
+        return True
+
     def minimum_size(self):
         return Size(int(self.surface.contents.w * self._scale), int(self.surface.contents.h * self._scale))
 

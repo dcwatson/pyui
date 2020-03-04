@@ -46,6 +46,17 @@ class Grid(View):
         self.flex = flex
         self.count = 0
 
+    def reuse(self, other):
+        self.axis = other.axis
+        self.cross = other.cross
+        self.alignment = other.alignment
+        self.spacing = other.spacing
+        self.num = other.num
+        self.size = other.size
+        self.flex = other.flex
+        self.count = other.count
+        return True
+
     def minimum_size(self):
         # Minimum size for a Grid is a single row/column (based on Axis).
         main = self.spacing[self.axis] * (len(self.subviews) - 1)

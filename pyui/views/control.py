@@ -26,6 +26,9 @@ class Button(HStack):
         self.asset = self.env.theme.load_asset(asset)
         self.down = self.env.theme.load_asset(asset + ".pressed")
 
+    def reuse(self, other):
+        return False
+
     def draw(self, renderer, rect):
         super().draw(renderer, rect)
         asset = self.down if self.pressed else self.asset
