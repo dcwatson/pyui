@@ -19,15 +19,20 @@ class Settings:
 
 
 class Window:
-    def __init__(self, app, title, view, width=640, height=480, pack=False):
+    def __init__(self, app, title, view, width=640, height=480, resize=True, border=True, pack=False):
         self.app = app
+        flags = sdl2.SDL_WINDOW_ALLOW_HIGHDPI
+        if resize:
+            flags |= sdl2.SDL_WINDOW_RESIZABLE
+        if not border:
+            flags |= sdl2.SDL_WINDOW_BORDERLESS
         self.win = sdl2.SDL_CreateWindow(
             title.encode("utf-8"),
             sdl2.SDL_WINDOWPOS_CENTERED,
             sdl2.SDL_WINDOWPOS_CENTERED,
             int(width * app.win_scale),
             int(height * app.win_scale),
-            sdl2.SDL_WINDOW_RESIZABLE | sdl2.SDL_WINDOW_ALLOW_HIGHDPI,
+            flags,
         )
         self.id = sdl2.SDL_GetWindowID(self.win)
         self.renderer = sdl2.SDL_CreateRenderer(self.win, -1, sdl2.SDL_RENDERER_ACCELERATED)
@@ -119,9 +124,10 @@ class Window:
     def mousedown(self, event):
         pt = self.point(event.x, event.y)
         found = self.view.find(pt, interactive=True)
-        if found and not found.disabled:
-            found.mousedown(pt)
-            self.tracking = found.id_path
+        if found is None or found.disabled:
+            found = self.view
+        found.mousedown(pt)
+        self.tracking = found.id_path
 
     def mousemotion(self, event):
         pt = self.point(event.x, event.y)
@@ -151,8 +157,9 @@ class Window:
         sdl2.SDL_GetMouseState(ctypes.byref(x), ctypes.byref(y))
         pt = self.point(x.value, y.value)
         found = self.view.find(pt, scrollable=True)
-        if found and not found.disabled:
-            found.mousewheel(Point(-event.x, event.y))
+        if found is None or found.disabled:
+            found = self.view
+        found.mousewheel(Point(-event.x, event.y))
 
     def window_event(self, event):
         if event.event == sdl2.SDL_WINDOWEVENT_SIZE_CHANGED:
@@ -163,22 +170,23 @@ class Window:
 
     def key_event(self, event):
         focus_view = self.view.resolve(self.focus)
+        if focus_view is None or focus_view.disabled:
+            focus_view = self.view
         if event.type == sdl2.SDL_KEYDOWN:
             if event.keysym.sym == sdl2.SDLK_TAB:
                 self.advance_focus(-1 if (event.keysym.mod & sdl2.KMOD_SHIFT) != 0 else 1)
             elif event.keysym.sym == sdl2.SDLK_SPACE:
-                if focus_view and not focus_view.disabled:
+                if focus_view.interactive:
                     focus_view.click(focus_view.frame.center)
-            if focus_view and not focus_view.disabled:
-                focus_view.keydown(event.keysym.sym, event.keysym.mod)
+            focus_view.keydown(event.keysym.sym, event.keysym.mod)
         elif event.type == sdl2.SDL_KEYUP:
-            if focus_view and not focus_view.disabled:
-                focus_view.keyup(event.keysym.sym, event.keysym.mod)
+            focus_view.keyup(event.keysym.sym, event.keysym.mod)
 
     def text_event(self, event):
         focus_view = self.view.resolve(self.focus)
-        if focus_view and not focus_view.disabled:
-            focus_view.textinput(event.text.decode("utf-8"))
+        if focus_view is None or focus_view.disabled:
+            focus_view = self.view
+        focus_view.textinput(event.text.decode("utf-8"))
 
 
 class Application:
@@ -218,8 +226,8 @@ class Application:
         sdl2.SDL_DestroyRenderer(rend)
         sdl2.SDL_DestroyWindow(win)
 
-    def window(self, title, view):
-        self.windows.append(Window(self, title, view))
+    def window(self, title, view, width=640, height=480, resize=True, border=True):
+        self.windows.append(Window(self, title, view, width=width, height=height, resize=resize, border=border))
 
     def run(self):
         self.running = True

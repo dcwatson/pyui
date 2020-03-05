@@ -275,6 +275,9 @@ class View(EnvironmentalView):
             self.opacity(0.25 * self.env.opacity)
         return self
 
+    def modify(self, mod):
+        return mod(self)
+
     def item(self, label_or_view):
         if isinstance(label_or_view, View):
             self.item_view = label_or_view

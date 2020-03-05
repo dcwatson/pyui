@@ -23,6 +23,7 @@ class Grid(View):
         size=None,
         axis=Axis.VERTICAL,
         flex=False,
+        cram=False,
         **options
     ):
         super().__init__(*contents, **options)
@@ -35,6 +36,7 @@ class Grid(View):
         self.num = num
         self.size = self.env.scaled(size) if size else None
         self.flex = flex
+        self.cram = cram
         self.count = 0
 
     def minimum_size(self):
@@ -67,13 +69,24 @@ class Grid(View):
             - ((self.count - 1) * self.spacing[self.cross])
         )
         main = self.env.padding[self.axis] + self.env.border[self.axis]
-        offer = self.size if self.size and not self.flex else available_cross // self.count
-        for idx, views in enumerate(chunked(self.subviews, self.count)):
+        cross_offer = self.size if self.size and not self.flex else available_cross // self.count
+        chunked_views = list(chunked(self.subviews, self.count))
+        if self.cram:
+            available_main = (
+                available[self.axis]
+                - self.env.padding[self.axis]
+                - self.env.border[self.axis]
+                - ((len(chunked_views) - 1) * self.spacing[self.axis])
+            )
+            main_offer = available_main // len(chunked_views)
+        else:
+            main_offer = cross_offer
+        for idx, views in enumerate(chunked_views):
             if idx > 0:
                 main += self.spacing[self.axis]
             max_main = 0
             for view in views:
-                view.resize(self.cross.size(offer, offer))
+                view.resize(self.axis.size(main_offer, cross_offer))
                 max_main = max(max_main, view.frame.size[self.axis])
             main += max_main
         self.frame.size = self.axis.size(main, available[self.cross])
