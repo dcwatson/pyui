@@ -85,7 +85,9 @@ class TabView(View):
         show = tabs[self.selected.value] if tabs else View()
         # fmt: off
         yield VStack(alignment=self.env.alignment, spacing=0)(
-            SegmentedButton(self.selected, *[t.item_view for t in tabs]),
+            SegmentedButton(self.selected)(
+                *[t.item_view for t in tabs]
+            ),
             show,
             Spacer()
         )

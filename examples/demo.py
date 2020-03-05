@@ -18,7 +18,7 @@ class TimestampView(pyui.View):
             pyui.HStack()(
                 pyui.Text(self.timestamp.value.strftime("%H:%M:%S.%f")),
                 pyui.Button(action=self.update_timestamp)(
-                    pyui.Image("images/python.svg").height(14),
+                    pyui.Image("images/python.svg").size(height=14),
                     pyui.Text("Update"),
                 ),
             ),
@@ -49,7 +49,7 @@ class BarChartView(pyui.View):
             pyui.Spacer(),
             pyui.HStack(alignment=pyui.Alignment.TRAILING)(
                 pyui.ForEach(self.bars.value, lambda height: (
-                    pyui.Rectangle(height=height)(
+                    pyui.Rectangle()(
                         pyui.Text("{:.0f}%".format(height * 100.0))
                             .color(230, 230, 230)
                             .background(0, 0, 0, 160)
@@ -60,7 +60,7 @@ class BarChartView(pyui.View):
                         random.randint(0, 255),
                         random.randint(0, 255),
                         random.randint(0, 255)
-                    )
+                    ).size(height=height)
                 ))
             ).priority(pyui.Priority.HIGH),
             pyui.HStack()(
@@ -79,7 +79,7 @@ class ImageSizerView(pyui.View):
         # fmt: off
         yield pyui.VStack(
             pyui.Slider(self.scale, 0, 100),
-            pyui.Image("images/python.png").scale(self.scale.value / 100),
+            pyui.Image("images/python.png").size(height=self.scale.value / 100),
         )
         # fmt: on
 

@@ -2,7 +2,7 @@
 
 ```
 pip install -r requirements.txt
-python demo.py
+python -m examples.demo
 ```
 
-See [demo.py](demo.py) for an example of using PyUI.
+See [the examples directory](examples) for examples of using PyUI.

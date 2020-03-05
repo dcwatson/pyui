@@ -9,39 +9,56 @@ from .base import View
 
 
 class Image(View):
-    def __init__(self, path):
+    def __init__(self, path, clamped=True, stretch=False):
         super().__init__()
-        self.surface = IMG_Load(path.encode("utf-8"))
-        self.texture = None
-        self._scale = 1.0
+        self.path = str(path)
+        self.clamped = clamped
+        self.stretch = stretch
+        # Cached locally, not copied on re-use.
+        self._surface = None
+        self._texture = None
+        self._size = None
+
+    def load_surface(self):
+        if self._surface is None:
+            self._surface = IMG_Load(self.path.encode("utf-8"))
+            self._size = Size(self._surface.contents.w, self._surface.contents.h)
+
+    @property
+    def image_size(self):
+        self.load_surface()
+        return self._size
 
     def __del__(self):
-        if self.surface:
-            sdl2.SDL_FreeSurface(self.surface)
-        if self.texture:
-            sdl2.SDL_DestroyTexture(self.texture)
+        if self._surface:
+            sdl2.SDL_FreeSurface(self._surface)
+        if self._texture:
+            sdl2.SDL_DestroyTexture(self._texture)
 
     def reuse(self, other):
-        self._scale = other._scale
-        return True
+        return self.path == other.path
+
+    def constrain(self, available=None):
+        if available is None:
+            available = self.image_size
+        box = self.env.constrain(available, self.image_size, clamped=self.clamped)
+        if self.stretch:
+            return box
+        pct_w = box.w / self.image_size.w
+        pct_h = box.h / self.image_size.h
+        if pct_w < pct_h:
+            return Size(box.w, int(self.image_size.h * pct_w))
+        else:
+            return Size(int(self.image_size.w * pct_h), box.h)
 
     def minimum_size(self):
-        return Size(int(self.surface.contents.w * self._scale), int(self.surface.contents.h * self._scale))
+        return self.constrain()
 
     def content_size(self, available: Size):
-        return Size(int(self.surface.contents.w * self._scale), int(self.surface.contents.h * self._scale))
+        return self.constrain(available)
 
     def draw(self, renderer, rect):
-        if self.texture is None:
-            self.texture = sdl2.SDL_CreateTextureFromSurface(renderer, self.surface)
-        sdl2.SDL_RenderCopy(renderer, self.texture, None, ctypes.byref(rect.sdl))
-
-    def scale(self, scale):
-        self._scale = scale
-        return self
-
-    def height(self, h):
-        return self.scale(self.env.scaled(h) / self.surface.contents.h)
-
-    def width(self, w):
-        return self.scale(self.env.scaled(w) / self.surface.contents.w)
+        self.load_surface()
+        if self._texture is None:
+            self._texture = sdl2.SDL_CreateTextureFromSurface(renderer, self._surface)
+        sdl2.SDL_RenderCopy(renderer, self._texture, None, ctypes.byref(rect.sdl))

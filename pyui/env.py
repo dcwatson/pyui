@@ -1,6 +1,7 @@
 import sdl2
 
 from pyui.geom import Alignment, Axis, Insets, Priority, Size
+from pyui.utils import clamp
 
 from .theme import Theme
 
@@ -47,6 +48,9 @@ class Environment:
     alignment = Env(default=Alignment.CENTER)
     spacing = Env(default=0)
     size = Env(default=Size())
+    opacity = Env(default=1.0, inherit=True)
+
+    alpha = property(lambda self: round(self.opacity * 255))
 
     def __init__(self, class_name=None, **overrides):
         self.parent = None
@@ -61,12 +65,14 @@ class Environment:
     def scaled(self, value):
         return value.__class__(value * self.scale)
 
-    def constrain(self, available, value=None):
+    def constrain(self, available, value=None, clamped=True):
         final = list(value or available)
         for a in Axis:
             v = self.size[a]
             if v:
                 final[a] = v if isinstance(v, int) else int(v * available[a])
+            if clamped:
+                final[a] = clamp(final[a], 0, available[a])
         return Size(*final)
 
     def load(self, class_name):
@@ -81,4 +87,16 @@ class Environment:
                 value = Alignment[value.upper()]
             elif key == "spacing":
                 value = self.scaled(value)
+            elif key == "size":
+                pass
+            elif key == "opacity":
+                value = clamp(float(value), 0.0, 1.0)
             setattr(self, key, value)
+
+    def draw(self, renderer, asset_name, rect, alpha=None):
+        # Mostly lives here because it's where I have access to the theme and the scale, not because it's a good place
+        # for it to live.
+        asset = self.theme.load_asset(asset_name)
+        if alpha is None:
+            alpha = self.alpha
+        asset.render(renderer, rect, alpha=alpha, scale=self.scale)

@@ -4,15 +4,6 @@ from pyui.utils import chunked
 from .base import View
 
 
-class Flow(View):
-    def __init__(self, *contents, alignment=Alignment.CENTER, spacing=10, flex=True, **options):
-        super().__init__(*contents, **options)
-        self.cross = self.axis.cross
-        self.alignment = (alignment, alignment) if isinstance(alignment, Alignment) else alignment
-        self.spacing = (spacing, spacing) if isinstance(spacing, int) else spacing
-        self.flex = flex
-
-
 class Grid(View):
     # A vertical Grid lays out items from left to right, flowing from top to bottom:
     #    1 2
@@ -45,17 +36,6 @@ class Grid(View):
         self.size = self.env.scaled(size) if size else None
         self.flex = flex
         self.count = 0
-
-    def reuse(self, other):
-        self.axis = other.axis
-        self.cross = other.cross
-        self.alignment = other.alignment
-        self.spacing = other.spacing
-        self.num = other.num
-        self.size = other.size
-        self.flex = other.flex
-        self.count = other.count
-        return True
 
     def minimum_size(self):
         # Minimum size for a Grid is a single row/column (based on Axis).

@@ -11,7 +11,6 @@ from sdl2.sdlttf import TTF_Init
 from .env import Environment
 from .font import Font
 from .geom import Insets, Point, Rect, Size
-from .theme import Theme
 
 
 class Settings:
@@ -108,7 +107,7 @@ class Window:
         focus_view = self.view.resolve(self.focus)
         if focus_view and focus_view.draws_focus:
             focus_rect = focus_view.frame + Insets(focus_view.env.scaled(1))
-            self.focus_ring.render(self.renderer, focus_rect)
+            self.view.env.draw(self.renderer, "focus", focus_rect)
         sdl2.SDL_RenderPresent(self.renderer)
 
     def cleanup(self):
@@ -193,7 +192,6 @@ class Application:
 
     def initialize(self):
         if os.name == "nt":
-            # Environment.theme.default = Theme("themes/uwp/config.json")
             ctypes.windll.shcore.SetProcessDpiAwareness(1)
         sdl2.SDL_Init(sdl2.SDL_INIT_EVERYTHING)
         IMG_Init(IMG_INIT_PNG)

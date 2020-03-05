@@ -1,9 +1,6 @@
 import json
 import os
 
-import sdl2
-from sdl2.sdlimage import IMG_Load
-
 from .asset import SlicedAsset
 from .font import Font
 
@@ -13,18 +10,14 @@ class Theme:
         self.path = os.path.dirname(config_path)
         self.config = json.load(open(config_path))
         self.name = self.config["name"]
-        self.surface_cache = {}
-
-    def __del__(self):
-        for asset_path, surface in self.surface_cache.items():
-            sdl2.SDL_FreeSurface(surface)
+        self.asset_cache = {}
 
     def load_asset(self, name):
-        asset_path = os.path.join(self.path, self.config["assets"][name]["file"])
-        center = self.config["assets"][name].get("slice")
-        if asset_path not in self.surface_cache:
-            self.surface_cache[asset_path] = IMG_Load(asset_path.encode("utf-8"))
-        return SlicedAsset(self.surface_cache[asset_path], center)
+        if name not in self.asset_cache:
+            asset_path = os.path.join(self.path, self.config["assets"][name]["file"])
+            center = self.config["assets"][name].get("slice")
+            self.asset_cache[name] = SlicedAsset(asset_path, center)
+        return self.asset_cache[name]
 
     def font(self, name="default", size=None):
         info = self.config["fonts"].get(name)

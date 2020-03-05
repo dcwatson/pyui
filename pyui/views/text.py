@@ -18,7 +18,7 @@ class Text(View):
         self.shadowtex = None
 
     def reuse(self, other):
-        return self.utf8 == other.utf8
+        return self.utf8 == other.utf8 and self.sdl_font == other.sdl_font
 
     @property
     def sdl_font(self):

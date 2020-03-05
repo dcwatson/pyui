@@ -1,4 +1,5 @@
 import ctypes
+import functools
 
 import sdl2
 
@@ -23,17 +24,12 @@ class Button(HStack):
         super().__init__(*contents, **options)
         self.action = action
         self.pressed = False
-        self.asset = self.env.theme.load_asset(asset)
-        self.down = self.env.theme.load_asset(asset + ".pressed")
-
-    def reuse(self, other):
-        return False
+        self.asset = asset
 
     def draw(self, renderer, rect):
         super().draw(renderer, rect)
-        asset = self.down if self.pressed else self.asset
-        alpha = 64 if self.disabled else 255
-        asset.render(renderer, self.frame, alpha)
+        asset_name = self.asset + ".pressed" if self.pressed else self.asset
+        self.env.draw(renderer, asset_name, self.frame)
 
     def mousedown(self, pt):
         self.pressed = True
@@ -58,8 +54,6 @@ class Slider(View):
         self.minimum = minimum
         self.maximum = maximum
         self.current = value
-        self.slider = self.env.theme.load_asset("slider.track")
-        self.knob = self.env.theme.load_asset("slider.knob")
 
     @property
     def span(self):
@@ -75,9 +69,8 @@ class Slider(View):
         offset = int((self.current.value - self.minimum) * (rect.width - self.env.scaled(20)) / (self.span - 1))
         slider_rect = Rect(origin=(rect.left, rect.top + self.env.scaled(7)), size=(rect.width, self.env.scaled(6)))
         knob_rect = Rect(origin=(rect.left + offset, rect.top), size=(self.env.scaled(20), self.env.scaled(20)))
-        alpha = 64 if self.disabled else 255
-        self.slider.render(renderer, slider_rect, alpha=alpha)
-        self.knob.render(renderer, knob_rect, alpha=alpha)
+        self.env.draw(renderer, "slider.track", slider_rect)
+        self.env.draw(renderer, "slider.knob", knob_rect)
 
     def _set(self, value):
         self.current.value = min(max(int(value), self.minimum), self.maximum)
@@ -102,11 +95,10 @@ class Slider(View):
 class TextField(View):
     interactive = True
 
-    def __init__(self, text: Binding, placeholder="Enter some text", **options):
+    def __init__(self, text: Binding, placeholder=None, **options):
         self.text = text
-        self.placeholder = Text(placeholder, shadow=False).color(150, 150, 150)
+        self.placeholder = placeholder
         super().__init__(**options)
-        self.asset = self.env.theme.load_asset("textfield")
 
     def minimum_size(self):
         return Text(self.text.value).minimum_size()
@@ -115,11 +107,14 @@ class TextField(View):
         return Size(available.w, 0)
 
     def content(self):
-        yield Text(self.text.value) if self.text.value else self.placeholder
+        if self.text.value:
+            yield Text(self.text.value)
+        elif self.placeholder:
+            yield Text(self.placeholder).color(150, 150, 150)
 
     def draw(self, renderer, rect):
         super().draw(renderer, rect)
-        self.asset.render(renderer, self.frame)
+        self.env.draw(renderer, "textfield", self.frame)
 
     def focus(self):
         sdl2.SDL_StartTextInput()
@@ -137,10 +132,10 @@ class TextField(View):
 
 
 class SegmentedButton(HStack):
-    def __init__(self, selection: Binding, *contents, action=None, **options):
+    def __init__(self, selection: Binding, action=None, **options):
         self.selection = selection
         self.action = action
-        super().__init__(*contents, spacing=0, **options)
+        super().__init__(spacing=0, **options)
 
     def _index_asset(self, idx, is_last):
         if idx == 0:
@@ -158,4 +153,5 @@ class SegmentedButton(HStack):
             asset = self._index_asset(idx, is_last)
             if idx == self.selection.value:
                 asset += ".selected"
-            yield Button(item, action=lambda idx=idx: self.select(idx), asset=asset, disabled=self.disabled)
+            action = functools.partial(self.select, idx)
+            yield Button(item, action=action, asset=asset).disable(self.disabled)

@@ -22,6 +22,7 @@
             "color": [230, 230, 230]
         },
         "button": {
+            "spacing": 5,
             "padding": [5, 20, 5, 20]
         },
         "textfield": {

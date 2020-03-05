@@ -5,6 +5,7 @@ from sdl2.sdlgfx import boxRGBA, roundedBoxRGBA
 
 from pyui.env import Environment
 from pyui.geom import Alignment, Axis, Insets, Point, Priority, Rect, Size
+from pyui.utils import clamp
 
 
 class EnvironmentalView:
@@ -73,6 +74,10 @@ class EnvironmentalView:
         self.env.size = Size(width or self.env.size.w, height or self.env.size.h)
         return self
 
+    def opacity(self, value):
+        self.env.opacity = clamp(float(value), 0.0, 1.0)
+        return self
+
 
 class View(EnvironmentalView):
     interactive = False
@@ -99,7 +104,7 @@ class View(EnvironmentalView):
         self.contents = contents
         # Resolved and built list of subviews, after evaluating e.g. ForEach constructs.
         # This will be empty until rebuild is called, which happens on first layout and state changes.
-        self.subviews = []
+        self._subviews = []
 
     @property
     def id(self):
@@ -108,6 +113,10 @@ class View(EnvironmentalView):
     @property
     def id_path(self):
         return self.parent.id_path + (self.id,) if self.parent else (self.id,)
+
+    @property
+    def subviews(self):
+        return self._subviews
 
     @property
     def root(self):
@@ -138,39 +147,33 @@ class View(EnvironmentalView):
                 return view
 
     def rebuild(self):
-        new_subviews = []
+        # TODO: this is not great. I'm using id_path out of convenience, but ideally this would use some sort of View
+        # hash value and equality testing to be able to detect if a view moves around in the hierarchy.
+        old = {v.id_path: v for v in self.subviews}
+        self._subviews = []
         for idx, view in enumerate(self.content()):
             if not isinstance(view, View):
                 raise ValueError("Subviews must be instances of View (got {}).".format(view.__class__.__name__))
+            # Set up the view/environment hierarchy.
             view.parent = self
             view.index = idx
             view.env.inherit(self.env)
+            # Let any existing view that this may replace decide if it can be re-used.
+            old_view = old.get(view.id_path)
+            if old_view and old_view.reuse(view):
+                old_view.update(view)
+                view = old_view
+            # Rebuild/diff down the tree.
             view.rebuild()
-            new_subviews.append(view)
-        self.subviews = self.diff_subviews(new_subviews)
-
-    def diff_subviews(self, new_subviews):
-        if not self.subviews:
-            return new_subviews
-        # TODO: this is not great. I'm using id_path out of convenience, but ideally this would use some sort of
-        # View hash value and equality testing to be able to detect if a view moves around in the hierarchy.
-        old = {v.id_path: v for v in self.subviews}
-        subviews = []
-        for idx, new_view in enumerate(new_subviews):
-            view = old.get(new_view.id_path)
-            # Let existing views decide if they can be re-used.
-            if view and view.reuse(new_view):
-                # Since it's an existing view, need to diff down the tree against the new subtree.
-                view.subviews = view.diff_subviews(new_view.subviews)
-            else:
-                # This view is new to the hierarchy, nothing else to do.
-                view = new_view
-            view.index = idx
-            subviews.append(view)
-        return subviews
+            self._subviews.append(view)
 
     def reuse(self, other):
         return True
+
+    def update(self, other):
+        for key, value in other.__dict__.items():
+            if not key.startswith("_"):
+                setattr(self, key, value)
 
     def content(self):
         for view in self.contents:
@@ -239,6 +242,7 @@ class View(EnvironmentalView):
             max_w + self.env.padding.width + self.env.border.width,
             max_h + self.env.padding.height + self.env.border.height,
         )
+        return Size(max_w, max_h)
 
     def reposition(self, inside: Rect):
         """
@@ -267,6 +271,8 @@ class View(EnvironmentalView):
 
     def disable(self, d):
         self.disabled = bool(d)
+        if self.disabled:
+            self.opacity(0.25 * self.env.opacity)
         return self
 
     def item(self, label_or_view):
