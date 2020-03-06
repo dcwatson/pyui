@@ -18,7 +18,7 @@ class ListItem(HStack):
         self._action = method
         return self
 
-    def click(self, pt):
+    async def click(self, pt):
         if self._action:
             self._action(self.index)
 
@@ -37,7 +37,7 @@ class List(VStack):
     def default_builder(self, item):
         return Text(item)
 
-    def click(self, pt):
+    async def click(self, pt):
         self.selection.value = []
 
     def item_click(self, index):

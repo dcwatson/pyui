@@ -257,7 +257,7 @@ class View(EnvironmentalView):
             view.reposition(inner)
 
     def layout(self, rect: Rect):
-        if not self.subviews:
+        if not self._subviews:
             self.rebuild()
         self.resize(rect.size)
         self.reposition(rect)
@@ -319,34 +319,34 @@ class View(EnvironmentalView):
 
     # Event handling stubs.
 
-    def mousedown(self, pt):
+    async def mousedown(self, pt):
         return True
 
-    def mousemotion(self, pt):
+    async def mousemotion(self, pt):
         pass
 
-    def mouseup(self, pt):
+    async def mouseup(self, pt):
         pass
 
-    def mousewheel(self, amt):
+    async def mousewheel(self, amt):
         pass
 
-    def click(self, pt):
+    async def click(self, pt):
         pass
 
-    def focus(self):
+    async def focus(self):
         pass
 
-    def blur(self):
+    async def blur(self):
         pass
 
-    def keydown(self, key, mods):
+    async def keydown(self, key, mods):
         pass
 
-    def keyup(self, key, mods):
+    async def keyup(self, key, mods):
         pass
 
-    def textinput(self, text):
+    async def textinput(self, text):
         pass
 
     # State management.

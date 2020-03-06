@@ -31,17 +31,17 @@ class Button(HStack):
         asset_name = self.asset + ".pressed" if self.pressed else self.asset
         self.env.draw(renderer, asset_name, self.frame)
 
-    def mousedown(self, pt):
+    async def mousedown(self, pt):
         self.pressed = True
         return True
 
-    def mousemotion(self, pt):
+    async def mousemotion(self, pt):
         self.pressed = pt in self.frame
 
-    def mouseup(self, pt):
+    async def mouseup(self, pt):
         self.pressed = False
 
-    def click(self, pt):
+    async def click(self, pt):
         if self.action:
             self.action()
 
@@ -75,16 +75,16 @@ class Slider(View):
     def _set(self, value):
         self.current.value = min(max(int(value), self.minimum), self.maximum)
 
-    def mousemotion(self, pt):
+    async def mousemotion(self, pt):
         inner = self.frame - self.env.padding - self.env.border
         pos = pt.x - inner.left
         pct = clamp(pos / inner.width, 0.0, 1.0)
         self._set(self.minimum + (pct * self.span))
 
-    def click(self, pt):
-        self.mousemotion(pt)
+    async def click(self, pt):
+        await self.mousemotion(pt)
 
-    def keydown(self, key, mods):
+    async def keydown(self, key, mods):
         amt = self.span // 10 if mods & sdl2.KMOD_SHIFT else 1
         if key == sdl2.SDLK_LEFT:
             self._set(self.current.value - amt)
@@ -116,18 +116,18 @@ class TextField(View):
         super().draw(renderer, rect)
         self.env.draw(renderer, "textfield", self.frame)
 
-    def focus(self):
+    async def focus(self):
         sdl2.SDL_StartTextInput()
         sdl2.SDL_SetTextInputRect(ctypes.byref(self.frame.sdl))
 
-    def blur(self):
+    async def blur(self):
         sdl2.SDL_StopTextInput()
 
-    def keydown(self, key, mods):
+    async def keydown(self, key, mods):
         if key == sdl2.SDLK_BACKSPACE:
             self.text.value = self.text.value[:-1]
 
-    def textinput(self, text):
+    async def textinput(self, text):
         self.text.value = self.text.value + text
 
 

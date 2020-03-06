@@ -21,7 +21,7 @@ class CalcButton(pyui.View):
         ).modify(self.mod)
         # fmt: on
 
-    def click(self, pt):
+    async def click(self, pt):
         if self.action:
             self.action(self.label)
 

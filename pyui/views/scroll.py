@@ -99,7 +99,7 @@ class ScrollView(View):
             pos = int(delta * pos)
         self._position = axis.point(clamp(pos, 0, delta), self._position[axis.cross])
 
-    def mousedown(self, pt):
+    async def mousedown(self, pt):
         for a in Axis:
             rect = self.knob_rect(a)
             if pt in rect:
@@ -108,7 +108,7 @@ class ScrollView(View):
                 return True
         return False
 
-    def mousemotion(self, pt):
+    async def mousemotion(self, pt):
         if self.tracking is None:
             return
         size = self.knob_size()
@@ -119,10 +119,10 @@ class ScrollView(View):
         self.set_position(self.tracking, pos / track)
         self.reposition(self.frame)
 
-    def mouseup(self, pt):
+    async def mouseup(self, pt):
         self.tracking = None
 
-    def mousewheel(self, amt):
+    async def mousewheel(self, amt):
         axis = Axis.VERTICAL if amt.y != 0 else Axis.HORIZONTAL
         new_pos = self._position[axis] - (self.env.scaled(amt[axis]) * self.scroll_interval)
         self.set_position(axis, new_pos)

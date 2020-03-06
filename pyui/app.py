@@ -1,3 +1,4 @@
+import asyncio
 import ctypes
 import os
 
@@ -44,12 +45,10 @@ class Window:
         self.tracking = None
         # Which view has keyboard focus.
         self.focus = None
-        self.focus_ring = self.view.env.theme.load_asset("focus")
         self.layout()
         if pack:
             scale = self.window_size.w / self.render_size.w
             self.resize(self.view.frame.width * scale, self.view.frame.height * scale)
-            self.layout()
         # Listen for events
         self.listen(sdl2.SDL_MOUSEBUTTONDOWN, "button", self.mousedown)
         self.listen(sdl2.SDL_MOUSEBUTTONUP, "button", self.mouseup, check_window=False)
@@ -64,8 +63,16 @@ class Window:
         stream = self.app.events.pipe(ops.filter(lambda event: event.type == event_type), ops.pluck_attr(event_attr))
         if check_window:
             stream = stream.pipe(ops.filter(lambda event: event.windowID == self.id))
-        # TODO: dispose of these when closing the window?
-        stream.subscribe(handler)
+        # TODO: dispose of these subscriptions when closing the window?
+        if asyncio.iscoroutinefunction(handler):
+
+            async def handle_and_render(event):
+                await handler(event)
+                self.render()
+
+            stream.subscribe(lambda event: asyncio.create_task(handle_and_render(event)))
+        else:
+            stream.subscribe(handler)
 
     @property
     def window_size(self):
@@ -121,37 +128,37 @@ class Window:
 
     # Event handlers
 
-    def mousedown(self, event):
+    async def mousedown(self, event):
         pt = self.point(event.x, event.y)
         found = self.view.find(pt, interactive=True)
         if found is None or found.disabled:
             found = self.view
-        found.mousedown(pt)
+        await found.mousedown(pt)
         self.tracking = found.id_path
 
-    def mousemotion(self, event):
+    async def mousemotion(self, event):
         pt = self.point(event.x, event.y)
         tracking_view = self.view.resolve(self.tracking)
         if tracking_view:
-            tracking_view.mousemotion(pt)
+            await tracking_view.mousemotion(pt)
 
-    def mouseup(self, event):
+    async def mouseup(self, event):
         pt = self.point(event.x, event.y)
         found = self.view.find(pt, interactive=True)
         focus_view = self.view.resolve(self.focus)
         if focus_view and not found:
             self.focus = None
-            focus_view.blur()
+            await focus_view.blur()
         tracking_view = self.view.resolve(self.tracking)
         if tracking_view:
-            tracking_view.mouseup(pt)
+            await tracking_view.mouseup(pt)
             if tracking_view == found:
                 self.focus = found.id_path
-                found.focus()
-                found.click(pt)
+                await found.focus()
+                await found.click(pt)
         self.tracking = None
 
-    def mousewheel(self, event):
+    async def mousewheel(self, event):
         x = ctypes.c_int()
         y = ctypes.c_int()
         sdl2.SDL_GetMouseState(ctypes.byref(x), ctypes.byref(y))
@@ -159,16 +166,15 @@ class Window:
         found = self.view.find(pt, scrollable=True)
         if found is None or found.disabled:
             found = self.view
-        found.mousewheel(Point(-event.x, event.y))
+        await found.mousewheel(Point(-event.x, event.y))
 
     def window_event(self, event):
+        # Note that this is not async.
         if event.event == sdl2.SDL_WINDOWEVENT_SIZE_CHANGED:
-            self.layout()
-        elif event.event == sdl2.SDL_WINDOWEVENT_RESIZED:
             self.layout()
             self.render()
 
-    def key_event(self, event):
+    async def key_event(self, event):
         focus_view = self.view.resolve(self.focus)
         if focus_view is None or focus_view.disabled:
             focus_view = self.view
@@ -177,16 +183,16 @@ class Window:
                 self.advance_focus(-1 if (event.keysym.mod & sdl2.KMOD_SHIFT) != 0 else 1)
             elif event.keysym.sym == sdl2.SDLK_SPACE:
                 if focus_view.interactive:
-                    focus_view.click(focus_view.frame.center)
-            focus_view.keydown(event.keysym.sym, event.keysym.mod)
+                    await focus_view.click(focus_view.frame.center)
+            await focus_view.keydown(event.keysym.sym, event.keysym.mod)
         elif event.type == sdl2.SDL_KEYUP:
-            focus_view.keyup(event.keysym.sym, event.keysym.mod)
+            await focus_view.keyup(event.keysym.sym, event.keysym.mod)
 
-    def text_event(self, event):
+    async def text_event(self, event):
         focus_view = self.view.resolve(self.focus)
         if focus_view is None or focus_view.disabled:
             focus_view = self.view
-        focus_view.textinput(event.text.decode("utf-8"))
+        await focus_view.textinput(event.text.decode("utf-8"))
 
 
 class Application:
@@ -227,25 +233,37 @@ class Application:
         sdl2.SDL_DestroyWindow(win)
 
     def window(self, title, view, width=640, height=480, resize=True, border=True):
-        self.windows.append(Window(self, title, view, width=width, height=height, resize=resize, border=border))
+        win = Window(self, title, view, width=width, height=height, resize=resize, border=border)
+        self.windows.append(win)
+        return win
 
     def run(self):
+        asyncio.run(self.run_async())
+
+    async def run_async(self):
         self.running = True
 
-        def resize_watcher(data, event_ptr):
-            event = event_ptr.contents
-            if event.type == sdl2.SDL_WINDOWEVENT:
-                if event.window.event == sdl2.SDL_WINDOWEVENT_RESIZED:
-                    self.events.on_next(event)
+        def event_handler(data, event_ptr):
+            if self.running:
+                # SDL2 seems to re-use SDL_Event structures, so we need to make a copy.
+                event = sdl2.SDL_Event()
+                ctypes.pointer(event)[0] = event_ptr.contents
+                self.events.on_next(event)
             return 0
 
-        watcher = sdl2.SDL_EventFilter(resize_watcher)
+        # Initial render. Ideally we only render as needed from here out.
+        self.render()
+
+        watcher = sdl2.SDL_EventFilter(event_handler)
         sdl2.SDL_AddEventWatch(watcher, None)
         event = sdl2.SDL_Event()
         while self.running:
-            if sdl2.SDL_WaitEvent(ctypes.byref(event)) != 0:
-                self.events.on_next(event)
-            self.render()
+            # This will mean asyncio tasks are essentially capped at 60hz while there are no events happening, which
+            # I think is fine. The alternative is doing an SDL2_PumpEvents and waiting some amount of time in asyncio,
+            # potentially delaying event handling which seems worse.
+            sdl2.SDL_WaitEventTimeout(ctypes.byref(event), 16)
+            # Let the asyncio loop do its thing.
+            await asyncio.sleep(0)
         sdl2.SDL_DelEventWatch(watcher, None)
         self.cleanup()
         sdl2.SDL_Quit()
