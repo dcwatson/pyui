@@ -1,3 +1,4 @@
+import asyncio
 import ctypes
 import functools
 
@@ -43,7 +44,10 @@ class Button(HStack):
 
     async def click(self, pt):
         if self.action:
-            self.action()
+            if asyncio.iscoroutinefunction(self.action):
+                await self.action()
+            else:
+                self.action()
 
 
 class Slider(View):

@@ -22,6 +22,7 @@ class Settings:
 class Window:
     def __init__(self, app, title, view, width=640, height=480, resize=True, border=True, pack=False):
         self.app = app
+        self.pack = pack
         flags = sdl2.SDL_WINDOW_ALLOW_HIGHDPI
         if resize:
             flags |= sdl2.SDL_WINDOW_RESIZABLE
@@ -45,10 +46,6 @@ class Window:
         self.tracking = None
         # Which view has keyboard focus.
         self.focus = None
-        self.layout()
-        if pack:
-            scale = self.window_size.w / self.render_size.w
-            self.resize(self.view.frame.width * scale, self.view.frame.height * scale)
         # Listen for events
         self.listen(sdl2.SDL_MOUSEBUTTONDOWN, "button", self.mousedown)
         self.listen(sdl2.SDL_MOUSEBUTTONUP, "button", self.mouseup, check_window=False)
@@ -110,6 +107,12 @@ class Window:
     def layout(self):
         self.view.layout(Rect(size=self.render_size))
 
+    def startup(self):
+        self.layout()
+        if self.pack:
+            scale = self.window_size.w / self.render_size.w
+            self.resize(self.view.frame.width * scale, self.view.frame.height * scale)
+
     def render(self):
         if self.view.dirty:
             self.layout()
@@ -169,7 +172,7 @@ class Window:
         await found.mousewheel(Point(-event.x, event.y))
 
     def window_event(self, event):
-        # Note that this is not async.
+        # Note that this is not async because the loop is blocked during resizing.
         if event.event == sdl2.SDL_WINDOWEVENT_SIZE_CHANGED:
             self.layout()
             self.render()
@@ -232,8 +235,8 @@ class Application:
         sdl2.SDL_DestroyRenderer(rend)
         sdl2.SDL_DestroyWindow(win)
 
-    def window(self, title, view, width=640, height=480, resize=True, border=True):
-        win = Window(self, title, view, width=width, height=height, resize=resize, border=border)
+    def window(self, title, view, **kwargs):
+        win = Window(self, title, view, **kwargs)
         self.windows.append(win)
         return win
 
@@ -242,6 +245,7 @@ class Application:
 
     async def run_async(self):
         self.running = True
+        self.startup()
 
         def event_handler(data, event_ptr):
             if self.running:
@@ -256,20 +260,19 @@ class Application:
 
         watcher = sdl2.SDL_EventFilter(event_handler)
         sdl2.SDL_AddEventWatch(watcher, None)
-        event = sdl2.SDL_Event()
         while self.running:
-            # This will mean asyncio tasks are essentially capped at 60hz while there are no events happening, which
-            # I think is fine. The alternative is doing an SDL2_PumpEvents and waiting some amount of time in asyncio,
-            # potentially delaying event handling which seems worse.
-            sdl2.SDL_WaitEventTimeout(ctypes.byref(event), 16)
-            # Let the asyncio loop do its thing.
-            await asyncio.sleep(0)
+            sdl2.SDL_PumpEvents()
+            await asyncio.sleep(1.0 / 60.0)
         sdl2.SDL_DelEventWatch(watcher, None)
         self.cleanup()
         sdl2.SDL_Quit()
 
     def quit(self, event=None):
         self.running = False
+
+    def startup(self):
+        for window in self.windows:
+            window.startup()
 
     def render(self):
         for window in self.windows:

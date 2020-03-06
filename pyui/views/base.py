@@ -1,3 +1,4 @@
+import asyncio
 import inspect
 
 import sdl2
@@ -163,6 +164,8 @@ class View(EnvironmentalView):
             if old_view and old_view.reuse(view):
                 old_view.update(view)
                 view = old_view
+            else:
+                asyncio.create_task(self.built())
             # Rebuild/diff down the tree.
             view.rebuild()
             self._subviews.append(view)
@@ -317,6 +320,11 @@ class View(EnvironmentalView):
             found.extend(view.find_all(**filters))
         return found
 
+    # Lifecycle stubs.
+
+    async def built(self):
+        pass
+
     # Event handling stubs.
 
     async def mousedown(self, pt):
@@ -354,6 +362,7 @@ class View(EnvironmentalView):
     def state_changed(self, name, value):
         self.rebuild()
         self.root.dirty = True
+        asyncio.get_running_loop().call_soon(self.window.render)
 
 
 class ForEach(View):

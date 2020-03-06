@@ -1,3 +1,5 @@
+import sdl2
+
 import pyui
 
 BTN_DEFAULT = lambda view: view.background(128, 128, 128)
@@ -30,13 +32,25 @@ class CalculatorView(pyui.View):
     result = pyui.State(str, default="0")
     formula = pyui.State(str, default="")
 
+    async def textinput(self, ch):
+        if ch in "0123456789.+-/*()":
+            self.add(ch)
+        elif ch.lower() == "c":
+            self.clear()
+        elif ch == "=":
+            self.compute()
+
+    async def keydown(self, key, mods):
+        if key == sdl2.SDLK_RETURN:
+            self.compute()
+
     def add(self, ch):
         self.formula = self.formula.value + ch
 
     def group(self, ch):
         self.formula = "(" + self.formula.value + ")"
 
-    def compute(self, ch):
+    def compute(self, ch=None):
         try:
             num = eval(self.formula.value)
             if isinstance(num, float):
@@ -48,7 +62,7 @@ class CalculatorView(pyui.View):
         except Exception:
             self.result = "???"
 
-    def clear(self, ch):
+    def clear(self, ch=None):
         self.formula = ""
         self.result = "0"
 
@@ -91,5 +105,5 @@ class CalculatorView(pyui.View):
 
 if __name__ == "__main__":
     app = pyui.Application("io.temp.Calculator")
-    app.window("Calculator", CalculatorView(), 250, 300, resize=True)
+    app.window("Calculator", CalculatorView(), width=250, height=300, resize=True)
     app.run()

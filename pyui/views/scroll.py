@@ -29,12 +29,18 @@ class ScrollView(View):
 
     def knob_size(self):
         return Size(
-            int(self.frame.width * self.frame.width / self.scroll_size[Axis.HORIZONTAL])
-            if self.scroll_size[Axis.HORIZONTAL] > self.frame.width
-            else 0,
-            int(self.frame.height * self.frame.height / self.scroll_size[Axis.VERTICAL])
-            if self.scroll_size[Axis.VERTICAL] > self.frame.height
-            else 0,
+            max(
+                self.track_size,
+                int(self.frame.width * self.frame.width / self.scroll_size[Axis.HORIZONTAL])
+                if self.scroll_size[Axis.HORIZONTAL] > self.frame.width
+                else 0,
+            ),
+            max(
+                self.track_size,
+                int(self.frame.height * self.frame.height / self.scroll_size[Axis.VERTICAL])
+                if self.scroll_size[Axis.VERTICAL] > self.frame.height
+                else 0,
+            ),
         )
 
     def knob_position(self):

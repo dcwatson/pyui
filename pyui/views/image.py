@@ -1,7 +1,7 @@
 import ctypes
 
 import sdl2
-from sdl2.sdlimage import IMG_Load
+from sdl2.sdlimage import IMG_Load, IMG_Load_RW
 
 from pyui.geom import Size
 
@@ -9,9 +9,11 @@ from .base import View
 
 
 class Image(View):
-    def __init__(self, path, clamped=True, stretch=False):
+    def __init__(self, path=None, rw=None, clamped=True, stretch=False):
+        assert path or rw
         super().__init__()
-        self.path = str(path)
+        self.path = path
+        self.rw = rw
         self.clamped = clamped
         self.stretch = stretch
         # Cached locally, not copied on re-use.
@@ -21,7 +23,10 @@ class Image(View):
 
     def load_surface(self):
         if self._surface is None:
-            self._surface = IMG_Load(self.path.encode("utf-8"))
+            if self.path:
+                self._surface = IMG_Load(self.path.encode("utf-8"))
+            else:
+                self._surface = IMG_Load_RW(self.rw, 0)
             self._size = Size(self._surface.contents.w, self._surface.contents.h)
 
     @property
