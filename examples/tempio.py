@@ -85,11 +85,20 @@ class FilesView(pyui.View):
         yield pyui.HStack(spacing=0)(
             pyui.ScrollView()(
                 pyui.List(selection=self.selected_tag)(
-                    pyui.ForEach(self.tags.value, lambda tag: (
+                    pyui.ForEach(self.tags.value, lambda tag, idx: (
                         pyui.HStack()(
-                            pyui.Text(tag["slug"]),
+                            pyui.Text(tag["slug"])
+                                .font("bold" if self.selected_tag.value[0] == idx else "default"),
                             pyui.Spacer(),
-                            pyui.Text(tag["num_files"]),
+                            (
+                                pyui.Text(tag["num_files"])
+                                    .font(size=11)
+                                    .background(60, 60, 60)
+                                    .padding(4, 7, 4, 7)
+                                    .radius(4)
+                                if tag["num_files"] else
+                                pyui.Text("")
+                            ),
                         )
                     )),
                 ),
