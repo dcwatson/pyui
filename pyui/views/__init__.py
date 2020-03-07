@@ -5,6 +5,7 @@ from .image import Image
 from .nav import List, TabView
 from .scroll import ScrollView
 from .shape import Rectangle
+from .spinner import Spinner
 from .stack import HStack, Spacer, VStack
 from .text import Text
 
@@ -28,6 +29,8 @@ __all__ = [
     "ScrollView",
     # shape
     "Rectangle",
+    # spinner
+    "Spinner",
     # stack
     "HStack",
     "Spacer",

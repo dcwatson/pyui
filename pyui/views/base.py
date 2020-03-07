@@ -83,7 +83,6 @@ class EnvironmentalView:
 class View(EnvironmentalView):
     interactive = False
     draws_focus = True
-    dirty = False
     disabled = False
     scrollable = False
 
@@ -264,7 +263,6 @@ class View(EnvironmentalView):
             self.rebuild()
         self.resize(rect.size)
         self.reposition(rect)
-        self.dirty = False
 
     def render(self, renderer):
         inner = self.frame - self.env.padding - self.env.border
@@ -361,8 +359,8 @@ class View(EnvironmentalView):
 
     def state_changed(self, name, value):
         self.rebuild()
-        self.root.dirty = True
-        asyncio.get_running_loop().call_soon(self.window.render)
+        self.window.needs_render = True
+        self.window.needs_layout = True
 
 
 class ForEach(View):

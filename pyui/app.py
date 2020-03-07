@@ -1,6 +1,7 @@
 import asyncio
 import ctypes
 import os
+import time
 
 import rx
 import rx.operators as ops
@@ -23,6 +24,8 @@ class Window:
     def __init__(self, app, title, view, width=640, height=480, resize=True, border=True, pack=False):
         self.app = app
         self.pack = pack
+        self.needs_layout = True
+        self.needs_render = True
         flags = sdl2.SDL_WINDOW_ALLOW_HIGHDPI
         if resize:
             flags |= sdl2.SDL_WINDOW_RESIZABLE
@@ -65,7 +68,8 @@ class Window:
 
             async def handle_and_render(event):
                 await handler(event)
-                self.render()
+                self.needs_render = True
+                # self.render()
 
             stream.subscribe(lambda event: asyncio.create_task(handle_and_render(event)))
         else:
@@ -104,7 +108,10 @@ class Window:
         ys = rs.h / ws.h
         return Point(int(x * xs), int(y * ys))
 
-    def layout(self):
+    def layout(self, force=False):
+        if not self.needs_layout and not force:
+            return
+        self.needs_layout = False
         self.view.layout(Rect(size=self.render_size))
 
     def startup(self):
@@ -113,9 +120,11 @@ class Window:
             scale = self.window_size.w / self.render_size.w
             self.resize(self.view.frame.width * scale, self.view.frame.height * scale)
 
-    def render(self):
-        if self.view.dirty:
-            self.layout()
+    def render(self, force=False):
+        if not self.needs_render and not force:
+            return
+        # Set this up front, so that the act of rendering can request another render.
+        self.needs_render = False
         sdl2.SDL_SetRenderDrawColor(self.renderer, *self.background, sdl2.SDL_ALPHA_OPAQUE)
         sdl2.SDL_RenderClear(self.renderer)
         self.view.render(self.renderer)
@@ -124,6 +133,10 @@ class Window:
             focus_rect = focus_view.frame + Insets(focus_view.env.scaled(1))
             self.view.env.draw(self.renderer, "focus", focus_rect)
         sdl2.SDL_RenderPresent(self.renderer)
+
+    def tick(self, dt):
+        self.layout()
+        self.render()
 
     def cleanup(self):
         sdl2.SDL_DestroyRenderer(self.renderer)
@@ -174,8 +187,8 @@ class Window:
     def window_event(self, event):
         # Note that this is not async because the loop is blocked during resizing.
         if event.event == sdl2.SDL_WINDOWEVENT_SIZE_CHANGED:
-            self.layout()
-            self.render()
+            self.layout(force=True)
+            self.render(force=True)
 
     async def key_event(self, event):
         focus_view = self.view.resolve(self.focus)
@@ -255,14 +268,22 @@ class Application:
                 self.events.on_next(event)
             return 0
 
-        # Initial render. Ideally we only render as needed from here out.
-        self.render()
-
         watcher = sdl2.SDL_EventFilter(event_handler)
         sdl2.SDL_AddEventWatch(watcher, None)
+
+        fps = 60.0
+        frame_time = 1.0 / fps
+        last_tick = time.time()
         while self.running:
             sdl2.SDL_PumpEvents()
-            await asyncio.sleep(1.0 / 60.0)
+            # dt here will be how much time since the last loop minus any event handling.
+            dt = time.time() - last_tick
+            await asyncio.sleep(max(0, frame_time - dt))
+            # dt here will be how much time since the last call to tick.
+            dt = time.time() - last_tick
+            self.tick(dt)
+            last_tick = time.time()
+
         sdl2.SDL_DelEventWatch(watcher, None)
         self.cleanup()
         sdl2.SDL_Quit()
@@ -274,9 +295,9 @@ class Application:
         for window in self.windows:
             window.startup()
 
-    def render(self):
+    def tick(self, dt):
         for window in self.windows:
-            window.render()
+            window.tick(dt)
 
     def cleanup(self):
         for window in self.windows:

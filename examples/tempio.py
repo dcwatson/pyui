@@ -52,6 +52,7 @@ class TagView(pyui.View):
             pyui.HStack()(
                 pyui.Text(self.slug).font("bold", 24),
                 pyui.Spacer(),
+                pyui.Spinner(),
                 pyui.Button("Refresh", action=self.refresh),
             ).padding(10),
             pyui.ScrollView()(
