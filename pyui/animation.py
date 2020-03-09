@@ -37,7 +37,7 @@ class Animation:
 
 
 class FrameAnimation(Animation):
-    def __init__(self, old_value, new_value, modifier, curve=linear, duration=0.2):
+    def __init__(self, old_value, new_value, modifier, curve=parametric, duration=0.15):
         super().__init__(curve, duration)
         self.old_value = old_value.copy()
         self.new_value = new_value.copy()

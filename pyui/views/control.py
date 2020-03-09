@@ -45,7 +45,7 @@ class Button(HStack):
     async def click(self, pt):
         if self.action:
             if asyncio.iscoroutinefunction(self.action):
-                await self.action()
+                asyncio.create_task(self.action())
             else:
                 self.action()
 

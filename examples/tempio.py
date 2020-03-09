@@ -29,6 +29,7 @@ class ThumbnailView(pyui.View):
 
 class TagView(pyui.View):
     files = pyui.State(default=list)
+    loading = pyui.State(default=False)
 
     def __init__(self, tag):
         super().__init__()
@@ -42,9 +43,11 @@ class TagView(pyui.View):
         await self.refresh()
 
     async def refresh(self):
+        self.loading = True
         async with httpx.AsyncClient() as client:
             r = await client.get(self.url)
             self.files = r.json().get("files", [])
+            self.loading = False
 
     def content(self):
         # fmt: off
@@ -52,7 +55,7 @@ class TagView(pyui.View):
             pyui.HStack()(
                 pyui.Text(self.slug).font("bold", 24),
                 pyui.Spacer(),
-                pyui.Spinner(),
+                pyui.Spinner() if self.loading.value else pyui.Spacer(),
                 pyui.Button("Refresh", action=self.refresh),
             ).padding(10),
             pyui.ScrollView()(
