@@ -279,6 +279,7 @@ class View(EnvironmentalView):
     def layout(self, rect: Rect):
         if not self._subviews:
             self.rebuild()
+            asyncio.create_task(self.built())
         self.resize(rect.size)
         self.reposition(rect)
 
@@ -383,6 +384,7 @@ class View(EnvironmentalView):
 
     def state_changed(self, name, value):
         self.rebuild()
+        asyncio.create_task(self.updated())
         self.window.needs_render = True
         self.window.needs_layout = True
 
