@@ -4,6 +4,7 @@ import inspect
 import sdl2
 from sdl2.sdlgfx import boxRGBA, roundedBoxRGBA
 
+from pyui.animation import FrameAnimation
 from pyui.env import Environment
 from pyui.geom import Alignment, Axis, Insets, Point, Priority, Rect, Size
 from pyui.utils import clamp
@@ -91,6 +92,9 @@ class View(EnvironmentalView):
     parent = None
     index = 0
 
+    # Set when moving/resizing an existing view, to do animations.
+    _old_frame = None
+
     def __init__(self, *contents, **options):
         super().__init__()
         # Overall frame of the View, including padding and border.
@@ -159,15 +163,20 @@ class View(EnvironmentalView):
             view.index = idx
             view.env.inherit(self.env)
             # Let any existing view that this may replace decide if it can be re-used.
-            old_view = old.get(view.id_path)
+            old_view = old.pop(view.id_path, None)
             if old_view and old_view.reuse(view):
+                if old_view.frame:
+                    old_view._old_frame = old_view.frame.copy()
                 old_view.update(view)
                 view = old_view
+                asyncio.create_task(view.updated())
             else:
-                asyncio.create_task(self.built())
+                asyncio.create_task(view.built())
             # Rebuild/diff down the tree.
             view.rebuild()
             self._subviews.append(view)
+        for path, view in old.items():
+            asyncio.create_task(view.removed())
 
     def reuse(self, other):
         return True
@@ -257,6 +266,15 @@ class View(EnvironmentalView):
         inner = inside - self.env.padding - self.env.border
         for view in self.subviews:
             view.reposition(inner)
+        if self._old_frame:
+            if self._old_frame != self.frame:
+
+                def _set_frame(new_frame):
+                    self.frame = new_frame
+                    self.window.needs_render = True
+
+                self.window.animate(FrameAnimation(self._old_frame, self.frame, _set_frame))
+            self._old_frame = None
 
     def layout(self, rect: Rect):
         if not self._subviews:
@@ -321,6 +339,12 @@ class View(EnvironmentalView):
     # Lifecycle stubs.
 
     async def built(self):
+        pass
+
+    async def updated(self):
+        pass
+
+    async def removed(self):
         pass
 
     # Event handling stubs.

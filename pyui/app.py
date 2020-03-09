@@ -49,6 +49,8 @@ class Window:
         self.tracking = None
         # Which view has keyboard focus.
         self.focus = None
+        # List of running animations.
+        self.animations = []
         # Listen for events
         self.listen(sdl2.SDL_MOUSEBUTTONDOWN, "button", self.mousedown)
         self.listen(sdl2.SDL_MOUSEBUTTONUP, "button", self.mouseup, check_window=False)
@@ -112,6 +114,7 @@ class Window:
         if not self.needs_layout and not force:
             return
         self.needs_layout = False
+        self.animations = []
         self.view.layout(Rect(size=self.render_size))
 
     def startup(self):
@@ -119,6 +122,13 @@ class Window:
         if self.pack:
             scale = self.window_size.w / self.render_size.w
             self.resize(self.view.frame.width * scale, self.view.frame.height * scale)
+
+    def animate(self, animation):
+        self.animations.append(animation)
+        # This is kind of a hack. The animations are triggered during layout, where the new frames are computed.
+        # If we render that layout before starting the animation, it flashes at the new location, then back to the
+        # original location and starts animating.
+        self.needs_render = False
 
     def render(self, force=False):
         if not self.needs_render and not force:
@@ -135,6 +145,9 @@ class Window:
         sdl2.SDL_RenderPresent(self.renderer)
 
     def tick(self, dt):
+        for a in self.animations:
+            a.step(dt)
+        self.animations = [a for a in self.animations if not a.finished()]
         self.layout()
         self.render()
 

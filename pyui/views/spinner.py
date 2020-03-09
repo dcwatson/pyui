@@ -13,7 +13,7 @@ class Spinner(View):
         self.d = self.env.scaled(size)
         self.lines = lines
         self.angles = [(math.pi * 2.0 / lines) * i for i in range(lines)]
-        self.step = 0.0
+        self.step = 0
 
     def minimum_size(self):
         return Size(self.env.scaled(10), self.env.scaled(10))
@@ -31,7 +31,7 @@ class Spinner(View):
             y1 = c.y + int(math.sin(a) * r1)
             x2 = c.x + int(math.cos(a) * r2)
             y2 = c.y + int(math.sin(a) * r2)
-            shade = 80 + (((idx - int(self.step)) % self.lines) * 6)
+            shade = 80 + (((idx - (self.step // 4)) % self.lines) * 6)
             thickLineRGBA(renderer, x1, y1, x2, y2, width, shade, shade, shade, 200)
-        self.step += 0.25
+        self.step += 1
         self.window.needs_render = True

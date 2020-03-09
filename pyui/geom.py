@@ -62,8 +62,20 @@ class Rect:
         # TODO: what are the memory implications of making this a property?
         return sdl2.SDL_Rect(self.origin.x, self.origin.y, self.size.w, self.size.h)
 
+    def copy(self):
+        return Rect(origin=self.origin, size=self.size)
+
     def __repr__(self):
         return "Rect(origin={}, size={})".format(self.origin, self.size)
+
+    def __eq__(self, other):
+        return self.origin == other.origin and self.size == other.size
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+    def __bool__(self):
+        return self.origin != Point(0, 0) or self.size != Size(0, 0)
 
     def __add__(self, other):
         if isinstance(other, Insets):
