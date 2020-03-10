@@ -101,6 +101,16 @@ class Rect:
     def scroll(self, pt):
         return Rect(origin=(self.left - pt.x, self.top - pt.y), size=self.size)
 
+    def interpolate(self, to, pct):
+        dx = to.left - self.left
+        dy = to.top - self.top
+        dw = to.width - self.width
+        dh = to.height - self.height
+        return Rect(
+            origin=Point(self.left + round(dx * pct), self.top + round(dy * pct)),
+            size=Size(self.width + round(dw * pct), self.height + round(dh * pct)),
+        )
+
 
 class Insets:
     def __init__(self, top=None, left=None, bottom=None, right=None):

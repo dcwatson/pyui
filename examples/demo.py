@@ -27,7 +27,7 @@ class TimestampView(pyui.View):
 
 
 def random_bars(num=5):
-    return [random.random() for i in range(num)]
+    return [0.1 + (random.random() * 0.9) for i in range(num)]
 
 
 class BarChartView(pyui.View):
@@ -48,7 +48,7 @@ class BarChartView(pyui.View):
             pyui.Text("Bar Chart"),
             pyui.Spacer(),
             pyui.HStack(alignment=pyui.Alignment.TRAILING)(
-                pyui.ForEach(self.bars.value, lambda height: (
+                pyui.ForEach(self.bars.value, lambda height, idx: (
                     pyui.Rectangle()(
                         pyui.Text("{:.0f}%".format(height * 100.0))
                             .color(230, 230, 230)
@@ -60,7 +60,7 @@ class BarChartView(pyui.View):
                         random.randint(0, 255),
                         random.randint(0, 255),
                         random.randint(0, 255)
-                    ).size(height=height).animate(pyui.spring(), 0.3)
+                    ).size(height=height).animate(pyui.spring(), 0.3, delay=0.03 * idx)
                 ))
             ).priority(pyui.Priority.HIGH),
             pyui.HStack()(

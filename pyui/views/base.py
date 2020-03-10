@@ -4,7 +4,7 @@ import inspect
 import sdl2
 from sdl2.sdlgfx import boxRGBA, roundedBoxRGBA
 
-from pyui.animation import FrameAnimation, parametric
+from pyui.animation import Animation, parametric
 from pyui.env import Environment
 from pyui.geom import Alignment, Axis, Insets, Point, Priority, Rect, Size
 from pyui.utils import clamp
@@ -80,6 +80,10 @@ class EnvironmentalView:
         self.env.opacity = clamp(float(value), 0.0, 1.0)
         return self
 
+    def animate(self, curve=parametric, duration=0.15, delay=0.0):
+        self.env.animation = Animation(curve, duration, delay)
+        return self
+
 
 class View(EnvironmentalView):
     interactive = False
@@ -109,8 +113,6 @@ class View(EnvironmentalView):
         # Resolved and built list of subviews, after evaluating e.g. ForEach constructs.
         # This will be empty until rebuild is called, which happens on first layout and state changes.
         self._subviews = []
-        self.animation = None
-        self.duration = None
 
     @property
     def id(self):
@@ -152,11 +154,6 @@ class View(EnvironmentalView):
             if view.id == vid:
                 return view
 
-    def animate(self, curve=parametric, duration=0.15):
-        self.animation = curve
-        self.duration = duration
-        return self
-
     def rebuild(self):
         # TODO: this is not great. I'm using id_path out of convenience, but ideally this would use some sort of View
         # hash value and equality testing to be able to detect if a view moves around in the hierarchy.
@@ -171,14 +168,16 @@ class View(EnvironmentalView):
             view.env.inherit(self.env)
             # Let any existing view that this may replace decide if it can be re-used.
             old_view = old.pop(view.id_path, None)
+            old_frame = None
+            if old_view and old_view.frame:
+                old_frame = old_view.frame.copy()
             if old_view and old_view.reuse(view):
-                if old_view.frame:
-                    old_view._old_frame = old_view.frame.copy()
                 old_view.update(view)
                 view = old_view
                 asyncio.create_task(view.updated())
             else:
                 asyncio.create_task(view.built())
+            view._old_frame = old_frame
             # Rebuild/diff down the tree.
             view.rebuild()
             self._subviews.append(view)
@@ -274,17 +273,13 @@ class View(EnvironmentalView):
         for view in self.subviews:
             view.reposition(inner)
         if self._old_frame:
-            if self.animation and self._old_frame != self.frame:
+            if self.env.animation and self._old_frame != self.frame:
 
                 def _set_frame(new_frame):
                     self.frame = new_frame
                     self.window.needs_render = True
 
-                self.window.animate(
-                    FrameAnimation(
-                        self._old_frame, self.frame, _set_frame, curve=self.animation, duration=self.duration
-                    )
-                )
+                self.window.animate(self.env.animation(self._old_frame, self.frame, _set_frame))
             self._old_frame = None
 
     def layout(self, rect: Rect):

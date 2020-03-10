@@ -49,6 +49,7 @@ class Environment:
     spacing = Env(default=0)
     size = Env(default=Size())
     opacity = Env(default=1.0, inherit=True)
+    animation = Env(inherit=True)
 
     alpha = property(lambda self: round(self.opacity * 255))
 

@@ -1,6 +1,5 @@
 import math
 
-from .geom import Point, Rect, Size
 from .utils import clamp
 
 
@@ -45,38 +44,34 @@ def spring(mass=1.0, stiffness=100.0, damping=10.0, velocity=0):
 
 
 class Animation:
-    def __init__(self, curve, duration=0.15):
+    def __init__(self, curve, duration=0.15, delay=0.0):
         self.curve = curve
         self.duration = duration
-        self.t = 0.0
+        self.delay = delay
 
-    def interpolate(self, dt):
-        self.t += dt
-        return self.curve(clamp(self.t / self.duration, 0.0, 1.0))
+    def interpolate(self, t):
+        return self.curve(clamp((t - self.delay) / self.duration, 0.0, 1.0))
 
-    def step(self, dt):
-        pass
+    def finished(self, t):
+        return t >= (self.duration + self.delay)
 
-    def finished(self):
-        return self.t >= self.duration
+    def __call__(self, old_value, new_value, modifier):
+        return AnimationExecutor(self, old_value, new_value, modifier)
 
 
-class FrameAnimation(Animation):
-    def __init__(self, old_value, new_value, modifier, curve=parametric, duration=0.15):
-        super().__init__(curve, duration)
+class AnimationExecutor:
+    def __init__(self, animation, old_value, new_value, modifier):
+        self.animation = animation
         self.old_value = old_value.copy()
         self.new_value = new_value.copy()
         self.modifier = modifier
+        self.t = 0.0
 
     def step(self, dt):
-        pct = self.interpolate(dt)
-        dx = self.new_value.left - self.old_value.left
-        dy = self.new_value.top - self.old_value.top
-        dw = self.new_value.width - self.old_value.width
-        dh = self.new_value.height - self.old_value.height
-        self.modifier(
-            Rect(
-                origin=Point(self.old_value.left + round(dx * pct), self.old_value.top + round(dy * pct)),
-                size=Size(self.old_value.width + round(dw * pct), self.old_value.height + round(dh * pct)),
-            )
-        )
+        self.t += dt
+        pct = self.animation.interpolate(self.t)
+        value = self.old_value.interpolate(self.new_value, pct)
+        self.modifier(value)
+
+    def finished(self):
+        return self.animation.finished(self.t)
