@@ -77,7 +77,9 @@ class Slider(View):
         self.env.draw(renderer, "slider.knob", knob_rect)
 
     def _set(self, value):
-        self.current.value = min(max(int(value), self.minimum), self.maximum)
+        clamped = clamp(int(value), self.minimum, self.maximum)
+        if self.current.value != clamped:
+            self.current.value = clamped
 
     async def mousemotion(self, pt):
         inner = self.frame - self.env.padding - self.env.border

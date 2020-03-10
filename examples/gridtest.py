@@ -7,9 +7,9 @@ class ItemGridView(pyui.View):
         yield pyui.ScrollView(axis=self.axis)(
             pyui.Grid(num=self.num, size=self.size, axis=self.axis, flex=self.flex)(
                 pyui.ForEach(range(self.item_count), lambda num: (
-                    pyui.Rectangle().background(120, 120, 120).radius(5)(
+                    pyui.Rectangle()(
                         pyui.Text(num + 1).color(255, 255, 255)
-                    )
+                    ).background(120, 120, 120).radius(5).animate()
                 ))
             )
         )
