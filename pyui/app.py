@@ -7,6 +7,7 @@ import rx
 import rx.operators as ops
 import rx.subject
 import sdl2
+from rx.scheduler.eventloop import AsyncIOScheduler
 from sdl2.sdlimage import IMG_INIT_PNG, IMG_Init
 from sdl2.sdlttf import TTF_Init
 
@@ -51,6 +52,8 @@ class Window:
         self.focus = None
         # List of running animations.
         self.animations = []
+        # Debouncing state change observer.
+        self.bouncer = rx.subject.Subject()
         # Listen for events
         self.listen(sdl2.SDL_MOUSEBUTTONDOWN, "button", self.mousedown)
         self.listen(sdl2.SDL_MOUSEBUTTONUP, "button", self.mouseup, check_window=False)
@@ -117,7 +120,13 @@ class Window:
         self.animations = []
         self.view.layout(Rect(size=self.render_size))
 
+    def bounce_state_change(self, view):
+        view.handle_state_change()
+
     def startup(self):
+        self.bouncer.pipe(ops.sample(1.0 / 60.0)).subscribe(
+            self.bounce_state_change, scheduler=AsyncIOScheduler(loop=asyncio.get_running_loop())
+        )
         self.layout()
         if self.pack:
             scale = self.window_size.w / self.render_size.w

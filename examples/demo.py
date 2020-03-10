@@ -60,7 +60,7 @@ class BarChartView(pyui.View):
                         random.randint(0, 255),
                         random.randint(0, 255),
                         random.randint(0, 255)
-                    ).size(height=height)
+                    ).size(height=height).animate(pyui.parametric)
                 ))
             ).priority(pyui.Priority.HIGH),
             pyui.HStack()(

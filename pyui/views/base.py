@@ -109,6 +109,7 @@ class View(EnvironmentalView):
         # Resolved and built list of subviews, after evaluating e.g. ForEach constructs.
         # This will be empty until rebuild is called, which happens on first layout and state changes.
         self._subviews = []
+        self.animation = None
 
     @property
     def id(self):
@@ -149,6 +150,10 @@ class View(EnvironmentalView):
         for view in self.subviews:
             if view.id == vid:
                 return view
+
+    def animate(self, curve):
+        self.animation = curve
+        return self
 
     def rebuild(self):
         # TODO: this is not great. I'm using id_path out of convenience, but ideally this would use some sort of View
@@ -267,13 +272,13 @@ class View(EnvironmentalView):
         for view in self.subviews:
             view.reposition(inner)
         if self._old_frame:
-            if self._old_frame != self.frame:
+            if self.animation and self._old_frame != self.frame:
 
                 def _set_frame(new_frame):
                     self.frame = new_frame
                     self.window.needs_render = True
 
-                self.window.animate(FrameAnimation(self._old_frame, self.frame, _set_frame))
+                self.window.animate(FrameAnimation(self._old_frame, self.frame, _set_frame, curve=self.animation))
             self._old_frame = None
 
     def layout(self, rect: Rect):
@@ -383,6 +388,9 @@ class View(EnvironmentalView):
     # State management.
 
     def state_changed(self, name, value):
+        self.window.bouncer.on_next(self)
+
+    def handle_state_change(self):
         self.rebuild()
         asyncio.create_task(self.updated())
         self.window.needs_render = True
