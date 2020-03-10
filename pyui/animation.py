@@ -1,3 +1,5 @@
+import math
+
 from .geom import Point, Rect, Size
 from .utils import clamp
 
@@ -17,6 +19,29 @@ def bezier(t):
 def parametric(t):
     t2 = t * t
     return t2 / (2.0 * (t2 - t) + 1.0)
+
+
+def spring(mass=1.0, stiffness=100.0, damping=10.0, velocity=0):
+    # Ported from https://webkit.org/demos/spring/
+    w0 = math.sqrt(stiffness / mass)
+    zeta = damping / (2.0 * math.sqrt(stiffness * mass))
+    if zeta < 1.0:
+        wd = w0 * math.sqrt(1 - zeta * zeta)
+        A = 1.0
+        B = (zeta * w0 - velocity) / wd
+    else:
+        wd = 0.0
+        A = 1.0
+        B = w0 - velocity
+
+    def solve(t):
+        if zeta < 1.0:
+            t = math.exp(-t * zeta * w0) * (A * math.cos(wd * t) + B * math.sin(wd * t))
+        else:
+            t = (A + B * t) * math.exp(-t * w0)
+        return 1 - t
+
+    return solve
 
 
 class Animation:

@@ -4,7 +4,7 @@ import inspect
 import sdl2
 from sdl2.sdlgfx import boxRGBA, roundedBoxRGBA
 
-from pyui.animation import FrameAnimation
+from pyui.animation import FrameAnimation, parametric
 from pyui.env import Environment
 from pyui.geom import Alignment, Axis, Insets, Point, Priority, Rect, Size
 from pyui.utils import clamp
@@ -110,6 +110,7 @@ class View(EnvironmentalView):
         # This will be empty until rebuild is called, which happens on first layout and state changes.
         self._subviews = []
         self.animation = None
+        self.duration = None
 
     @property
     def id(self):
@@ -151,8 +152,9 @@ class View(EnvironmentalView):
             if view.id == vid:
                 return view
 
-    def animate(self, curve):
+    def animate(self, curve=parametric, duration=0.15):
         self.animation = curve
+        self.duration = duration
         return self
 
     def rebuild(self):
@@ -278,7 +280,11 @@ class View(EnvironmentalView):
                     self.frame = new_frame
                     self.window.needs_render = True
 
-                self.window.animate(FrameAnimation(self._old_frame, self.frame, _set_frame, curve=self.animation))
+                self.window.animate(
+                    FrameAnimation(
+                        self._old_frame, self.frame, _set_frame, curve=self.animation, duration=self.duration
+                    )
+                )
             self._old_frame = None
 
     def layout(self, rect: Rect):
