@@ -19,6 +19,10 @@ class Theme:
             self.asset_cache[name] = SlicedAsset(asset_path, center)
         return self.asset_cache[name]
 
+    def prepare(self, renderer):
+        for name in self.config["fonts"]:
+            self.font(name).prepare(renderer)
+
     def font(self, name="default", size=None):
         info = self.config["fonts"].get(name)
         filename = info["file"] if info else name

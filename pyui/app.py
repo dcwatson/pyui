@@ -44,6 +44,7 @@ class Window:
         self.renderer = sdl2.SDL_CreateRenderer(self.win, -1, sdl2.SDL_RENDERER_ACCELERATED)
         self.view = view
         self.view._window = self
+        self.view.env.theme.prepare(self.renderer)
         self.background = self.view.env.theme.config["background"]
         # self.view.dump()
         # Which view is currently tracking mouse events (i.e. was clicked but not released yet)
