@@ -1,6 +1,7 @@
 import ctypes
 import math
 import os
+import unicodedata
 
 import sdl2
 from sdl2.sdlttf import (
@@ -8,12 +9,14 @@ from sdl2.sdlttf import (
     TTF_CloseFont,
     TTF_FontLineSkip,
     TTF_GetFontKerningSizeGlyphs,
+    TTF_Init,
     TTF_OpenFont,
     TTF_RenderGlyph_Blended,
     TTF_SetFontHinting,
 )
 
-from pyui.geom import Size
+from .geom import Rect, Size
+from .utils import enumerate_last
 
 
 class Font:
@@ -21,11 +24,15 @@ class Font:
     scale = 1.0
 
     @classmethod
-    def initialize(cls):
-        ddpi = ctypes.c_float()
-        base_dpi = 96.0 if os.name == "nt" else 72.0
-        if sdl2.SDL_GetDisplayDPI(0, ctypes.byref(ddpi), None, None) == 0:
-            cls.scale = ddpi.value / base_dpi
+    def initialize(cls, scale=None):
+        TTF_Init()
+        if scale is None:
+            ddpi = ctypes.c_float()
+            base_dpi = 96.0 if os.name == "nt" else 72.0
+            if sdl2.SDL_GetDisplayDPI(0, ctypes.byref(ddpi), None, None) == 0:
+                cls.scale = ddpi.value / base_dpi
+        else:
+            cls.scale = scale
 
     @classmethod
     def load(cls, path, size):
@@ -82,54 +89,139 @@ class Font:
         for i in range(32, 127):
             self.glyph(renderer, i)
 
-    def measure(self, text, width=None, kerning=True):
-        lines = []
-        w = 0
+    def words(self, text, kerning=True):
+        """
+        Yields a series of words (start/end index range) and the width of the word. Words are automatically broken by
+        punctuation, spaces, or newlines. Unprintable characters are skipped (but break words).
+        """
+        start = 0
+        width = 0
         prev = None
-        for ch in text:
-            code = ord(ch)
+        textlen = len(text)
+        for idx in range(textlen):
+            code = ord(text[idx])
             if code == 10:
-                lines.append(w)
+                # Newline.
+                if idx > start:
+                    yield start, idx, width
+                yield idx, idx + 1, 0
+                start = idx + 1
+                width = 0
                 prev = None
-                w = 0
-                continue
-            kern = TTF_GetFontKerningSizeGlyphs(self.font, prev, code) if kerning and prev else 0
-            size = self.glyph_size(code)
-            if width and (w + size.w + kern) > width:
-                lines.append(w)
-                prev = None
-                w = size.w
+            elif code < 32:
+                # Unprintable, ignore (but count as a word break).
+                if idx > start:
+                    yield start, idx, width
+                start = idx + 1
+                width = 0
+                # Leave prev alone, so the next letter kerns over the unprintable character.
             else:
-                w += size.w + kern
+                size = self.glyph_size(code)
+                kern = TTF_GetFontKerningSizeGlyphs(self.font, prev, code) if kerning and prev else 0
+                if code == 32:
+                    # Space, break word.
+                    if idx > start:
+                        yield start, idx, width
+                    yield idx, idx + 1, size.w
+                    start = idx + 1
+                    width = 0
+                elif unicodedata.category(text[idx]).startswith("P"):
+                    # Punctuation, break word (including trailing punctuation).
+                    width += size.w + kern
+                    yield start, idx + 1, width
+                    start = idx + 1
+                    width = 0
+                else:
+                    # Printable character.
+                    width += size.w + kern
                 prev = code
-        if w > 0:
-            lines.append(w)
-        if not lines:
-            lines.append(0)
-        max_w = max(lines) if lines else 0
-        w = min(width, max_w) if width else max_w
-        return Size(w, len(lines) * self.line_height)
+        if textlen > start:
+            yield start, textlen, width
 
-    def draw(self, renderer, text, rect, color, kerning=True):
-        x, y = rect.origin
+    def layout(self, text, width, kerning=True):
+        """
+        Yields a series of lines, laying out text with a maximum width. Each line contains 0 or more tuples containing:
+            (index_in_text, code_point, start_x, kerning, max_x)
+        """
+        x = 0
         prev = None
-        for ch in text:
-            code = ord(ch)
-            if code == 10:
+        line = []
+        continuation = False
+        for start, end, w in self.words(text):
+            if x + w > width:
                 prev = None
-                x = rect.left
-                y += self.line_height
-                continue
-            kern = TTF_GetFontKerningSizeGlyphs(self.font, prev, code) if kerning and prev else 0
-            tex, size = self.glyph(renderer, code)
-            sdl2.SDL_SetTextureColorMod(tex, color.r, color.g, color.b)
-            sdl2.SDL_SetTextureAlphaMod(tex, color.a)
-            if x + size.w + kern > rect.right:
-                prev = None
-                kern = 0
-                x = rect.left
-                y += self.line_height
-            dst = sdl2.SDL_Rect(x + kern, y, size.w, size.h)
-            sdl2.SDL_RenderCopy(renderer, tex, None, ctypes.byref(dst))
-            x += size.w + kern
-            prev = code
+                x = 0
+                continuation = True
+                yield line
+                line = []
+            for idx in range(start, end):
+                code = ord(text[idx])
+                if code == 10:
+                    prev = None
+                    x = 0
+                    continuation = False
+                    yield line
+                    line = []
+                    continue
+                if code == 32 and continuation:
+                    continue
+                kern = TTF_GetFontKerningSizeGlyphs(self.font, prev, code) if kerning and prev else 0
+                size = self.glyph_size(code)
+                if x + size.w + kern > width:
+                    prev = None
+                    kern = 0
+                    x = 0
+                    continuation = True
+                    yield line
+                    line = []
+                line.append((idx, code, x, kern, x + size.w + kern))
+                x += size.w + kern
+                prev = code
+                continuation = False
+        yield line
+
+    def measure(self, text, width=None, kerning=True):
+        """
+        Returns how much space the given text would take up when rendered, optionally with a width constraint.
+        """
+        max_x = 0
+        y = 0
+        for line in self.layout(text, width or 2 ** 14, kerning=kerning):
+            if line:
+                # Take the maximum extent of the last character on each line.
+                max_x = max(max_x, line[-1][-1])
+            y += self.line_height
+        return Size(max_x, y)
+
+    def find(self, text, rect, pt, kerning=True):
+        """
+        Given text laid out inside rect, finds the index in the text under the given point.
+        """
+        y = rect.top
+        for line in self.layout(text, rect.width, kerning=kerning):
+            for pos, (idx, code, x, kern, extent), last in enumerate_last(line):
+                w = rect.width - x if last else extent - x
+                r = Rect(origin=(rect.left + x, y), size=(w, self.line_height))
+                if pt in r:
+                    return idx
+            y += self.line_height
+        return None
+
+    def draw(self, renderer, text, rect, color, selected=None, kerning=True):
+        """
+        Renders text in the specified rect, using the specified color. If specified, selected is a set of indexes in
+        text that should be highlighted.
+        """
+        y = rect.top
+        for line in self.layout(text, rect.width, kerning=kerning):
+            for idx, code, x, kern, extent in line:
+                tex, size = self.glyph(renderer, code)
+                sdl2.SDL_SetTextureColorMod(tex, color.r, color.g, color.b)
+                sdl2.SDL_SetTextureAlphaMod(tex, color.a)
+                dst = sdl2.SDL_Rect(rect.left + x + kern, y, size.w, size.h)
+                sdl2.SDL_RenderCopy(renderer, tex, None, ctypes.byref(dst))
+                if selected and idx in selected:
+                    sdl2.SDL_SetRenderDrawColor(renderer, 20, 60, 120, 255)
+                    sdl2.SDL_SetRenderDrawBlendMode(renderer, sdl2.SDL_BLENDMODE_ADD)
+                    sdl2.SDL_RenderFillRect(renderer, sdl2.SDL_Rect(rect.left + x, y, size.w + kern, size.h))
+            y += self.line_height

@@ -26,6 +26,7 @@
             "padding": [5, 20, 5, 20]
         },
         "textfield": {
+            "color": [230, 230, 230],
             "padding": [5, 10, 5, 10]
         },
         "tabview": {

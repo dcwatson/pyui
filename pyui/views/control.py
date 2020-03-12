@@ -102,25 +102,41 @@ class TextField(View):
     interactive = True
 
     def __init__(self, text: Binding, placeholder=None, **options):
-        self.text = text
-        self.placeholder = placeholder
         super().__init__(**options)
+        self.text = text
+        self.placeholder = placeholder or ""
+        self._start = None
+        self._end = None
+
+    @property
+    def _font(self):
+        return self.env.theme.font(self.env.font, self.env.font_size)
+
+    @property
+    def selection(self):
+        if self._start is None or self._end is None:
+            return None
+        return set(range(min(self._start, self._end), max(self._start, self._end) + 1))
 
     def minimum_size(self):
-        return Text(self.text.value).minimum_size()
+        size = self._font.measure(self.placeholder)
+        return Size(size.w, size.h * max(1, self.env.lines))
 
     def content_size(self, available):
-        return Size(available.w, 0)
-
-    def content(self):
-        if self.text.value:
-            yield Text(self.text.value)
-        elif self.placeholder:
-            yield Text(self.placeholder).color(150, 150, 150)
+        if self.env.lines > 0:
+            h = self._font.line_height * self.env.lines
+        else:
+            size = self._font.measure(self.text.value, width=available.w)
+            h = max(size.h, available.h)
+        return Size(available.w, h)
 
     def draw(self, renderer, rect):
         super().draw(renderer, rect)
         self.env.draw(renderer, "textfield", self.frame)
+        if self.text.value:
+            self._font.draw(renderer, self.text.value, rect, self.env.color, selected=self.selection)
+        elif self.placeholder:
+            self._font.draw(renderer, self.placeholder, rect, sdl2.SDL_Color(150, 150, 150))
 
     async def focus(self):
         sdl2.SDL_StartTextInput()
@@ -131,10 +147,31 @@ class TextField(View):
 
     async def keydown(self, key, mods):
         if key == sdl2.SDLK_BACKSPACE:
-            self.text.value = self.text.value[:-1]
+            if self._start is not None and self._end is not None:
+                s = min(self._start, self._end)
+                e = max(self._start, self._end)
+                self.text.value = self.text.value[:s] + self.text.value[e:]
+                self._start = None
+                self._end = None
+            else:
+                self.text.value = self.text.value[:-1]
+        elif key == sdl2.SDLK_RETURN:
+            self.text.value = self.text.value + "\n"
 
     async def textinput(self, text):
         self.text.value = self.text.value + text
+
+    async def mousedown(self, pt):
+        inner = self.frame - self.env.padding - self.env.border
+        self._start = self._font.find(self.text.value, inner, pt)
+        self._end = None
+        return self._start is not None
+
+    async def mousemotion(self, pt):
+        inner = self.frame - self.env.padding - self.env.border
+        idx = self._font.find(self.text.value, inner, pt)
+        if idx is not None:
+            self._end = idx
 
 
 class SegmentedButton(HStack):

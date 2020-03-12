@@ -84,6 +84,10 @@ class EnvironmentalView:
         self.env.animation = Animation(curve, duration, delay)
         return self
 
+    def lines(self, num):
+        self.env.lines = max(0, int(num)) if num else 0
+        return self
+
 
 class View(EnvironmentalView):
     interactive = False

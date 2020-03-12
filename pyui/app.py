@@ -9,7 +9,6 @@ import rx.subject
 import sdl2
 from rx.scheduler.eventloop import AsyncIOScheduler
 from sdl2.sdlimage import IMG_INIT_PNG, IMG_Init
-from sdl2.sdlttf import TTF_Init
 
 from .env import Environment
 from .font import Font
@@ -248,7 +247,6 @@ class Application:
             ctypes.windll.shcore.SetProcessDpiAwareness(1)
         sdl2.SDL_Init(sdl2.SDL_INIT_EVERYTHING)
         IMG_Init(IMG_INIT_PNG)
-        TTF_Init()
         # Initialize our font cache and calculate DPI scaling.
         Font.initialize()
         # Ugly hack to determine resolution scaling factor as early as possible.
