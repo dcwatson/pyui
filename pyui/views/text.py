@@ -34,7 +34,7 @@ class Text(View):
 class Icon(Text):
     data = json.load(open(os.path.join(DATA_DIR, "icons.json")))
 
-    def __init__(self, name, style=None, size=16):
+    def __init__(self, name, style=None, size=None):
         info = Icon.data["icons"][name]
         fontname = "{}/{}.otf".format(Icon.data["font"], style or info["sets"][0])
         super().__init__(info["text"])

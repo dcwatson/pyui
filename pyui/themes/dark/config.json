@@ -18,6 +18,9 @@
         "text": {
             "color": [230, 230, 230]
         },
+        "icon": {
+            "font_size": 16
+        },
         "button": {
             "spacing": 5,
             "padding": [5, 20, 5, 20]
