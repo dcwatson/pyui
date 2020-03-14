@@ -1,9 +1,14 @@
+import os
+
 import sdl2
 
 from pyui.geom import Alignment, Axis, Insets, Priority, Size
 from pyui.utils import clamp
 
 from .theme import Theme
+
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+print(BASE_DIR)
 
 
 class Env:
@@ -33,7 +38,7 @@ class Env:
 
 
 class Environment:
-    theme = Env(inherit=True, default=Theme("themes/dark/config.json"))
+    theme = Env(inherit=True, default=Theme(os.path.join(BASE_DIR, "themes/dark/config.json")))
     scale = Env(inherit=True, default=1.0)
 
     font = Env(inherit=True, default="default")

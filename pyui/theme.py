@@ -25,7 +25,7 @@ class Theme:
 
     def font(self, name="default", size=None):
         info = self.config["fonts"].get(name)
-        filename = info["file"] if info else name
+        filename = os.path.join(self.path, info["file"]) if info else name
         fontsize = size or info["size"]
         return Font.load(filename, fontsize)
 

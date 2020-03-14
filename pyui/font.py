@@ -49,6 +49,8 @@ class Font:
         self.path = path
         self.size = size
         self.font = TTF_OpenFont(path.encode("utf-8"), math.ceil(size * self.scale))
+        if not self.font:
+            raise Exception("Could not load font: {}".format(path))
         TTF_SetFontHinting(self.font, TTF_HINTING_LIGHT)
         self.line_height = TTF_FontLineSkip(self.font)
         # A cache of surfaces that have been loaded for measuring, but not yet loaded into a texture.
