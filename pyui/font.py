@@ -43,7 +43,6 @@ class Font:
     def load(cls, path, size, search=None):
         key = "{}-{}".format(path, size)
         if key not in cls.cache:
-            print("LOADING FONT", path, size)
             cls.cache[key] = cls(path, size, search=search)
         return cls.cache[key]
 
