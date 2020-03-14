@@ -8,7 +8,6 @@ from pyui.utils import clamp
 from .theme import Theme
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-print(BASE_DIR)
 
 
 class Env:

@@ -5,3 +5,4 @@ __pycache__
 /dist
 /build
 /pip-wheel-metadata
+.vscode

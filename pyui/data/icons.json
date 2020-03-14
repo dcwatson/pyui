@@ -1,0 +1,8600 @@
+{
+  "font": "fontawesome",
+  "icons": {
+    "500px": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf26e"
+    },
+    "accessible-icon": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf368"
+    },
+    "accusoft": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf369"
+    },
+    "acquisitions-incorporated": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf6af"
+    },
+    "ad": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf641"
+    },
+    "address-book": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf2b9"
+    },
+    "address-card": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf2bb"
+    },
+    "adjust": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf042"
+    },
+    "adn": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf170"
+    },
+    "adobe": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf778"
+    },
+    "adversal": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf36a"
+    },
+    "affiliatetheme": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf36b"
+    },
+    "air-freshener": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5d0"
+    },
+    "airbnb": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf834"
+    },
+    "algolia": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf36c"
+    },
+    "align-center": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf037"
+    },
+    "align-justify": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf039"
+    },
+    "align-left": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf036"
+    },
+    "align-right": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf038"
+    },
+    "alipay": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf642"
+    },
+    "allergies": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf461"
+    },
+    "amazon": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf270"
+    },
+    "amazon-pay": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf42c"
+    },
+    "ambulance": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0f9"
+    },
+    "american-sign-language-interpreting": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf2a3"
+    },
+    "amilia": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf36d"
+    },
+    "anchor": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf13d"
+    },
+    "android": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf17b"
+    },
+    "angellist": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf209"
+    },
+    "angle-double-down": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf103"
+    },
+    "angle-double-left": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf100"
+    },
+    "angle-double-right": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf101"
+    },
+    "angle-double-up": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf102"
+    },
+    "angle-down": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf107"
+    },
+    "angle-left": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf104"
+    },
+    "angle-right": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf105"
+    },
+    "angle-up": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf106"
+    },
+    "angry": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf556"
+    },
+    "angrycreative": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf36e"
+    },
+    "angular": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf420"
+    },
+    "ankh": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf644"
+    },
+    "app-store": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf36f"
+    },
+    "app-store-ios": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf370"
+    },
+    "apper": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf371"
+    },
+    "apple": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf179"
+    },
+    "apple-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5d1"
+    },
+    "apple-pay": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf415"
+    },
+    "archive": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf187"
+    },
+    "archway": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf557"
+    },
+    "arrow-alt-circle-down": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf358"
+    },
+    "arrow-alt-circle-left": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf359"
+    },
+    "arrow-alt-circle-right": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf35a"
+    },
+    "arrow-alt-circle-up": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf35b"
+    },
+    "arrow-circle-down": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0ab"
+    },
+    "arrow-circle-left": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0a8"
+    },
+    "arrow-circle-right": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0a9"
+    },
+    "arrow-circle-up": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0aa"
+    },
+    "arrow-down": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf063"
+    },
+    "arrow-left": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf060"
+    },
+    "arrow-right": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf061"
+    },
+    "arrow-up": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf062"
+    },
+    "arrows-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0b2"
+    },
+    "arrows-alt-h": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf337"
+    },
+    "arrows-alt-v": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf338"
+    },
+    "artstation": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf77a"
+    },
+    "assistive-listening-systems": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf2a2"
+    },
+    "asterisk": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf069"
+    },
+    "asymmetrik": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf372"
+    },
+    "at": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1fa"
+    },
+    "atlas": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf558"
+    },
+    "atlassian": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf77b"
+    },
+    "atom": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5d2"
+    },
+    "audible": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf373"
+    },
+    "audio-description": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf29e"
+    },
+    "autoprefixer": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf41c"
+    },
+    "avianex": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf374"
+    },
+    "aviato": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf421"
+    },
+    "award": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf559"
+    },
+    "aws": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf375"
+    },
+    "baby": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf77c"
+    },
+    "baby-carriage": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf77d"
+    },
+    "backspace": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf55a"
+    },
+    "backward": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf04a"
+    },
+    "bacon": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7e5"
+    },
+    "bahai": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf666"
+    },
+    "balance-scale": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf24e"
+    },
+    "balance-scale-left": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf515"
+    },
+    "balance-scale-right": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf516"
+    },
+    "ban": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf05e"
+    },
+    "band-aid": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf462"
+    },
+    "bandcamp": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf2d5"
+    },
+    "barcode": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf02a"
+    },
+    "bars": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0c9"
+    },
+    "baseball-ball": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf433"
+    },
+    "basketball-ball": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf434"
+    },
+    "bath": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf2cd"
+    },
+    "battery-empty": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf244"
+    },
+    "battery-full": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf240"
+    },
+    "battery-half": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf242"
+    },
+    "battery-quarter": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf243"
+    },
+    "battery-three-quarters": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf241"
+    },
+    "battle-net": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf835"
+    },
+    "bed": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf236"
+    },
+    "beer": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0fc"
+    },
+    "behance": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1b4"
+    },
+    "behance-square": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1b5"
+    },
+    "bell": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf0f3"
+    },
+    "bell-slash": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf1f6"
+    },
+    "bezier-curve": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf55b"
+    },
+    "bible": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf647"
+    },
+    "bicycle": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf206"
+    },
+    "biking": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf84a"
+    },
+    "bimobject": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf378"
+    },
+    "binoculars": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1e5"
+    },
+    "biohazard": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf780"
+    },
+    "birthday-cake": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1fd"
+    },
+    "bitbucket": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf171"
+    },
+    "bitcoin": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf379"
+    },
+    "bity": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf37a"
+    },
+    "black-tie": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf27e"
+    },
+    "blackberry": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf37b"
+    },
+    "blender": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf517"
+    },
+    "blender-phone": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6b6"
+    },
+    "blind": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf29d"
+    },
+    "blog": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf781"
+    },
+    "blogger": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf37c"
+    },
+    "blogger-b": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf37d"
+    },
+    "bluetooth": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf293"
+    },
+    "bluetooth-b": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf294"
+    },
+    "bold": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf032"
+    },
+    "bolt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0e7"
+    },
+    "bomb": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1e2"
+    },
+    "bone": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5d7"
+    },
+    "bong": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf55c"
+    },
+    "book": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf02d"
+    },
+    "book-dead": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6b7"
+    },
+    "book-medical": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7e6"
+    },
+    "book-open": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf518"
+    },
+    "book-reader": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5da"
+    },
+    "bookmark": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf02e"
+    },
+    "bootstrap": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf836"
+    },
+    "border-all": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf84c"
+    },
+    "border-none": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf850"
+    },
+    "border-style": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf853"
+    },
+    "bowling-ball": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf436"
+    },
+    "box": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf466"
+    },
+    "box-open": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf49e"
+    },
+    "boxes": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf468"
+    },
+    "braille": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf2a1"
+    },
+    "brain": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5dc"
+    },
+    "bread-slice": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7ec"
+    },
+    "briefcase": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0b1"
+    },
+    "briefcase-medical": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf469"
+    },
+    "broadcast-tower": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf519"
+    },
+    "broom": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf51a"
+    },
+    "brush": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf55d"
+    },
+    "btc": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf15a"
+    },
+    "buffer": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf837"
+    },
+    "bug": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf188"
+    },
+    "building": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf1ad"
+    },
+    "bullhorn": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0a1"
+    },
+    "bullseye": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf140"
+    },
+    "burn": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf46a"
+    },
+    "buromobelexperte": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf37f"
+    },
+    "bus": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf207"
+    },
+    "bus-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf55e"
+    },
+    "business-time": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf64a"
+    },
+    "buy-n-large": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf8a6"
+    },
+    "buysellads": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf20d"
+    },
+    "calculator": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1ec"
+    },
+    "calendar": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf133"
+    },
+    "calendar-alt": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf073"
+    },
+    "calendar-check": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf274"
+    },
+    "calendar-day": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf783"
+    },
+    "calendar-minus": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf272"
+    },
+    "calendar-plus": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf271"
+    },
+    "calendar-times": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf273"
+    },
+    "calendar-week": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf784"
+    },
+    "camera": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf030"
+    },
+    "camera-retro": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf083"
+    },
+    "campground": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6bb"
+    },
+    "canadian-maple-leaf": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf785"
+    },
+    "candy-cane": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf786"
+    },
+    "cannabis": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf55f"
+    },
+    "capsules": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf46b"
+    },
+    "car": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1b9"
+    },
+    "car-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5de"
+    },
+    "car-battery": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5df"
+    },
+    "car-crash": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5e1"
+    },
+    "car-side": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5e4"
+    },
+    "caravan": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf8ff"
+    },
+    "caret-down": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0d7"
+    },
+    "caret-left": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0d9"
+    },
+    "caret-right": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0da"
+    },
+    "caret-square-down": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf150"
+    },
+    "caret-square-left": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf191"
+    },
+    "caret-square-right": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf152"
+    },
+    "caret-square-up": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf151"
+    },
+    "caret-up": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0d8"
+    },
+    "carrot": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf787"
+    },
+    "cart-arrow-down": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf218"
+    },
+    "cart-plus": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf217"
+    },
+    "cash-register": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf788"
+    },
+    "cat": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6be"
+    },
+    "cc-amazon-pay": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf42d"
+    },
+    "cc-amex": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1f3"
+    },
+    "cc-apple-pay": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf416"
+    },
+    "cc-diners-club": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf24c"
+    },
+    "cc-discover": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1f2"
+    },
+    "cc-jcb": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf24b"
+    },
+    "cc-mastercard": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1f1"
+    },
+    "cc-paypal": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1f4"
+    },
+    "cc-stripe": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1f5"
+    },
+    "cc-visa": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1f0"
+    },
+    "centercode": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf380"
+    },
+    "centos": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf789"
+    },
+    "certificate": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0a3"
+    },
+    "chair": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6c0"
+    },
+    "chalkboard": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf51b"
+    },
+    "chalkboard-teacher": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf51c"
+    },
+    "charging-station": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5e7"
+    },
+    "chart-area": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1fe"
+    },
+    "chart-bar": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf080"
+    },
+    "chart-line": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf201"
+    },
+    "chart-pie": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf200"
+    },
+    "check": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf00c"
+    },
+    "check-circle": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf058"
+    },
+    "check-double": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf560"
+    },
+    "check-square": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf14a"
+    },
+    "cheese": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7ef"
+    },
+    "chess": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf439"
+    },
+    "chess-bishop": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf43a"
+    },
+    "chess-board": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf43c"
+    },
+    "chess-king": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf43f"
+    },
+    "chess-knight": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf441"
+    },
+    "chess-pawn": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf443"
+    },
+    "chess-queen": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf445"
+    },
+    "chess-rook": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf447"
+    },
+    "chevron-circle-down": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf13a"
+    },
+    "chevron-circle-left": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf137"
+    },
+    "chevron-circle-right": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf138"
+    },
+    "chevron-circle-up": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf139"
+    },
+    "chevron-down": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf078"
+    },
+    "chevron-left": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf053"
+    },
+    "chevron-right": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf054"
+    },
+    "chevron-up": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf077"
+    },
+    "child": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1ae"
+    },
+    "chrome": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf268"
+    },
+    "chromecast": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf838"
+    },
+    "church": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf51d"
+    },
+    "circle": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf111"
+    },
+    "circle-notch": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1ce"
+    },
+    "city": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf64f"
+    },
+    "clinic-medical": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7f2"
+    },
+    "clipboard": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf328"
+    },
+    "clipboard-check": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf46c"
+    },
+    "clipboard-list": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf46d"
+    },
+    "clock": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf017"
+    },
+    "clone": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf24d"
+    },
+    "closed-captioning": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf20a"
+    },
+    "cloud": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0c2"
+    },
+    "cloud-download-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf381"
+    },
+    "cloud-meatball": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf73b"
+    },
+    "cloud-moon": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6c3"
+    },
+    "cloud-moon-rain": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf73c"
+    },
+    "cloud-rain": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf73d"
+    },
+    "cloud-showers-heavy": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf740"
+    },
+    "cloud-sun": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6c4"
+    },
+    "cloud-sun-rain": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf743"
+    },
+    "cloud-upload-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf382"
+    },
+    "cloudscale": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf383"
+    },
+    "cloudsmith": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf384"
+    },
+    "cloudversify": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf385"
+    },
+    "cocktail": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf561"
+    },
+    "code": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf121"
+    },
+    "code-branch": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf126"
+    },
+    "codepen": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1cb"
+    },
+    "codiepie": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf284"
+    },
+    "coffee": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0f4"
+    },
+    "cog": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf013"
+    },
+    "cogs": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf085"
+    },
+    "coins": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf51e"
+    },
+    "columns": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0db"
+    },
+    "comment": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf075"
+    },
+    "comment-alt": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf27a"
+    },
+    "comment-dollar": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf651"
+    },
+    "comment-dots": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf4ad"
+    },
+    "comment-medical": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7f5"
+    },
+    "comment-slash": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf4b3"
+    },
+    "comments": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf086"
+    },
+    "comments-dollar": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf653"
+    },
+    "compact-disc": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf51f"
+    },
+    "compass": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf14e"
+    },
+    "compress": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf066"
+    },
+    "compress-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf422"
+    },
+    "compress-arrows-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf78c"
+    },
+    "concierge-bell": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf562"
+    },
+    "confluence": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf78d"
+    },
+    "connectdevelop": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf20e"
+    },
+    "contao": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf26d"
+    },
+    "cookie": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf563"
+    },
+    "cookie-bite": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf564"
+    },
+    "copy": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf0c5"
+    },
+    "copyright": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf1f9"
+    },
+    "cotton-bureau": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf89e"
+    },
+    "couch": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf4b8"
+    },
+    "cpanel": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf388"
+    },
+    "creative-commons": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf25e"
+    },
+    "creative-commons-by": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf4e7"
+    },
+    "creative-commons-nc": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf4e8"
+    },
+    "creative-commons-nc-eu": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf4e9"
+    },
+    "creative-commons-nc-jp": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf4ea"
+    },
+    "creative-commons-nd": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf4eb"
+    },
+    "creative-commons-pd": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf4ec"
+    },
+    "creative-commons-pd-alt": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf4ed"
+    },
+    "creative-commons-remix": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf4ee"
+    },
+    "creative-commons-sa": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf4ef"
+    },
+    "creative-commons-sampling": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf4f0"
+    },
+    "creative-commons-sampling-plus": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf4f1"
+    },
+    "creative-commons-share": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf4f2"
+    },
+    "creative-commons-zero": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf4f3"
+    },
+    "credit-card": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf09d"
+    },
+    "critical-role": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf6c9"
+    },
+    "crop": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf125"
+    },
+    "crop-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf565"
+    },
+    "cross": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf654"
+    },
+    "crosshairs": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf05b"
+    },
+    "crow": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf520"
+    },
+    "crown": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf521"
+    },
+    "crutch": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7f7"
+    },
+    "css3": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf13c"
+    },
+    "css3-alt": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf38b"
+    },
+    "cube": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1b2"
+    },
+    "cubes": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1b3"
+    },
+    "cut": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0c4"
+    },
+    "cuttlefish": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf38c"
+    },
+    "d-and-d": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf38d"
+    },
+    "d-and-d-beyond": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf6ca"
+    },
+    "dailymotion": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf952"
+    },
+    "dashcube": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf210"
+    },
+    "database": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1c0"
+    },
+    "deaf": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf2a4"
+    },
+    "delicious": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1a5"
+    },
+    "democrat": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf747"
+    },
+    "deploydog": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf38e"
+    },
+    "deskpro": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf38f"
+    },
+    "desktop": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf108"
+    },
+    "dev": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf6cc"
+    },
+    "deviantart": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1bd"
+    },
+    "dharmachakra": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf655"
+    },
+    "dhl": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf790"
+    },
+    "diagnoses": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf470"
+    },
+    "diaspora": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf791"
+    },
+    "dice": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf522"
+    },
+    "dice-d20": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6cf"
+    },
+    "dice-d6": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6d1"
+    },
+    "dice-five": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf523"
+    },
+    "dice-four": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf524"
+    },
+    "dice-one": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf525"
+    },
+    "dice-six": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf526"
+    },
+    "dice-three": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf527"
+    },
+    "dice-two": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf528"
+    },
+    "digg": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1a6"
+    },
+    "digital-ocean": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf391"
+    },
+    "digital-tachograph": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf566"
+    },
+    "directions": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5eb"
+    },
+    "discord": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf392"
+    },
+    "discourse": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf393"
+    },
+    "divide": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf529"
+    },
+    "dizzy": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf567"
+    },
+    "dna": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf471"
+    },
+    "dochub": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf394"
+    },
+    "docker": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf395"
+    },
+    "dog": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6d3"
+    },
+    "dollar-sign": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf155"
+    },
+    "dolly": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf472"
+    },
+    "dolly-flatbed": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf474"
+    },
+    "donate": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf4b9"
+    },
+    "door-closed": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf52a"
+    },
+    "door-open": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf52b"
+    },
+    "dot-circle": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf192"
+    },
+    "dove": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf4ba"
+    },
+    "download": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf019"
+    },
+    "draft2digital": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf396"
+    },
+    "drafting-compass": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf568"
+    },
+    "dragon": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6d5"
+    },
+    "draw-polygon": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5ee"
+    },
+    "dribbble": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf17d"
+    },
+    "dribbble-square": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf397"
+    },
+    "dropbox": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf16b"
+    },
+    "drum": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf569"
+    },
+    "drum-steelpan": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf56a"
+    },
+    "drumstick-bite": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6d7"
+    },
+    "drupal": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1a9"
+    },
+    "dumbbell": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf44b"
+    },
+    "dumpster": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf793"
+    },
+    "dumpster-fire": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf794"
+    },
+    "dungeon": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6d9"
+    },
+    "dyalog": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf399"
+    },
+    "earlybirds": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf39a"
+    },
+    "ebay": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf4f4"
+    },
+    "edge": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf282"
+    },
+    "edit": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf044"
+    },
+    "egg": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7fb"
+    },
+    "eject": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf052"
+    },
+    "elementor": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf430"
+    },
+    "ellipsis-h": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf141"
+    },
+    "ellipsis-v": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf142"
+    },
+    "ello": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf5f1"
+    },
+    "ember": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf423"
+    },
+    "empire": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1d1"
+    },
+    "envelope": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf0e0"
+    },
+    "envelope-open": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf2b6"
+    },
+    "envelope-open-text": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf658"
+    },
+    "envelope-square": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf199"
+    },
+    "envira": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf299"
+    },
+    "equals": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf52c"
+    },
+    "eraser": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf12d"
+    },
+    "erlang": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf39d"
+    },
+    "ethereum": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf42e"
+    },
+    "ethernet": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf796"
+    },
+    "etsy": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf2d7"
+    },
+    "euro-sign": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf153"
+    },
+    "evernote": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf839"
+    },
+    "exchange-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf362"
+    },
+    "exclamation": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf12a"
+    },
+    "exclamation-circle": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf06a"
+    },
+    "exclamation-triangle": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf071"
+    },
+    "expand": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf065"
+    },
+    "expand-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf424"
+    },
+    "expand-arrows-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf31e"
+    },
+    "expeditedssl": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf23e"
+    },
+    "external-link-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf35d"
+    },
+    "external-link-square-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf360"
+    },
+    "eye": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf06e"
+    },
+    "eye-dropper": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1fb"
+    },
+    "eye-slash": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf070"
+    },
+    "facebook": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf09a"
+    },
+    "facebook-f": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf39e"
+    },
+    "facebook-messenger": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf39f"
+    },
+    "facebook-square": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf082"
+    },
+    "fan": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf863"
+    },
+    "fantasy-flight-games": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf6dc"
+    },
+    "fast-backward": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf049"
+    },
+    "fast-forward": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf050"
+    },
+    "fax": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1ac"
+    },
+    "feather": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf52d"
+    },
+    "feather-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf56b"
+    },
+    "fedex": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf797"
+    },
+    "fedora": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf798"
+    },
+    "female": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf182"
+    },
+    "fighter-jet": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0fb"
+    },
+    "figma": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf799"
+    },
+    "file": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf15b"
+    },
+    "file-alt": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf15c"
+    },
+    "file-archive": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf1c6"
+    },
+    "file-audio": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf1c7"
+    },
+    "file-code": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf1c9"
+    },
+    "file-contract": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf56c"
+    },
+    "file-csv": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6dd"
+    },
+    "file-download": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf56d"
+    },
+    "file-excel": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf1c3"
+    },
+    "file-export": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf56e"
+    },
+    "file-image": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf1c5"
+    },
+    "file-import": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf56f"
+    },
+    "file-invoice": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf570"
+    },
+    "file-invoice-dollar": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf571"
+    },
+    "file-medical": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf477"
+    },
+    "file-medical-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf478"
+    },
+    "file-pdf": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf1c1"
+    },
+    "file-powerpoint": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf1c4"
+    },
+    "file-prescription": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf572"
+    },
+    "file-signature": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf573"
+    },
+    "file-upload": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf574"
+    },
+    "file-video": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf1c8"
+    },
+    "file-word": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf1c2"
+    },
+    "fill": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf575"
+    },
+    "fill-drip": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf576"
+    },
+    "film": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf008"
+    },
+    "filter": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0b0"
+    },
+    "fingerprint": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf577"
+    },
+    "fire": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf06d"
+    },
+    "fire-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7e4"
+    },
+    "fire-extinguisher": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf134"
+    },
+    "firefox": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf269"
+    },
+    "firefox-browser": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf907"
+    },
+    "first-aid": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf479"
+    },
+    "first-order": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf2b0"
+    },
+    "first-order-alt": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf50a"
+    },
+    "firstdraft": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3a1"
+    },
+    "fish": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf578"
+    },
+    "fist-raised": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6de"
+    },
+    "flag": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf024"
+    },
+    "flag-checkered": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf11e"
+    },
+    "flag-usa": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf74d"
+    },
+    "flask": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0c3"
+    },
+    "flickr": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf16e"
+    },
+    "flipboard": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf44d"
+    },
+    "flushed": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf579"
+    },
+    "fly": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf417"
+    },
+    "folder": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf07b"
+    },
+    "folder-minus": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf65d"
+    },
+    "folder-open": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf07c"
+    },
+    "folder-plus": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf65e"
+    },
+    "font": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf031"
+    },
+    "font-awesome": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf2b4"
+    },
+    "font-awesome-alt": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf35c"
+    },
+    "font-awesome-flag": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf425"
+    },
+    "font-awesome-logo-full": {
+      "sets": [
+        "regular",
+        "solid",
+        "brands"
+      ],
+      "text": "\uf4e6"
+    },
+    "fonticons": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf280"
+    },
+    "fonticons-fi": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3a2"
+    },
+    "football-ball": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf44e"
+    },
+    "fort-awesome": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf286"
+    },
+    "fort-awesome-alt": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3a3"
+    },
+    "forumbee": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf211"
+    },
+    "forward": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf04e"
+    },
+    "foursquare": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf180"
+    },
+    "free-code-camp": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf2c5"
+    },
+    "freebsd": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3a4"
+    },
+    "frog": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf52e"
+    },
+    "frown": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf119"
+    },
+    "frown-open": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf57a"
+    },
+    "fulcrum": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf50b"
+    },
+    "funnel-dollar": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf662"
+    },
+    "futbol": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf1e3"
+    },
+    "galactic-republic": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf50c"
+    },
+    "galactic-senate": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf50d"
+    },
+    "gamepad": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf11b"
+    },
+    "gas-pump": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf52f"
+    },
+    "gavel": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0e3"
+    },
+    "gem": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf3a5"
+    },
+    "genderless": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf22d"
+    },
+    "get-pocket": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf265"
+    },
+    "gg": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf260"
+    },
+    "gg-circle": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf261"
+    },
+    "ghost": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6e2"
+    },
+    "gift": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf06b"
+    },
+    "gifts": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf79c"
+    },
+    "git": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1d3"
+    },
+    "git-alt": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf841"
+    },
+    "git-square": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1d2"
+    },
+    "github": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf09b"
+    },
+    "github-alt": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf113"
+    },
+    "github-square": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf092"
+    },
+    "gitkraken": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3a6"
+    },
+    "gitlab": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf296"
+    },
+    "gitter": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf426"
+    },
+    "glass-cheers": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf79f"
+    },
+    "glass-martini": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf000"
+    },
+    "glass-martini-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf57b"
+    },
+    "glass-whiskey": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7a0"
+    },
+    "glasses": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf530"
+    },
+    "glide": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf2a5"
+    },
+    "glide-g": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf2a6"
+    },
+    "globe": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0ac"
+    },
+    "globe-africa": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf57c"
+    },
+    "globe-americas": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf57d"
+    },
+    "globe-asia": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf57e"
+    },
+    "globe-europe": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7a2"
+    },
+    "gofore": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3a7"
+    },
+    "golf-ball": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf450"
+    },
+    "goodreads": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3a8"
+    },
+    "goodreads-g": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3a9"
+    },
+    "google": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1a0"
+    },
+    "google-drive": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3aa"
+    },
+    "google-play": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3ab"
+    },
+    "google-plus": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf2b3"
+    },
+    "google-plus-g": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf0d5"
+    },
+    "google-plus-square": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf0d4"
+    },
+    "google-wallet": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1ee"
+    },
+    "gopuram": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf664"
+    },
+    "graduation-cap": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf19d"
+    },
+    "gratipay": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf184"
+    },
+    "grav": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf2d6"
+    },
+    "greater-than": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf531"
+    },
+    "greater-than-equal": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf532"
+    },
+    "grimace": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf57f"
+    },
+    "grin": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf580"
+    },
+    "grin-alt": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf581"
+    },
+    "grin-beam": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf582"
+    },
+    "grin-beam-sweat": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf583"
+    },
+    "grin-hearts": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf584"
+    },
+    "grin-squint": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf585"
+    },
+    "grin-squint-tears": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf586"
+    },
+    "grin-stars": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf587"
+    },
+    "grin-tears": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf588"
+    },
+    "grin-tongue": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf589"
+    },
+    "grin-tongue-squint": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf58a"
+    },
+    "grin-tongue-wink": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf58b"
+    },
+    "grin-wink": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf58c"
+    },
+    "grip-horizontal": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf58d"
+    },
+    "grip-lines": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7a4"
+    },
+    "grip-lines-vertical": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7a5"
+    },
+    "grip-vertical": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf58e"
+    },
+    "gripfire": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3ac"
+    },
+    "grunt": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3ad"
+    },
+    "guitar": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7a6"
+    },
+    "gulp": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3ae"
+    },
+    "h-square": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0fd"
+    },
+    "hacker-news": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1d4"
+    },
+    "hacker-news-square": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3af"
+    },
+    "hackerrank": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf5f7"
+    },
+    "hamburger": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf805"
+    },
+    "hammer": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6e3"
+    },
+    "hamsa": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf665"
+    },
+    "hand-holding": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf4bd"
+    },
+    "hand-holding-heart": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf4be"
+    },
+    "hand-holding-usd": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf4c0"
+    },
+    "hand-lizard": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf258"
+    },
+    "hand-middle-finger": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf806"
+    },
+    "hand-paper": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf256"
+    },
+    "hand-peace": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf25b"
+    },
+    "hand-point-down": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf0a7"
+    },
+    "hand-point-left": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf0a5"
+    },
+    "hand-point-right": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf0a4"
+    },
+    "hand-point-up": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf0a6"
+    },
+    "hand-pointer": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf25a"
+    },
+    "hand-rock": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf255"
+    },
+    "hand-scissors": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf257"
+    },
+    "hand-spock": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf259"
+    },
+    "hands": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf4c2"
+    },
+    "hands-helping": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf4c4"
+    },
+    "handshake": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf2b5"
+    },
+    "hanukiah": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6e6"
+    },
+    "hard-hat": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf807"
+    },
+    "hashtag": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf292"
+    },
+    "hat-cowboy": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf8c0"
+    },
+    "hat-cowboy-side": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf8c1"
+    },
+    "hat-wizard": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6e8"
+    },
+    "hdd": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf0a0"
+    },
+    "heading": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1dc"
+    },
+    "headphones": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf025"
+    },
+    "headphones-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf58f"
+    },
+    "headset": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf590"
+    },
+    "heart": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf004"
+    },
+    "heart-broken": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7a9"
+    },
+    "heartbeat": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf21e"
+    },
+    "helicopter": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf533"
+    },
+    "highlighter": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf591"
+    },
+    "hiking": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6ec"
+    },
+    "hippo": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6ed"
+    },
+    "hips": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf452"
+    },
+    "hire-a-helper": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3b0"
+    },
+    "history": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1da"
+    },
+    "hockey-puck": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf453"
+    },
+    "holly-berry": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7aa"
+    },
+    "home": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf015"
+    },
+    "hooli": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf427"
+    },
+    "hornbill": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf592"
+    },
+    "horse": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6f0"
+    },
+    "horse-head": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7ab"
+    },
+    "hospital": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf0f8"
+    },
+    "hospital-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf47d"
+    },
+    "hospital-symbol": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf47e"
+    },
+    "hot-tub": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf593"
+    },
+    "hotdog": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf80f"
+    },
+    "hotel": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf594"
+    },
+    "hotjar": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3b1"
+    },
+    "hourglass": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf254"
+    },
+    "hourglass-end": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf253"
+    },
+    "hourglass-half": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf252"
+    },
+    "hourglass-start": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf251"
+    },
+    "house-damage": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6f1"
+    },
+    "houzz": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf27c"
+    },
+    "hryvnia": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6f2"
+    },
+    "html5": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf13b"
+    },
+    "hubspot": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3b2"
+    },
+    "i-cursor": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf246"
+    },
+    "ice-cream": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf810"
+    },
+    "icicles": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7ad"
+    },
+    "icons": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf86d"
+    },
+    "id-badge": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf2c1"
+    },
+    "id-card": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf2c2"
+    },
+    "id-card-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf47f"
+    },
+    "ideal": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf913"
+    },
+    "igloo": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7ae"
+    },
+    "image": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf03e"
+    },
+    "images": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf302"
+    },
+    "imdb": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf2d8"
+    },
+    "inbox": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf01c"
+    },
+    "indent": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf03c"
+    },
+    "industry": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf275"
+    },
+    "infinity": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf534"
+    },
+    "info": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf129"
+    },
+    "info-circle": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf05a"
+    },
+    "instagram": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf16d"
+    },
+    "instagram-square": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf955"
+    },
+    "intercom": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf7af"
+    },
+    "internet-explorer": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf26b"
+    },
+    "invision": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf7b0"
+    },
+    "ioxhost": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf208"
+    },
+    "italic": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf033"
+    },
+    "itch-io": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf83a"
+    },
+    "itunes": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3b4"
+    },
+    "itunes-note": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3b5"
+    },
+    "java": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf4e4"
+    },
+    "jedi": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf669"
+    },
+    "jedi-order": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf50e"
+    },
+    "jenkins": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3b6"
+    },
+    "jira": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf7b1"
+    },
+    "joget": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3b7"
+    },
+    "joint": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf595"
+    },
+    "joomla": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1aa"
+    },
+    "journal-whills": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf66a"
+    },
+    "js": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3b8"
+    },
+    "js-square": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3b9"
+    },
+    "jsfiddle": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1cc"
+    },
+    "kaaba": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf66b"
+    },
+    "kaggle": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf5fa"
+    },
+    "key": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf084"
+    },
+    "keybase": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf4f5"
+    },
+    "keyboard": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf11c"
+    },
+    "keycdn": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3ba"
+    },
+    "khanda": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf66d"
+    },
+    "kickstarter": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3bb"
+    },
+    "kickstarter-k": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3bc"
+    },
+    "kiss": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf596"
+    },
+    "kiss-beam": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf597"
+    },
+    "kiss-wink-heart": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf598"
+    },
+    "kiwi-bird": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf535"
+    },
+    "korvue": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf42f"
+    },
+    "landmark": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf66f"
+    },
+    "language": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1ab"
+    },
+    "laptop": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf109"
+    },
+    "laptop-code": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5fc"
+    },
+    "laptop-medical": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf812"
+    },
+    "laravel": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3bd"
+    },
+    "lastfm": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf202"
+    },
+    "lastfm-square": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf203"
+    },
+    "laugh": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf599"
+    },
+    "laugh-beam": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf59a"
+    },
+    "laugh-squint": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf59b"
+    },
+    "laugh-wink": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf59c"
+    },
+    "layer-group": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5fd"
+    },
+    "leaf": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf06c"
+    },
+    "leanpub": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf212"
+    },
+    "lemon": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf094"
+    },
+    "less": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf41d"
+    },
+    "less-than": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf536"
+    },
+    "less-than-equal": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf537"
+    },
+    "level-down-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf3be"
+    },
+    "level-up-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf3bf"
+    },
+    "life-ring": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf1cd"
+    },
+    "lightbulb": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf0eb"
+    },
+    "line": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3c0"
+    },
+    "link": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0c1"
+    },
+    "linkedin": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf08c"
+    },
+    "linkedin-in": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf0e1"
+    },
+    "linode": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf2b8"
+    },
+    "linux": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf17c"
+    },
+    "lira-sign": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf195"
+    },
+    "list": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf03a"
+    },
+    "list-alt": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf022"
+    },
+    "list-ol": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0cb"
+    },
+    "list-ul": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0ca"
+    },
+    "location-arrow": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf124"
+    },
+    "lock": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf023"
+    },
+    "lock-open": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf3c1"
+    },
+    "long-arrow-alt-down": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf309"
+    },
+    "long-arrow-alt-left": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf30a"
+    },
+    "long-arrow-alt-right": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf30b"
+    },
+    "long-arrow-alt-up": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf30c"
+    },
+    "low-vision": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf2a8"
+    },
+    "luggage-cart": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf59d"
+    },
+    "lyft": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3c3"
+    },
+    "magento": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3c4"
+    },
+    "magic": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0d0"
+    },
+    "magnet": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf076"
+    },
+    "mail-bulk": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf674"
+    },
+    "mailchimp": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf59e"
+    },
+    "male": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf183"
+    },
+    "mandalorian": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf50f"
+    },
+    "map": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf279"
+    },
+    "map-marked": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf59f"
+    },
+    "map-marked-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5a0"
+    },
+    "map-marker": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf041"
+    },
+    "map-marker-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf3c5"
+    },
+    "map-pin": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf276"
+    },
+    "map-signs": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf277"
+    },
+    "markdown": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf60f"
+    },
+    "marker": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5a1"
+    },
+    "mars": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf222"
+    },
+    "mars-double": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf227"
+    },
+    "mars-stroke": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf229"
+    },
+    "mars-stroke-h": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf22b"
+    },
+    "mars-stroke-v": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf22a"
+    },
+    "mask": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6fa"
+    },
+    "mastodon": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf4f6"
+    },
+    "maxcdn": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf136"
+    },
+    "mdb": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf8ca"
+    },
+    "medal": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5a2"
+    },
+    "medapps": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3c6"
+    },
+    "medium": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf23a"
+    },
+    "medium-m": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3c7"
+    },
+    "medkit": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0fa"
+    },
+    "medrt": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3c8"
+    },
+    "meetup": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf2e0"
+    },
+    "megaport": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf5a3"
+    },
+    "meh": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf11a"
+    },
+    "meh-blank": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf5a4"
+    },
+    "meh-rolling-eyes": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf5a5"
+    },
+    "memory": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf538"
+    },
+    "mendeley": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf7b3"
+    },
+    "menorah": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf676"
+    },
+    "mercury": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf223"
+    },
+    "meteor": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf753"
+    },
+    "microblog": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf91a"
+    },
+    "microchip": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf2db"
+    },
+    "microphone": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf130"
+    },
+    "microphone-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf3c9"
+    },
+    "microphone-alt-slash": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf539"
+    },
+    "microphone-slash": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf131"
+    },
+    "microscope": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf610"
+    },
+    "microsoft": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3ca"
+    },
+    "minus": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf068"
+    },
+    "minus-circle": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf056"
+    },
+    "minus-square": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf146"
+    },
+    "mitten": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7b5"
+    },
+    "mix": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3cb"
+    },
+    "mixcloud": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf289"
+    },
+    "mixer": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf956"
+    },
+    "mizuni": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3cc"
+    },
+    "mobile": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf10b"
+    },
+    "mobile-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf3cd"
+    },
+    "modx": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf285"
+    },
+    "monero": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3d0"
+    },
+    "money-bill": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0d6"
+    },
+    "money-bill-alt": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf3d1"
+    },
+    "money-bill-wave": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf53a"
+    },
+    "money-bill-wave-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf53b"
+    },
+    "money-check": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf53c"
+    },
+    "money-check-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf53d"
+    },
+    "monument": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5a6"
+    },
+    "moon": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf186"
+    },
+    "mortar-pestle": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5a7"
+    },
+    "mosque": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf678"
+    },
+    "motorcycle": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf21c"
+    },
+    "mountain": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6fc"
+    },
+    "mouse": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf8cc"
+    },
+    "mouse-pointer": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf245"
+    },
+    "mug-hot": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7b6"
+    },
+    "music": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf001"
+    },
+    "napster": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3d2"
+    },
+    "neos": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf612"
+    },
+    "network-wired": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6ff"
+    },
+    "neuter": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf22c"
+    },
+    "newspaper": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf1ea"
+    },
+    "nimblr": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf5a8"
+    },
+    "node": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf419"
+    },
+    "node-js": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3d3"
+    },
+    "not-equal": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf53e"
+    },
+    "notes-medical": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf481"
+    },
+    "npm": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3d4"
+    },
+    "ns8": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3d5"
+    },
+    "nutritionix": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3d6"
+    },
+    "object-group": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf247"
+    },
+    "object-ungroup": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf248"
+    },
+    "odnoklassniki": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf263"
+    },
+    "odnoklassniki-square": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf264"
+    },
+    "oil-can": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf613"
+    },
+    "old-republic": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf510"
+    },
+    "om": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf679"
+    },
+    "opencart": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf23d"
+    },
+    "openid": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf19b"
+    },
+    "opera": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf26a"
+    },
+    "optin-monster": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf23c"
+    },
+    "orcid": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf8d2"
+    },
+    "osi": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf41a"
+    },
+    "otter": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf700"
+    },
+    "outdent": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf03b"
+    },
+    "page4": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3d7"
+    },
+    "pagelines": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf18c"
+    },
+    "pager": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf815"
+    },
+    "paint-brush": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1fc"
+    },
+    "paint-roller": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5aa"
+    },
+    "palette": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf53f"
+    },
+    "palfed": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3d8"
+    },
+    "pallet": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf482"
+    },
+    "paper-plane": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf1d8"
+    },
+    "paperclip": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0c6"
+    },
+    "parachute-box": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf4cd"
+    },
+    "paragraph": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1dd"
+    },
+    "parking": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf540"
+    },
+    "passport": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5ab"
+    },
+    "pastafarianism": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf67b"
+    },
+    "paste": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0ea"
+    },
+    "patreon": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3d9"
+    },
+    "pause": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf04c"
+    },
+    "pause-circle": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf28b"
+    },
+    "paw": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1b0"
+    },
+    "paypal": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1ed"
+    },
+    "peace": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf67c"
+    },
+    "pen": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf304"
+    },
+    "pen-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf305"
+    },
+    "pen-fancy": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5ac"
+    },
+    "pen-nib": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5ad"
+    },
+    "pen-square": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf14b"
+    },
+    "pencil-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf303"
+    },
+    "pencil-ruler": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5ae"
+    },
+    "penny-arcade": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf704"
+    },
+    "people-carry": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf4ce"
+    },
+    "pepper-hot": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf816"
+    },
+    "percent": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf295"
+    },
+    "percentage": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf541"
+    },
+    "periscope": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3da"
+    },
+    "person-booth": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf756"
+    },
+    "phabricator": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3db"
+    },
+    "phoenix-framework": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3dc"
+    },
+    "phoenix-squadron": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf511"
+    },
+    "phone": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf095"
+    },
+    "phone-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf879"
+    },
+    "phone-slash": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf3dd"
+    },
+    "phone-square": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf098"
+    },
+    "phone-square-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf87b"
+    },
+    "phone-volume": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf2a0"
+    },
+    "photo-video": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf87c"
+    },
+    "php": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf457"
+    },
+    "pied-piper": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf2ae"
+    },
+    "pied-piper-alt": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1a8"
+    },
+    "pied-piper-hat": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf4e5"
+    },
+    "pied-piper-pp": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1a7"
+    },
+    "pied-piper-square": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf91e"
+    },
+    "piggy-bank": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf4d3"
+    },
+    "pills": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf484"
+    },
+    "pinterest": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf0d2"
+    },
+    "pinterest-p": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf231"
+    },
+    "pinterest-square": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf0d3"
+    },
+    "pizza-slice": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf818"
+    },
+    "place-of-worship": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf67f"
+    },
+    "plane": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf072"
+    },
+    "plane-arrival": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5af"
+    },
+    "plane-departure": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5b0"
+    },
+    "play": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf04b"
+    },
+    "play-circle": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf144"
+    },
+    "playstation": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3df"
+    },
+    "plug": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1e6"
+    },
+    "plus": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf067"
+    },
+    "plus-circle": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf055"
+    },
+    "plus-square": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf0fe"
+    },
+    "podcast": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf2ce"
+    },
+    "poll": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf681"
+    },
+    "poll-h": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf682"
+    },
+    "poo": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf2fe"
+    },
+    "poo-storm": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf75a"
+    },
+    "poop": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf619"
+    },
+    "portrait": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf3e0"
+    },
+    "pound-sign": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf154"
+    },
+    "power-off": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf011"
+    },
+    "pray": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf683"
+    },
+    "praying-hands": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf684"
+    },
+    "prescription": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5b1"
+    },
+    "prescription-bottle": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf485"
+    },
+    "prescription-bottle-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf486"
+    },
+    "print": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf02f"
+    },
+    "procedures": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf487"
+    },
+    "product-hunt": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf288"
+    },
+    "project-diagram": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf542"
+    },
+    "pushed": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3e1"
+    },
+    "puzzle-piece": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf12e"
+    },
+    "python": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3e2"
+    },
+    "qq": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1d6"
+    },
+    "qrcode": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf029"
+    },
+    "question": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf128"
+    },
+    "question-circle": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf059"
+    },
+    "quidditch": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf458"
+    },
+    "quinscape": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf459"
+    },
+    "quora": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf2c4"
+    },
+    "quote-left": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf10d"
+    },
+    "quote-right": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf10e"
+    },
+    "quran": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf687"
+    },
+    "r-project": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf4f7"
+    },
+    "radiation": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7b9"
+    },
+    "radiation-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7ba"
+    },
+    "rainbow": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf75b"
+    },
+    "random": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf074"
+    },
+    "raspberry-pi": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf7bb"
+    },
+    "ravelry": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf2d9"
+    },
+    "react": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf41b"
+    },
+    "reacteurope": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf75d"
+    },
+    "readme": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf4d5"
+    },
+    "rebel": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1d0"
+    },
+    "receipt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf543"
+    },
+    "record-vinyl": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf8d9"
+    },
+    "recycle": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1b8"
+    },
+    "red-river": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3e3"
+    },
+    "reddit": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1a1"
+    },
+    "reddit-alien": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf281"
+    },
+    "reddit-square": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1a2"
+    },
+    "redhat": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf7bc"
+    },
+    "redo": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf01e"
+    },
+    "redo-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf2f9"
+    },
+    "registered": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf25d"
+    },
+    "remove-format": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf87d"
+    },
+    "renren": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf18b"
+    },
+    "reply": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf3e5"
+    },
+    "reply-all": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf122"
+    },
+    "replyd": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3e6"
+    },
+    "republican": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf75e"
+    },
+    "researchgate": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf4f8"
+    },
+    "resolving": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3e7"
+    },
+    "restroom": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7bd"
+    },
+    "retweet": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf079"
+    },
+    "rev": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf5b2"
+    },
+    "ribbon": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf4d6"
+    },
+    "ring": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf70b"
+    },
+    "road": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf018"
+    },
+    "robot": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf544"
+    },
+    "rocket": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf135"
+    },
+    "rocketchat": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3e8"
+    },
+    "rockrms": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3e9"
+    },
+    "route": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf4d7"
+    },
+    "rss": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf09e"
+    },
+    "rss-square": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf143"
+    },
+    "ruble-sign": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf158"
+    },
+    "ruler": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf545"
+    },
+    "ruler-combined": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf546"
+    },
+    "ruler-horizontal": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf547"
+    },
+    "ruler-vertical": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf548"
+    },
+    "running": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf70c"
+    },
+    "rupee-sign": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf156"
+    },
+    "sad-cry": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf5b3"
+    },
+    "sad-tear": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf5b4"
+    },
+    "safari": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf267"
+    },
+    "salesforce": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf83b"
+    },
+    "sass": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf41e"
+    },
+    "satellite": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7bf"
+    },
+    "satellite-dish": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7c0"
+    },
+    "save": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf0c7"
+    },
+    "schlix": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3ea"
+    },
+    "school": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf549"
+    },
+    "screwdriver": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf54a"
+    },
+    "scribd": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf28a"
+    },
+    "scroll": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf70e"
+    },
+    "sd-card": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7c2"
+    },
+    "search": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf002"
+    },
+    "search-dollar": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf688"
+    },
+    "search-location": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf689"
+    },
+    "search-minus": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf010"
+    },
+    "search-plus": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf00e"
+    },
+    "searchengin": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3eb"
+    },
+    "seedling": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf4d8"
+    },
+    "sellcast": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf2da"
+    },
+    "sellsy": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf213"
+    },
+    "server": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf233"
+    },
+    "servicestack": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3ec"
+    },
+    "shapes": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf61f"
+    },
+    "share": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf064"
+    },
+    "share-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1e0"
+    },
+    "share-alt-square": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1e1"
+    },
+    "share-square": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf14d"
+    },
+    "shekel-sign": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf20b"
+    },
+    "shield-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf3ed"
+    },
+    "ship": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf21a"
+    },
+    "shipping-fast": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf48b"
+    },
+    "shirtsinbulk": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf214"
+    },
+    "shoe-prints": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf54b"
+    },
+    "shopify": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf957"
+    },
+    "shopping-bag": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf290"
+    },
+    "shopping-basket": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf291"
+    },
+    "shopping-cart": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf07a"
+    },
+    "shopware": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf5b5"
+    },
+    "shower": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf2cc"
+    },
+    "shuttle-van": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5b6"
+    },
+    "sign": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf4d9"
+    },
+    "sign-in-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf2f6"
+    },
+    "sign-language": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf2a7"
+    },
+    "sign-out-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf2f5"
+    },
+    "signal": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf012"
+    },
+    "signature": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5b7"
+    },
+    "sim-card": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7c4"
+    },
+    "simplybuilt": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf215"
+    },
+    "sistrix": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3ee"
+    },
+    "sitemap": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0e8"
+    },
+    "sith": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf512"
+    },
+    "skating": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7c5"
+    },
+    "sketch": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf7c6"
+    },
+    "skiing": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7c9"
+    },
+    "skiing-nordic": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7ca"
+    },
+    "skull": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf54c"
+    },
+    "skull-crossbones": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf714"
+    },
+    "skyatlas": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf216"
+    },
+    "skype": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf17e"
+    },
+    "slack": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf198"
+    },
+    "slack-hash": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3ef"
+    },
+    "slash": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf715"
+    },
+    "sleigh": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7cc"
+    },
+    "sliders-h": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1de"
+    },
+    "slideshare": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1e7"
+    },
+    "smile": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf118"
+    },
+    "smile-beam": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf5b8"
+    },
+    "smile-wink": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf4da"
+    },
+    "smog": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf75f"
+    },
+    "smoking": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf48d"
+    },
+    "smoking-ban": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf54d"
+    },
+    "sms": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7cd"
+    },
+    "snapchat": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf2ab"
+    },
+    "snapchat-ghost": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf2ac"
+    },
+    "snapchat-square": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf2ad"
+    },
+    "snowboarding": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7ce"
+    },
+    "snowflake": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf2dc"
+    },
+    "snowman": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7d0"
+    },
+    "snowplow": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7d2"
+    },
+    "socks": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf696"
+    },
+    "solar-panel": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5ba"
+    },
+    "sort": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0dc"
+    },
+    "sort-alpha-down": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf15d"
+    },
+    "sort-alpha-down-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf881"
+    },
+    "sort-alpha-up": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf15e"
+    },
+    "sort-alpha-up-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf882"
+    },
+    "sort-amount-down": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf160"
+    },
+    "sort-amount-down-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf884"
+    },
+    "sort-amount-up": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf161"
+    },
+    "sort-amount-up-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf885"
+    },
+    "sort-down": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0dd"
+    },
+    "sort-numeric-down": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf162"
+    },
+    "sort-numeric-down-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf886"
+    },
+    "sort-numeric-up": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf163"
+    },
+    "sort-numeric-up-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf887"
+    },
+    "sort-up": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0de"
+    },
+    "soundcloud": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1be"
+    },
+    "sourcetree": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf7d3"
+    },
+    "spa": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5bb"
+    },
+    "space-shuttle": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf197"
+    },
+    "speakap": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3f3"
+    },
+    "speaker-deck": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf83c"
+    },
+    "spell-check": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf891"
+    },
+    "spider": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf717"
+    },
+    "spinner": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf110"
+    },
+    "splotch": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5bc"
+    },
+    "spotify": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1bc"
+    },
+    "spray-can": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5bd"
+    },
+    "square": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf0c8"
+    },
+    "square-full": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf45c"
+    },
+    "square-root-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf698"
+    },
+    "squarespace": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf5be"
+    },
+    "stack-exchange": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf18d"
+    },
+    "stack-overflow": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf16c"
+    },
+    "stackpath": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf842"
+    },
+    "stamp": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5bf"
+    },
+    "star": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf005"
+    },
+    "star-and-crescent": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf699"
+    },
+    "star-half": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf089"
+    },
+    "star-half-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5c0"
+    },
+    "star-of-david": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf69a"
+    },
+    "star-of-life": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf621"
+    },
+    "staylinked": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3f5"
+    },
+    "steam": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1b6"
+    },
+    "steam-square": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1b7"
+    },
+    "steam-symbol": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3f6"
+    },
+    "step-backward": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf048"
+    },
+    "step-forward": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf051"
+    },
+    "stethoscope": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0f1"
+    },
+    "sticker-mule": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3f7"
+    },
+    "sticky-note": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf249"
+    },
+    "stop": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf04d"
+    },
+    "stop-circle": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf28d"
+    },
+    "stopwatch": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf2f2"
+    },
+    "store": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf54e"
+    },
+    "store-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf54f"
+    },
+    "strava": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf428"
+    },
+    "stream": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf550"
+    },
+    "street-view": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf21d"
+    },
+    "strikethrough": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0cc"
+    },
+    "stripe": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf429"
+    },
+    "stripe-s": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf42a"
+    },
+    "stroopwafel": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf551"
+    },
+    "studiovinari": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3f8"
+    },
+    "stumbleupon": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1a4"
+    },
+    "stumbleupon-circle": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1a3"
+    },
+    "subscript": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf12c"
+    },
+    "subway": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf239"
+    },
+    "suitcase": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0f2"
+    },
+    "suitcase-rolling": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5c1"
+    },
+    "sun": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf185"
+    },
+    "superpowers": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf2dd"
+    },
+    "superscript": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf12b"
+    },
+    "supple": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3f9"
+    },
+    "surprise": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf5c2"
+    },
+    "suse": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf7d6"
+    },
+    "swatchbook": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5c3"
+    },
+    "swift": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf8e1"
+    },
+    "swimmer": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5c4"
+    },
+    "swimming-pool": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5c5"
+    },
+    "symfony": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf83d"
+    },
+    "synagogue": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf69b"
+    },
+    "sync": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf021"
+    },
+    "sync-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf2f1"
+    },
+    "syringe": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf48e"
+    },
+    "table": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0ce"
+    },
+    "table-tennis": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf45d"
+    },
+    "tablet": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf10a"
+    },
+    "tablet-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf3fa"
+    },
+    "tablets": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf490"
+    },
+    "tachometer-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf3fd"
+    },
+    "tag": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf02b"
+    },
+    "tags": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf02c"
+    },
+    "tape": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf4db"
+    },
+    "tasks": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0ae"
+    },
+    "taxi": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1ba"
+    },
+    "teamspeak": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf4f9"
+    },
+    "teeth": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf62e"
+    },
+    "teeth-open": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf62f"
+    },
+    "telegram": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf2c6"
+    },
+    "telegram-plane": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3fe"
+    },
+    "temperature-high": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf769"
+    },
+    "temperature-low": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf76b"
+    },
+    "tencent-weibo": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1d5"
+    },
+    "tenge": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7d7"
+    },
+    "terminal": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf120"
+    },
+    "text-height": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf034"
+    },
+    "text-width": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf035"
+    },
+    "th": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf00a"
+    },
+    "th-large": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf009"
+    },
+    "th-list": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf00b"
+    },
+    "the-red-yeti": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf69d"
+    },
+    "theater-masks": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf630"
+    },
+    "themeco": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf5c6"
+    },
+    "themeisle": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf2b2"
+    },
+    "thermometer": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf491"
+    },
+    "thermometer-empty": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf2cb"
+    },
+    "thermometer-full": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf2c7"
+    },
+    "thermometer-half": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf2c9"
+    },
+    "thermometer-quarter": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf2ca"
+    },
+    "thermometer-three-quarters": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf2c8"
+    },
+    "think-peaks": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf731"
+    },
+    "thumbs-down": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf165"
+    },
+    "thumbs-up": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf164"
+    },
+    "thumbtack": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf08d"
+    },
+    "ticket-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf3ff"
+    },
+    "times": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf00d"
+    },
+    "times-circle": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf057"
+    },
+    "tint": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf043"
+    },
+    "tint-slash": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5c7"
+    },
+    "tired": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf5c8"
+    },
+    "toggle-off": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf204"
+    },
+    "toggle-on": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf205"
+    },
+    "toilet": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7d8"
+    },
+    "toilet-paper": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf71e"
+    },
+    "toolbox": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf552"
+    },
+    "tools": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7d9"
+    },
+    "tooth": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5c9"
+    },
+    "torah": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6a0"
+    },
+    "torii-gate": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6a1"
+    },
+    "tractor": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf722"
+    },
+    "trade-federation": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf513"
+    },
+    "trademark": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf25c"
+    },
+    "traffic-light": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf637"
+    },
+    "trailer": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf941"
+    },
+    "train": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf238"
+    },
+    "tram": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf7da"
+    },
+    "transgender": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf224"
+    },
+    "transgender-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf225"
+    },
+    "trash": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1f8"
+    },
+    "trash-alt": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf2ed"
+    },
+    "trash-restore": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf829"
+    },
+    "trash-restore-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf82a"
+    },
+    "tree": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1bb"
+    },
+    "trello": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf181"
+    },
+    "tripadvisor": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf262"
+    },
+    "trophy": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf091"
+    },
+    "truck": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0d1"
+    },
+    "truck-loading": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf4de"
+    },
+    "truck-monster": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf63b"
+    },
+    "truck-moving": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf4df"
+    },
+    "truck-pickup": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf63c"
+    },
+    "tshirt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf553"
+    },
+    "tty": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1e4"
+    },
+    "tumblr": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf173"
+    },
+    "tumblr-square": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf174"
+    },
+    "tv": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf26c"
+    },
+    "twitch": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1e8"
+    },
+    "twitter": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf099"
+    },
+    "twitter-square": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf081"
+    },
+    "typo3": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf42b"
+    },
+    "uber": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf402"
+    },
+    "ubuntu": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf7df"
+    },
+    "uikit": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf403"
+    },
+    "umbraco": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf8e8"
+    },
+    "umbrella": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0e9"
+    },
+    "umbrella-beach": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5ca"
+    },
+    "underline": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0cd"
+    },
+    "undo": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0e2"
+    },
+    "undo-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf2ea"
+    },
+    "uniregistry": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf404"
+    },
+    "unity": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf949"
+    },
+    "universal-access": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf29a"
+    },
+    "university": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf19c"
+    },
+    "unlink": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf127"
+    },
+    "unlock": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf09c"
+    },
+    "unlock-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf13e"
+    },
+    "untappd": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf405"
+    },
+    "upload": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf093"
+    },
+    "ups": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf7e0"
+    },
+    "usb": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf287"
+    },
+    "user": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf007"
+    },
+    "user-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf406"
+    },
+    "user-alt-slash": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf4fa"
+    },
+    "user-astronaut": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf4fb"
+    },
+    "user-check": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf4fc"
+    },
+    "user-circle": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf2bd"
+    },
+    "user-clock": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf4fd"
+    },
+    "user-cog": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf4fe"
+    },
+    "user-edit": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf4ff"
+    },
+    "user-friends": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf500"
+    },
+    "user-graduate": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf501"
+    },
+    "user-injured": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf728"
+    },
+    "user-lock": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf502"
+    },
+    "user-md": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0f0"
+    },
+    "user-minus": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf503"
+    },
+    "user-ninja": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf504"
+    },
+    "user-nurse": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf82f"
+    },
+    "user-plus": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf234"
+    },
+    "user-secret": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf21b"
+    },
+    "user-shield": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf505"
+    },
+    "user-slash": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf506"
+    },
+    "user-tag": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf507"
+    },
+    "user-tie": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf508"
+    },
+    "user-times": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf235"
+    },
+    "users": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0c0"
+    },
+    "users-cog": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf509"
+    },
+    "usps": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf7e1"
+    },
+    "ussunnah": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf407"
+    },
+    "utensil-spoon": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf2e5"
+    },
+    "utensils": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf2e7"
+    },
+    "vaadin": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf408"
+    },
+    "vector-square": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5cb"
+    },
+    "venus": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf221"
+    },
+    "venus-double": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf226"
+    },
+    "venus-mars": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf228"
+    },
+    "viacoin": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf237"
+    },
+    "viadeo": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf2a9"
+    },
+    "viadeo-square": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf2aa"
+    },
+    "vial": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf492"
+    },
+    "vials": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf493"
+    },
+    "viber": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf409"
+    },
+    "video": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf03d"
+    },
+    "video-slash": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf4e2"
+    },
+    "vihara": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6a7"
+    },
+    "vimeo": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf40a"
+    },
+    "vimeo-square": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf194"
+    },
+    "vimeo-v": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf27d"
+    },
+    "vine": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1ca"
+    },
+    "vk": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf189"
+    },
+    "vnv": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf40b"
+    },
+    "voicemail": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf897"
+    },
+    "volleyball-ball": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf45f"
+    },
+    "volume-down": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf027"
+    },
+    "volume-mute": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6a9"
+    },
+    "volume-off": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf026"
+    },
+    "volume-up": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf028"
+    },
+    "vote-yea": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf772"
+    },
+    "vr-cardboard": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf729"
+    },
+    "vuejs": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf41f"
+    },
+    "walking": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf554"
+    },
+    "wallet": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf555"
+    },
+    "warehouse": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf494"
+    },
+    "water": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf773"
+    },
+    "wave-square": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf83e"
+    },
+    "waze": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf83f"
+    },
+    "weebly": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf5cc"
+    },
+    "weibo": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf18a"
+    },
+    "weight": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf496"
+    },
+    "weight-hanging": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5cd"
+    },
+    "weixin": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1d7"
+    },
+    "whatsapp": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf232"
+    },
+    "whatsapp-square": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf40c"
+    },
+    "wheelchair": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf193"
+    },
+    "whmcs": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf40d"
+    },
+    "wifi": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf1eb"
+    },
+    "wikipedia-w": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf266"
+    },
+    "wind": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf72e"
+    },
+    "window-close": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf410"
+    },
+    "window-maximize": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf2d0"
+    },
+    "window-minimize": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf2d1"
+    },
+    "window-restore": {
+      "sets": [
+        "solid",
+        "regular"
+      ],
+      "text": "\uf2d2"
+    },
+    "windows": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf17a"
+    },
+    "wine-bottle": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf72f"
+    },
+    "wine-glass": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf4e3"
+    },
+    "wine-glass-alt": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf5ce"
+    },
+    "wix": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf5cf"
+    },
+    "wizards-of-the-coast": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf730"
+    },
+    "wolf-pack-battalion": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf514"
+    },
+    "won-sign": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf159"
+    },
+    "wordpress": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf19a"
+    },
+    "wordpress-simple": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf411"
+    },
+    "wpbeginner": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf297"
+    },
+    "wpexplorer": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf2de"
+    },
+    "wpforms": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf298"
+    },
+    "wpressr": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf3e4"
+    },
+    "wrench": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf0ad"
+    },
+    "x-ray": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf497"
+    },
+    "xbox": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf412"
+    },
+    "xing": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf168"
+    },
+    "xing-square": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf169"
+    },
+    "y-combinator": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf23b"
+    },
+    "yahoo": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf19e"
+    },
+    "yammer": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf840"
+    },
+    "yandex": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf413"
+    },
+    "yandex-international": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf414"
+    },
+    "yarn": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf7e3"
+    },
+    "yelp": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf1e9"
+    },
+    "yen-sign": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf157"
+    },
+    "yin-yang": {
+      "sets": [
+        "solid"
+      ],
+      "text": "\uf6ad"
+    },
+    "yoast": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf2b1"
+    },
+    "youtube": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf167"
+    },
+    "youtube-square": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf431"
+    },
+    "zhihu": {
+      "sets": [
+        "brands"
+      ],
+      "text": "\uf63f"
+    }
+  }
+}

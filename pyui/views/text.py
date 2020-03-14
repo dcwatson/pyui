@@ -1,6 +1,11 @@
+import json
+import os
+
 from pyui.geom import Size
 
 from .base import View
+
+DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
 
 
 class Text(View):
@@ -24,3 +29,16 @@ class Text(View):
     def draw(self, renderer, rect):
         super().draw(renderer, rect)
         self._font.draw(renderer, self.text, rect, self.env.color)
+
+
+class Icon(Text):
+    data = None
+
+    def __init__(self, name, style=None, size=16):
+        if Icon.data is None:
+            with open(os.path.join(DATA_DIR, "icons.json")) as fp:
+                Icon.data = json.load(fp)
+        info = Icon.data["icons"][name]
+        fontname = "{}/{}.otf".format(Icon.data["font"], style or info["sets"][0])
+        super().__init__(info["text"])
+        self.font(fontname, size)

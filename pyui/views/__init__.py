@@ -1,13 +1,13 @@
 from .base import ForEach, View
-from .control import Button, SegmentedButton, Slider, TextField
+from .control import Button, SecureField, SegmentedButton, Slider, TextField
 from .grid import Grid
 from .image import Image
-from .nav import List, TabView
+from .nav import List, Section, TabView
 from .scroll import ScrollView
 from .shape import Rectangle
 from .spinner import Spinner
 from .stack import HStack, Spacer, VStack
-from .text import Text
+from .text import Icon, Text
 
 __all__ = [
     # base
@@ -15,6 +15,7 @@ __all__ = [
     "View",
     # control
     "Button",
+    "SecureField",
     "SegmentedButton",
     "Slider",
     "TextField",
@@ -24,6 +25,7 @@ __all__ = [
     "Image",
     # nav
     "List",
+    "Section",
     "TabView",
     # scroll
     "ScrollView",
@@ -36,5 +38,6 @@ __all__ = [
     "Spacer",
     "VStack",
     # text
+    "Icon",
     "Text",
 ]

@@ -18,13 +18,16 @@ from sdl2.sdlttf import (
 from .geom import Rect, Size
 from .utils import enumerate_last
 
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+
 
 class Font:
     cache = {}
     scale = 1.0
+    search = [os.path.join(BASE_DIR, "fonts")]
 
     @classmethod
-    def initialize(cls, scale=None):
+    def initialize(cls, scale=None, search=None):
         TTF_Init()
         if scale is None:
             ddpi = ctypes.c_float()
@@ -33,22 +36,25 @@ class Font:
                 cls.scale = ddpi.value / base_dpi
         else:
             cls.scale = scale
+        if search:
+            cls.search.insert(0, search)
 
     @classmethod
-    def load(cls, path, size):
+    def load(cls, path, size, search=None):
         key = "{}-{}".format(path, size)
         if key not in cls.cache:
-            cls.cache[key] = cls(path, size)
+            print("LOADING FONT", path, size)
+            cls.cache[key] = cls(path, size, search=search)
         return cls.cache[key]
 
     @classmethod
     def cleanup(cls):
         cls.cache = {}
 
-    def __init__(self, path, size):
+    def __init__(self, path, size, search=None):
         self.path = path
         self.size = size
-        self.font = TTF_OpenFont(path.encode("utf-8"), math.ceil(size * self.scale))
+        self.font = self.load_font(path, size, search=search)
         if not self.font:
             raise Exception("Could not load font: {}".format(path))
         TTF_SetFontHinting(self.font, TTF_HINTING_LIGHT)
@@ -57,6 +63,14 @@ class Font:
         self.surfaces = {}
         # A cache of loaded textures and sizes per glyph.
         self.glyphs = {}
+
+    def load_font(self, path, size, search=None):
+        search_dirs = [search] if search else []
+        search_dirs.extend(self.search)
+        for directory in search_dirs:
+            full_path = os.path.join(directory, path)
+            if os.path.exists(full_path):
+                return TTF_OpenFont(full_path.encode("utf-8"), math.ceil(size * self.scale))
 
     def __del__(self):
         TTF_CloseFont(self.font)

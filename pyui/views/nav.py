@@ -8,6 +8,8 @@ from .control import SegmentedButton
 from .stack import HStack, Spacer, VStack
 from .text import Text
 
+ListHeaderStyle = lambda view: view.padding(10, 10, 5, 10).color(120, 120, 120).font(size=13)
+
 
 class ListItem(HStack):
     interactive = True
@@ -21,6 +23,11 @@ class ListItem(HStack):
     async def click(self, pt):
         if self._action:
             self._action(self.index)
+
+
+class ListContent(View):
+    def __iter__(self):
+        yield from self.contents
 
 
 class List(VStack):
@@ -59,8 +66,31 @@ class List(VStack):
 
     def content(self):
         for idx, item in enumerate(super().content()):
-            yield self.wrap(item, idx)
+            yield item if isinstance(item, ListContent) else self.wrap(item, idx)
         yield Spacer()
+
+
+class Section(View):
+    def __init__(self, header=None, footer=None, **options):
+        super().__init__(**options)
+        self.header = header
+        self.footer = footer
+
+    def __iter__(self):
+        yield from self.content()
+
+    def content(self):
+        if self.header:
+            if isinstance(self.header, View):
+                yield ListContent(self.header)
+            else:
+                yield ListContent(Text(self.header).modify(ListHeaderStyle))
+        yield from self.contents
+        if self.footer:
+            if isinstance(self.footer, View):
+                yield ListContent(self.footer)
+            else:
+                yield ListContent(Text(self.footer).modify(ListHeaderStyle))
 
 
 class TabView(View):

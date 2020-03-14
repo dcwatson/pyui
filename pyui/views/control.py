@@ -118,6 +118,9 @@ class TextField(View):
             return None
         return set(range(min(self._start, self._end), max(self._start, self._end) + 1))
 
+    def text_representation(self):
+        return self.text.value
+
     def minimum_size(self):
         size = self._font.measure(self.placeholder)
         return Size(size.w, size.h * max(1, self.env.lines))
@@ -134,7 +137,7 @@ class TextField(View):
         super().draw(renderer, rect)
         self.env.draw(renderer, "textfield", self.frame)
         if self.text.value:
-            self._font.draw(renderer, self.text.value, rect, self.env.color, selected=self.selection)
+            self._font.draw(renderer, self.text_representation(), rect, self.env.color, selected=self.selection)
         elif self.placeholder:
             self._font.draw(renderer, self.placeholder, rect, sdl2.SDL_Color(150, 150, 150))
 
@@ -172,6 +175,11 @@ class TextField(View):
         idx = self._font.find(self.text.value, inner, pt)
         if idx is not None:
             self._end = idx
+
+
+class SecureField(TextField):
+    def text_representation(self):
+        return "•" * len(self.text.value)
 
 
 class SegmentedButton(HStack):

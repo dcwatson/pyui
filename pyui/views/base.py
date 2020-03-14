@@ -12,7 +12,9 @@ from pyui.utils import clamp
 
 class EnvironmentalView:
     def __init__(self):
-        self.env = Environment(self.__class__.__name__)
+        self.env = Environment()
+        for cls in reversed(self.__class__.__mro__[:-3]):
+            self.env.load(cls.__name__)
 
     def font(self, font=None, size=None):
         if font:

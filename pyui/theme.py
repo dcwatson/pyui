@@ -24,10 +24,10 @@ class Theme:
             self.font(name).prepare(renderer)
 
     def font(self, name="default", size=None):
-        info = self.config["fonts"].get(name)
-        filename = os.path.join(self.path, info["file"]) if info else name
-        fontsize = size or info["size"]
-        return Font.load(filename, fontsize)
+        info = self.config["fonts"].get(name, {})
+        filename = info.get("file", name)
+        fontsize = size or info.get("size", size or 16)
+        return Font.load(filename, fontsize, search=self.path)
 
     def env(self, name="default"):
         return self.config.get("env", {}).get(name, {})
