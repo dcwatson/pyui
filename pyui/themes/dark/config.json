@@ -25,6 +25,9 @@
             "spacing": 5,
             "padding": [5, 20, 5, 20]
         },
+        "checkbox": {
+            "size": [16, 16]
+        },
         "textfield": {
             "color": [230, 230, 230],
             "padding": [5, 10, 5, 10]
@@ -133,6 +136,22 @@
         "scroll.corner": {
             "file": "assets/scroll_corner.png",
             "slice": [[1, 1], [1, 1]]
+        },
+        "checkbox": {
+            "file": "assets/checkbox.png",
+            "slice": [[12, 12], [1, 1]]
+        },
+        "checkbox.pressed": {
+            "file": "assets/checkbox_pressed.png",
+            "slice": [[12, 12], [1, 1]]
+        },
+        "checkbox.checked": {
+            "file": "assets/checkbox_checked.png",
+            "slice": [[12, 12], [1, 1]]
+        },
+        "checkbox.checked.pressed": {
+            "file": "assets/checkbox_checked_pressed.png",
+            "slice": [[12, 12], [1, 1]]
         }
     }
 }

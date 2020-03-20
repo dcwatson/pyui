@@ -4,7 +4,7 @@ import functools
 
 import sdl2
 
-from pyui.geom import Rect, Size
+from pyui.geom import Insets, Rect, Size
 from pyui.state import Binding
 from pyui.utils import clamp, enumerate_last
 
@@ -48,6 +48,54 @@ class Button(HStack):
                 asyncio.create_task(self.action())
             else:
                 self.action()
+
+
+class Checkbox(View):
+    # interactive = True
+
+    def __init__(self, asset="checkbox", **options):
+        self.asset = asset
+        super().__init__(**options)
+
+    def draw(self, renderer, rect):
+        super().draw(renderer, rect)
+        self.env.draw(renderer, self.asset, self.frame)
+        # TODO: This is not great...
+        if "checked" in self.asset:
+            font = self.env.theme.font(self.env.font, self.env.font_size)
+            font.draw(renderer, "✓", rect + Insets(left=-6), sdl2.SDL_Color(255, 255, 255))
+
+
+class Toggle(HStack):
+    interactive = True
+    draws_focus = False
+
+    def __init__(self, checked: Binding, label=None, **options):
+        self.checked = checked
+        self._checkbox = Checkbox("checkbox.checked" if self.checked.value else "checkbox")
+        contents = [self._checkbox]
+        if label is not None:
+            if not isinstance(label, View):
+                label = Text(label)
+            contents.append(label)
+        super().__init__(*contents, spacing=5, **options)
+
+    async def mousedown(self, pt):
+        self._checkbox.asset = "checkbox.checked.pressed" if self.checked.value else "checkbox.pressed"
+        return True
+
+    async def mousemotion(self, pt):
+        if pt in self.frame:
+            self._checkbox.asset = "checkbox.checked.pressed" if self.checked.value else "checkbox.pressed"
+        else:
+            self._checkbox.asset = "checkbox.checked" if self.checked.value else "checkbox"
+
+    async def mouseup(self, pt):
+        self._checkbox.asset = "checkbox.checked" if self.checked.value else "checkbox"
+
+    async def click(self, pt):
+        self.checked.value = not bool(self.checked.value)
+        self._checkbox.asset = "checkbox.checked" if self.checked.value else "checkbox"
 
 
 class Slider(View):

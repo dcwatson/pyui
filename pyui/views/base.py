@@ -225,7 +225,7 @@ class View(EnvironmentalView):
         Given an available amount of space, returns the content size for this view's content, not including padding
         or borders.
         """
-        return Size()
+        return self.env.size
 
     def draw(self, renderer, rect):
         if self.env.background:

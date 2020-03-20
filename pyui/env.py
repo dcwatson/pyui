@@ -69,6 +69,8 @@ class Environment:
         self.parent = parent
 
     def scaled(self, value):
+        if value is None:
+            return None
         return value.__class__(value * self.scale)
 
     def constrain(self, available, value=None, clamped=True):
@@ -94,7 +96,7 @@ class Environment:
             elif key == "spacing":
                 value = self.scaled(value)
             elif key == "size":
-                pass
+                value = Size(self.scaled(value[0]), self.scaled(value[1]))
             elif key == "opacity":
                 value = clamp(float(value), 0.0, 1.0)
             setattr(self, key, value)

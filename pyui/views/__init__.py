@@ -1,5 +1,5 @@
 from .base import ForEach, View
-from .control import Button, SecureField, SegmentedButton, Slider, TextField
+from .control import Button, SecureField, SegmentedButton, Slider, TextField, Toggle
 from .grid import Grid
 from .image import Image
 from .nav import List, Section, TabView
@@ -19,6 +19,7 @@ __all__ = [
     "SegmentedButton",
     "Slider",
     "TextField",
+    "Toggle",
     # grid
     "Grid",
     # image

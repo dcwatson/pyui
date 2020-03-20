@@ -22,7 +22,7 @@ class GridTest(pyui.View):
     size = pyui.State(default=100)
     num = pyui.State(default=4)
     size_or_num = pyui.State(default=0)
-    flex = pyui.State(default=0)
+    flex = pyui.State(default=False)
 
     def content(self):
         # fmt: off
@@ -62,11 +62,7 @@ class GridTest(pyui.View):
                     pyui.Text(self.size.value).color(128, 128, 128).priority("high"),
                 ),
                 pyui.Slider(self.size, minimum=50, maximum=200).disable(self.size_or_num.value == 0),
-                pyui.Text("Adjust size to fit"),
-                pyui.SegmentedButton(self.flex)(
-                    pyui.Text("No"),
-                    pyui.Text("Yes"),
-                ).disable(self.size_or_num.value == 0),
+                pyui.Toggle(self.flex, label="Adjust size to fit").disable(self.size_or_num.value == 0),
             ).padding(10).size(width=300),
             ItemGridView(
                 item_count=self.item_count.value,
