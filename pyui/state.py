@@ -1,3 +1,18 @@
+class Observable:
+    _listeners = None
+
+    def listen(self, name, observer):
+        if not self._listeners:
+            self._listeners = []
+        self._listeners.append((name, observer))
+
+    def changed(self):
+        if not self._listeners:
+            return
+        for name, listener in self._listeners:
+            listener.state_changed(name, self)
+
+
 class Binding:
     def __init__(self, state, instance):
         self.state = state
@@ -11,6 +26,9 @@ class Binding:
     def value(self, new_value):
         self.state.__set__(self.instance, new_value)
 
+    def __bool__(self):
+        return bool(self.value)
+
 
 class State:
     def __init__(self, python_type=None, default=None):
@@ -23,10 +41,14 @@ class State:
             return self
         if self.name not in instance.__dict__:
             value = self.get_default()
+            if isinstance(value, Observable):
+                value.listen(self.name, instance)
             # Set the default value the first time it's accessed, so it's not changing on every access.
             instance.__dict__[self.name] = self.check_value(instance, value)
             # TODO: firing the state_changed for default values seems unnecessary?
             # self.__set__(instance, value)
+        if isinstance(instance.__dict__[self.name], Observable):
+            return instance.__dict__[self.name]
         return Binding(self, instance)
 
     def __set__(self, instance, value):

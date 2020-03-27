@@ -44,6 +44,8 @@ class Window:
         self.view = view
         self.view._window = self
         self.view.env.theme.prepare(self.renderer)
+        self.hover = None
+        self.menu = None
         self.background = self.view.env.theme.config["background"]
         # self.view.dump()
         # Which view is currently tracking mouse events (i.e. was clicked but not released yet)
@@ -151,6 +153,8 @@ class Window:
         if focus_view and focus_view.draws_focus:
             focus_rect = focus_view.frame + Insets(focus_view.env.scaled(1))
             self.view.env.draw(self.renderer, "focus", focus_rect)
+        if self.menu:
+            self.menu.render(self.renderer)
         sdl2.SDL_RenderPresent(self.renderer)
 
     def tick(self, dt):
@@ -164,11 +168,35 @@ class Window:
         sdl2.SDL_DestroyRenderer(self.renderer)
         sdl2.SDL_DestroyWindow(self.win)
 
+    def show_menu(self, menu, pt):
+        self.menu = menu
+        self.menu.rebuild()
+        self.menu.resize(self.render_size)
+        self.menu.reposition(Rect(origin=pt, size=self.menu.frame.size))
+
+    def find(self, pt, **filters):
+        for view in (self.menu, self.view):
+            if view is None:
+                continue
+            found = view.find(pt, **filters)
+            if found:
+                return found
+        return None
+
+    def resolve(self, path):
+        for view in (self.menu, self.view):
+            if view is None:
+                continue
+            found = view.resolve(path)
+            if found:
+                return found
+        return None
+
     # Event handlers
 
     async def mousedown(self, event):
         pt = self.point(event.x, event.y)
-        found = self.view.find(pt, interactive=True)
+        found = self.find(pt, interactive=True)
         if found is None or found.disabled:
             found = self.view
         await found.mousedown(pt)
@@ -176,18 +204,29 @@ class Window:
 
     async def mousemotion(self, event):
         pt = self.point(event.x, event.y)
-        tracking_view = self.view.resolve(self.tracking)
+        current_hover = self.resolve(self.hover)
+        if current_hover:
+            await current_hover.hover(pt)
+        found = self.find(pt)
+        if found:
+            self.hover = found.id_path
+            if found != current_hover:
+                await found.hover(pt)
+        else:
+            self.hover = None
+        tracking_view = self.resolve(self.tracking)
         if tracking_view:
             await tracking_view.mousemotion(pt)
 
     async def mouseup(self, event):
         pt = self.point(event.x, event.y)
-        found = self.view.find(pt, interactive=True)
-        focus_view = self.view.resolve(self.focus)
+        found = self.find(pt, interactive=True)
+        focus_view = self.resolve(self.focus)
         if focus_view and not found:
             self.focus = None
             await focus_view.blur()
-        tracking_view = self.view.resolve(self.tracking)
+        tracking_view = self.resolve(self.tracking)
+        self.menu = None
         if tracking_view:
             await tracking_view.mouseup(pt)
             if tracking_view == found:
@@ -201,7 +240,7 @@ class Window:
         y = ctypes.c_int()
         sdl2.SDL_GetMouseState(ctypes.byref(x), ctypes.byref(y))
         pt = self.point(x.value, y.value)
-        found = self.view.find(pt, scrollable=True)
+        found = self.find(pt, scrollable=True)
         if found is None or found.disabled:
             found = self.view
         await found.mousewheel(Point(-event.x, event.y))
@@ -213,7 +252,7 @@ class Window:
             self.render(force=True)
 
     async def key_event(self, event):
-        focus_view = self.view.resolve(self.focus)
+        focus_view = self.resolve(self.focus)
         if focus_view is None or focus_view.disabled:
             focus_view = self.view
         if event.type == sdl2.SDL_KEYDOWN:
@@ -227,7 +266,7 @@ class Window:
             await focus_view.keyup(event.keysym.sym, event.keysym.mod)
 
     async def text_event(self, event):
-        focus_view = self.view.resolve(self.focus)
+        focus_view = self.resolve(self.focus)
         if focus_view is None or focus_view.disabled:
             focus_view = self.view
         await focus_view.textinput(event.text.decode("utf-8"))

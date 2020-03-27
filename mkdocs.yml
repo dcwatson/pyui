@@ -1,0 +1,4 @@
+site_name: PyUI Documentation
+repo_url: https://github.com/dcwatson/pyui/
+markdown_extensions:
+    - mkautodoc

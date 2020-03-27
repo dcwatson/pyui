@@ -37,7 +37,16 @@
             "padding": [20]
         },
         "list": {
-            "background": [30, 32, 33]
+            "background": [30, 32, 33],
+            "spacing": 0
+        },
+        "menu": {
+            "padding": [10, 3, 10, 3],
+            "spacing": 1
+        },
+        "menuitem": {
+            "padding": [3, 20, 3, 20],
+            "font_size": 15
         }
     },
     "assets": {
@@ -58,6 +67,22 @@
             "slice": [[12, 12], [1, 1]]
         },
         "button.primary.pressed": {
+            "file": "assets/button_primary_pressed.png",
+            "slice": [[12, 12], [1, 1]]
+        },
+        "segment.single": {
+            "file": "assets/button.png",
+            "slice": [[12, 12], [1, 1]]
+        },
+        "segment.single.pressed": {
+            "file": "assets/button_pressed.png",
+            "slice": [[12, 12], [1, 1]]
+        },
+        "segment.single.selected": {
+            "file": "assets/button_primary.png",
+            "slice": [[12, 12], [1, 1]]
+        },
+        "segment.single.selected.pressed": {
             "file": "assets/button_primary_pressed.png",
             "slice": [[12, 12], [1, 1]]
         },
@@ -151,6 +176,10 @@
         },
         "checkbox.checked.pressed": {
             "file": "assets/checkbox_checked_pressed.png",
+            "slice": [[12, 12], [1, 1]]
+        },
+        "menu": {
+            "file": "assets/menu.png",
             "slice": [[12, 12], [1, 1]]
         }
     }

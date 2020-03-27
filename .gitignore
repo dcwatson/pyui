@@ -4,5 +4,6 @@ __pycache__
 .DS_Store
 /dist
 /build
+/site
 /pip-wheel-metadata
 .vscode

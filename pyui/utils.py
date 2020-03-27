@@ -4,6 +4,7 @@ def enumerate_last(items):
         last_val = next(iterator)
     except StopIteration:
         return []
+    idx = -1
     for idx, value in enumerate(iterator):
         yield idx, last_val, False
         last_val = value

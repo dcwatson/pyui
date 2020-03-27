@@ -48,6 +48,7 @@ class Environment:
     radius = Env(default=0)
     padding = Env(default=Insets(0))
     border = Env(default=Insets(0))
+    border_color = Env()
     priority = Env(default=Priority.NORMAL)
     alignment = Env(default=Alignment.CENTER)
     spacing = Env(default=0)
@@ -87,7 +88,7 @@ class Environment:
         for key, value in self.theme.env(class_name.lower()).items():
             if key in ("padding", "border"):
                 value = Insets(*value).scaled(self.scale)
-            elif key in ("color", "background", "text_shadow"):
+            elif key in ("color", "background", "border_color", "text_shadow"):
                 value = sdl2.SDL_Color(*value)
             elif key == "priority":
                 value = Priority[value.upper()]

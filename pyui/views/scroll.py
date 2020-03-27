@@ -13,8 +13,8 @@ class ScrollView(View):
     scrollable = True
     draws_focus = False
 
-    def __init__(self, axis=Axis.VERTICAL, **options):
-        super().__init__(**options)
+    def __init__(self, *contents, axis=Axis.VERTICAL, **options):
+        super().__init__(*contents, **options)
         self.axis = Axis(axis) if axis is not None else None
         self.scroll_size = Size()
         self.scroll_interval = self.env.scaled(20)

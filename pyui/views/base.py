@@ -58,6 +58,13 @@ class EnvironmentalView:
         self.env.border = Insets(*tlbr).scaled(self.env.scale)
         return self
 
+    def border_color(self, *rgba):
+        if not rgba or rgba[0] is None:
+            self.env.border_color = None
+        else:
+            self.env.border_color = sdl2.SDL_Color(*rgba)
+        return self
+
     def priority(self, p):
         self.env.priority = Priority[p.upper()] if isinstance(p, str) else Priority(p)
         return self
@@ -96,6 +103,8 @@ class View(EnvironmentalView):
     draws_focus = True
     disabled = False
     scrollable = False
+
+    hovering = False
 
     # Hierarchy information.
     _window = None
@@ -228,20 +237,25 @@ class View(EnvironmentalView):
         return self.env.size
 
     def draw(self, renderer, rect):
+        if self.env.border and self.env.border_color and self.env.background and self.env.background.a == 255:
+            adjusted = self.frame  # + self.env.border
+            rgba = (self.env.border_color.r, self.env.border_color.g, self.env.border_color.b, self.env.border_color.a)
+            if self.env.radius:
+                roundedBoxRGBA(
+                    renderer, adjusted.left, adjusted.top, adjusted.right, adjusted.bottom, self.env.radius, *rgba
+                )
+            else:
+                boxRGBA(renderer, adjusted.left, adjusted.top, adjusted.right, adjusted.bottom, *rgba)
+
         if self.env.background:
+            adjusted = self.frame - self.env.border
             rgba = (self.env.background.r, self.env.background.g, self.env.background.b, self.env.background.a)
             if self.env.radius:
                 roundedBoxRGBA(
-                    renderer,
-                    self.frame.left,
-                    self.frame.top,
-                    self.frame.right,
-                    self.frame.bottom,
-                    self.env.radius,
-                    *rgba
+                    renderer, adjusted.left, adjusted.top, adjusted.right, adjusted.bottom, self.env.radius, *rgba
                 )
             else:
-                boxRGBA(renderer, self.frame.left, self.frame.top, self.frame.right, self.frame.bottom, *rgba)
+                boxRGBA(renderer, adjusted.left, adjusted.top, adjusted.right, adjusted.bottom, *rgba)
 
     def resize(self, available: Size):
         """
@@ -362,8 +376,25 @@ class View(EnvironmentalView):
 
     # Event handling stubs.
 
+    async def hover(self, pt):
+        if self.parent:
+            await self.parent.hover(pt)
+        if pt in self.frame:
+            if not self.hovering:
+                self.hovering = True
+                await self.mouseenter()
+        elif self.hovering:
+            self.hovering = False
+            await self.mouseleave()
+
     async def mousedown(self, pt):
         return True
+
+    async def mouseenter(self):
+        pass
+
+    async def mouseleave(self):
+        pass
 
     async def mousemotion(self, pt):
         pass

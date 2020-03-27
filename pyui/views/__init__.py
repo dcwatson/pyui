@@ -3,6 +3,7 @@ from .control import Button, SecureField, SegmentedButton, Slider, TextField, To
 from .grid import Grid
 from .image import Image
 from .nav import List, Section, TabView
+from .picker import Picker
 from .scroll import ScrollView
 from .shape import Rectangle
 from .spinner import Spinner
@@ -28,6 +29,8 @@ __all__ = [
     "List",
     "Section",
     "TabView",
+    # picker
+    "Picker",
     # scroll
     "ScrollView",
     # shape

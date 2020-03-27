@@ -1,6 +1,5 @@
 import asyncio
 import ctypes
-import functools
 
 import sdl2
 
@@ -11,6 +10,18 @@ from pyui.utils import clamp, enumerate_last
 from .base import View
 from .stack import HStack
 from .text import Text
+
+
+def call_action(action, *args, **kwargs):
+    if not action:
+        return
+    if isinstance(action, (list, tuple)):
+        action, *original = action
+        args = tuple(original) + args
+    if asyncio.iscoroutinefunction(action):
+        asyncio.create_task(action(*args, **kwargs))
+    else:
+        action(*args, **kwargs)
 
 
 class Button(HStack):
@@ -43,11 +54,7 @@ class Button(HStack):
         self.pressed = False
 
     async def click(self, pt):
-        if self.action:
-            if asyncio.iscoroutinefunction(self.action):
-                asyncio.create_task(self.action())
-            else:
-                self.action()
+        call_action(self.action)
 
 
 class Checkbox(View):
@@ -70,9 +77,10 @@ class Toggle(HStack):
     interactive = True
     draws_focus = False
 
-    def __init__(self, checked: Binding, label=None, **options):
+    def __init__(self, checked, label=None, action=None, **options):
         self.checked = checked
-        self._checkbox = Checkbox("checkbox.checked" if self.checked.value else "checkbox")
+        self._checkbox = Checkbox("checkbox.checked" if self.checked else "checkbox")
+        self.action = action
         contents = [self._checkbox]
         if label is not None:
             if not isinstance(label, View):
@@ -81,21 +89,25 @@ class Toggle(HStack):
         super().__init__(*contents, spacing=5, **options)
 
     async def mousedown(self, pt):
-        self._checkbox.asset = "checkbox.checked.pressed" if self.checked.value else "checkbox.pressed"
+        self._checkbox.asset = "checkbox.checked.pressed" if self.checked else "checkbox.pressed"
         return True
 
     async def mousemotion(self, pt):
         if pt in self.frame:
-            self._checkbox.asset = "checkbox.checked.pressed" if self.checked.value else "checkbox.pressed"
+            self._checkbox.asset = "checkbox.checked.pressed" if self.checked else "checkbox.pressed"
         else:
-            self._checkbox.asset = "checkbox.checked" if self.checked.value else "checkbox"
+            self._checkbox.asset = "checkbox.checked" if self.checked else "checkbox"
 
     async def mouseup(self, pt):
-        self._checkbox.asset = "checkbox.checked" if self.checked.value else "checkbox"
+        self._checkbox.asset = "checkbox.checked" if self.checked else "checkbox"
 
     async def click(self, pt):
-        self.checked.value = not bool(self.checked.value)
-        self._checkbox.asset = "checkbox.checked" if self.checked.value else "checkbox"
+        if isinstance(self.checked, Binding):
+            self.checked.value = not bool(self.checked)
+        else:
+            self.checked = not self.checked
+        self._checkbox.asset = "checkbox.checked" if self.checked else "checkbox"
+        call_action(self.action)
 
 
 class Slider(View):
@@ -149,10 +161,11 @@ class Slider(View):
 class TextField(View):
     interactive = True
 
-    def __init__(self, text: Binding, placeholder=None, **options):
+    def __init__(self, text: Binding, placeholder=None, action=None, **options):
         super().__init__(**options)
         self.text = text
         self.placeholder = placeholder or ""
+        self.action = action
         self._start = None
         self._end = None
 
@@ -207,7 +220,10 @@ class TextField(View):
             else:
                 self.text.value = self.text.value[:-1]
         elif key == sdl2.SDLK_RETURN:
-            self.text.value = self.text.value + "\n"
+            if self.env.lines == 1:
+                call_action(self.action, self.text.value)
+            else:
+                self.text.value = self.text.value + "\n"
 
     async def textinput(self, text):
         self.text.value = self.text.value + text
@@ -238,13 +254,12 @@ class SegmentedButton(HStack):
 
     def _index_asset(self, idx, is_last):
         if idx == 0:
-            return "button" if is_last else "segment.left"
+            return "segment.single" if is_last else "segment.left"
         else:
             return "segment.right" if is_last else "segment.center"
 
     def select(self, idx):
-        if self.action:
-            self.action(idx)
+        call_action(self.action, idx)
         self.selection.value = idx
 
     def content(self):
@@ -252,5 +267,4 @@ class SegmentedButton(HStack):
             asset = self._index_asset(idx, is_last)
             if idx == self.selection.value:
                 asset += ".selected"
-            action = functools.partial(self.select, idx)
-            yield Button(item, action=action, asset=asset).disable(self.disabled)
+            yield Button(item, action=(self.select, idx), asset=asset).disable(self.disabled)

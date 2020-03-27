@@ -45,10 +45,11 @@ class List(VStack):
         return Text(item)
 
     async def click(self, pt):
-        self.selection.value = []
+        if self.selection is not None:
+            self.selection.value = []
 
     def item_click(self, index):
-        if self.selection:
+        if self.selection is not None:
             self.window.focus = self.id_path
             if self.selection.value and index in self.selection.value:
                 self.selection.value = [idx for idx in self.selection.value if idx != index]
@@ -67,6 +68,7 @@ class List(VStack):
     def content(self):
         for idx, item in enumerate(super().content()):
             yield item if isinstance(item, ListContent) else self.wrap(item, idx)
+        yield HStack(Spacer())  # No! Bad!
         yield Spacer()
 
 
