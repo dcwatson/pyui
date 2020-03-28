@@ -16,8 +16,8 @@ def call_action(action, *args, **kwargs):
     if not action:
         return
     if isinstance(action, (list, tuple)):
-        action, *original = action
-        args = tuple(original) + args
+        action, *extra = action
+        args = args + tuple(extra)
     if asyncio.iscoroutinefunction(action):
         asyncio.create_task(action(*args, **kwargs))
     else:
@@ -40,8 +40,9 @@ class Button(HStack):
 
     def draw(self, renderer, rect):
         super().draw(renderer, rect)
-        asset_name = self.asset + ".pressed" if self.pressed else self.asset
-        self.env.draw(renderer, asset_name, self.frame)
+        if self.asset:
+            asset_name = self.asset + ".pressed" if self.pressed else self.asset
+            self.env.draw(renderer, asset_name, self.frame)
 
     async def mousedown(self, pt):
         self.pressed = True
@@ -70,7 +71,7 @@ class Checkbox(View):
         # TODO: This is not great...
         if "checked" in self.asset:
             font = self.env.theme.font(self.env.font, self.env.font_size)
-            font.draw(renderer, "✓", rect + Insets(left=-6), sdl2.SDL_Color(255, 255, 255))
+            font.draw(renderer, "✓", rect + Insets(top=1, left=-6), sdl2.SDL_Color(255, 255, 255))
 
 
 class Toggle(HStack):
@@ -86,7 +87,7 @@ class Toggle(HStack):
             if not isinstance(label, View):
                 label = Text(label)
             contents.append(label)
-        super().__init__(*contents, spacing=5, **options)
+        super().__init__(*contents, **options)
 
     async def mousedown(self, pt):
         self._checkbox.asset = "checkbox.checked.pressed" if self.checked else "checkbox.pressed"
@@ -107,7 +108,7 @@ class Toggle(HStack):
         else:
             self.checked = not self.checked
         self._checkbox.asset = "checkbox.checked" if self.checked else "checkbox"
-        call_action(self.action)
+        call_action(self.action, bool(self.checked))
 
 
 class Slider(View):

@@ -13,6 +13,15 @@ class Observable:
             listener.state_changed(name, self)
 
 
+def mutating(method):
+    def _wrapper(self, *args, **kwargs):
+        result = method(self, *args, **kwargs)
+        self.changed()
+        return result
+
+    return _wrapper
+
+
 class Binding:
     def __init__(self, state, instance):
         self.state = state
@@ -42,12 +51,14 @@ class State:
         if self.name not in instance.__dict__:
             value = self.get_default()
             if isinstance(value, Observable):
+                # If the state's value is Observable, listen for changes to trigger instance.state_changed.
                 value.listen(self.name, instance)
             # Set the default value the first time it's accessed, so it's not changing on every access.
             instance.__dict__[self.name] = self.check_value(instance, value)
             # TODO: firing the state_changed for default values seems unnecessary?
             # self.__set__(instance, value)
         if isinstance(instance.__dict__[self.name], Observable):
+            # No need for Bindings if the state is Observable. It triggers state_changed as necessary.
             return instance.__dict__[self.name]
         return Binding(self, instance)
 

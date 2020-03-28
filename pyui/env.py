@@ -43,7 +43,7 @@ class Environment:
     font = Env(inherit=True, default="default")
     font_size = Env(inherit=True)
     text_shadow = Env(inherit=True)
-    color = Env(default=sdl2.SDL_Color(0, 0, 0))
+    color = Env(default=sdl2.SDL_Color(230, 230, 230), inherit=True)
     background = Env()
     radius = Env(default=0)
     padding = Env(default=Insets(0))
@@ -58,6 +58,9 @@ class Environment:
     lines = Env(default=1)
 
     alpha = property(lambda self: round(self.opacity * 255))
+    blended_color = property(
+        lambda self: sdl2.SDL_Color(self.color.r, self.color.g, self.color.b, round((self.color.a * self.alpha) / 255))
+    )
 
     def __init__(self, class_name=None, **overrides):
         self.parent = None

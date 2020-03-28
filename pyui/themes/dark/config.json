@@ -16,7 +16,6 @@
             "spacing": 10
         },
         "text": {
-            "color": [230, 230, 230]
         },
         "icon": {
             "font_size": 16
@@ -28,8 +27,10 @@
         "checkbox": {
             "size": [16, 16]
         },
+        "toggle": {
+            "spacing": 6
+        },
         "textfield": {
-            "color": [230, 230, 230],
             "padding": [5, 10, 5, 10]
         },
         "tabview": {

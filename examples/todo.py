@@ -14,21 +14,34 @@ class TodoList(pyui.Observable):
     def __init__(self):
         self.items = []
 
+    @pyui.mutating
     def add(self, title):
         self.items.append(TodoItem(title))
-        self.changed()
 
-    def toggle(self, item):
-        item.complete = not item.complete
-        self.changed()
+    @pyui.mutating
+    def toggle(self, checked, item):
+        item.complete = checked
 
+    @pyui.mutating
+    def toggle_all(self, checked):
+        for item in self.items:
+            item.complete = checked
+
+    @pyui.mutating
     def delete(self, item):
         self.items.remove(item)
-        self.changed()
 
+    @pyui.mutating
     def clear_complete(self):
         self.items = [item for item in self.items if not item.complete]
-        self.changed()
+
+    @property
+    def all_complete(self):
+        return len(self.items) > 0 and all(item.complete for item in self.items)
+
+    @property
+    def any_complete(self):
+        return any(item.complete for item in self.items)
 
     @property
     def remaining(self):
@@ -64,26 +77,34 @@ class TodoMVC(pyui.View):
     def content(self):
         # fmt: off
         yield pyui.VStack(alignment=pyui.Alignment.LEADING)(
-            pyui.TextField(self.new_item, "What needs to be done?", action=self.add),
-            pyui.List(self.selected, builder=lambda item: (
-                pyui.HStack()(
-                    pyui.Toggle(item.complete, action=(self.items.toggle, item)),
-                    pyui.Text(item.text).modify(ITEM_COMPLETE if item.complete else ITEM_ACTIVE),
-                    pyui.Spacer(),
-                    pyui.Button(pyui.Icon("times"), action=(self.items.delete, item)).font(size=12)
-                )
-            )).priority(pyui.Priority.HIGH),
+            pyui.HStack()(
+                pyui.Toggle(self.items.all_complete, action=self.items.toggle_all),
+                pyui.TextField(self.new_item, "What needs to be done?", action=self.add),
+            ),
+            pyui.ScrollView()(
+                pyui.List(self.selected, builder=lambda item: (
+                    pyui.HStack()(
+                        pyui.Toggle(item.complete, label=item.text, action=(self.items.toggle, item))
+                            .modify(ITEM_COMPLETE if item.complete else ITEM_ACTIVE),
+                        pyui.Spacer(),
+                        pyui.Button(action=(self.items.delete, item), asset=None)(
+                            pyui.Icon("trash-alt")
+                        ).font(size=12).padding(0)
+                    )
+                )),
+            ).priority(pyui.Priority.HIGH),
             pyui.HStack(
                 pyui.Text(self.remaining_text),
+                pyui.Button(action=self.items.clear_complete, asset=None)(
+                    pyui.Text("Clear Completed").color(60, 150, 255)
+                ).padding(5).disable(not self.items.any_complete),
                 pyui.Spacer(),
                 # TODO: would be nice to pass SegmentedButton an enum?
                 pyui.SegmentedButton(self.selected_filter)(
                     pyui.Text("All"),
                     pyui.Text("Active"),
                     pyui.Text("Completed"),
-                ).priority("high"),
-                pyui.Spacer(),
-                pyui.Button("Clear Completed", action=self.items.clear_complete)
+                ),
             )
         ).padding(20)
         # fmt: on
@@ -91,5 +112,5 @@ class TodoMVC(pyui.View):
 
 if __name__ == "__main__":
     app = pyui.Application("net.pyui.TodoMVC")
-    app.window("TodoMVC", TodoMVC())
+    app.window("TodoMVC", TodoMVC(), height=320)
     app.run()

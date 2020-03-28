@@ -28,7 +28,7 @@ class Text(View):
 
     def draw(self, renderer, rect):
         super().draw(renderer, rect)
-        self._font.draw(renderer, self.text, rect, self.env.color)
+        self._font.draw(renderer, self.text, rect, self.env.blended_color)
 
 
 class Icon(Text):

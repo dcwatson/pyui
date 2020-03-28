@@ -13,7 +13,9 @@ from pyui.utils import clamp
 class EnvironmentalView:
     def __init__(self):
         self.env = Environment()
-        for cls in reversed(self.__class__.__mro__[:-3]):
+        for cls in reversed(self.__class__.__mro__):
+            if cls in (EnvironmentalView, object):
+                continue
             self.env.load(cls.__name__)
 
     def font(self, font=None, size=None):
@@ -318,7 +320,7 @@ class View(EnvironmentalView):
     def disable(self, d):
         self.disabled = bool(d)
         if self.disabled:
-            self.opacity(0.25 * self.env.opacity)
+            self.opacity(self.env.opacity / 3.0)
         return self
 
     def modify(self, mod):
