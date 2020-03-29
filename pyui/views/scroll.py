@@ -24,6 +24,9 @@ class ScrollView(View):
         # Local state, not overwritten when re-using the view.
         self._position = Point()
 
+    def minimum_size(self):
+        return Size(self.track_size * 2, self.track_size * 2)
+
     def content_size(self, available: Size):
         return available
 
@@ -133,7 +136,8 @@ class ScrollView(View):
         inner = self.frame - self.env.padding - self.env.border
         sdl2.SDL_RenderSetClipRect(renderer, ctypes.byref(inner.sdl))
         for view in self.subviews:
-            view.render(renderer)
+            if self.frame.intersects(view.frame):
+                view.render(renderer)
         self.draw(renderer, inner)
         # sdl2.SDL_RenderSetClipRect(renderer, None)
         # Setting the clip rect to None/NULL work on OSX, but does strange things on Windows.

@@ -58,6 +58,10 @@ class Rect:
         return Point(self.left + (self.width // 2), self.top + (self.height // 2))
 
     @property
+    def extent(self):
+        return Point(self.right, self.bottom)
+
+    @property
     def sdl(self):
         # TODO: what are the memory implications of making this a property?
         return sdl2.SDL_Rect(self.origin.x, self.origin.y, self.size.w, self.size.h)
@@ -96,7 +100,17 @@ class Rect:
     def __contains__(self, other):
         if isinstance(other, Point):
             return other.x >= self.left and other.y >= self.top and other.x <= self.right and other.y <= self.bottom
+        elif isinstance(other, Rect):
+            return (other.origin in self) and (other.extent in self)
         raise ValueError()
+
+    def intersects(self, other):
+        return (
+            (self.left <= other.right)
+            and (self.right >= other.left)
+            and (self.top <= other.bottom)
+            and (self.bottom >= other.top)
+        )
 
     def scroll(self, pt):
         return Rect(origin=(self.left - pt.x, self.top - pt.y), size=self.size)

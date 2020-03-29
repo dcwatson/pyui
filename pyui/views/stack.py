@@ -49,12 +49,12 @@ class Stack(View):
         max_cross = 0
         # Group our subviews by priority, and calculate the minimum total size along our axis for each group.
         groups = {}
+        mins = {}
         for view in self.subviews:
             min_size = view.minimum_size()
+            mins[view] = min_size[self.axis] + view.env.padding[self.axis] + view.env.border[self.axis]
             groups.setdefault(view.env.priority, {"minimum": 0, "views": []})
-            groups[view.env.priority]["minimum"] += (
-                min_size[self.axis] + view.env.padding[self.axis] + view.env.border[self.axis]
-            )
+            groups[view.env.priority]["minimum"] += mins[view]
             groups[view.env.priority]["views"].append(view)
         # Starting with the highest priority views, offer them an even split of the remaining available space
         # along the layout axis, reserving enough space for the minimal sizes of all views with lower priority.
@@ -64,8 +64,10 @@ class Stack(View):
             # TODO: sort views within a priority by whether they have fixed sizes?
             for idx, view in enumerate(views):
                 # Take the remaining unreserved space, and divide it by how many views are left in this group.
-                # TODO: we could make sure we offer at least the view's minimal space, but that may be unnecessary.
-                offer = self.axis.size(int((remaining - reserved) / (len(views) - idx)), available_cross)
+                # Always offer at least the view's minimal space along the primary axis.
+                offer = self.axis.size(
+                    max(mins[view], int((remaining - reserved) / (len(views) - idx))), available_cross
+                )
                 # Offer the view some amount of space, let it decide how much it wants.
                 view.resize(offer)
                 # TODO: should we verify this is less than or equal to what was offered?

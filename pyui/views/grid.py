@@ -40,6 +40,8 @@ class Grid(View):
         self.count = 0
 
     def minimum_size(self):
+        # Not sure a minimum size calculation is useful for this without knowing what's available.
+        return Size()
         # Minimum size for a Grid is a single row/column (based on Axis).
         main = self.spacing[self.axis] * (len(self.subviews) - 1)
         cross = 0

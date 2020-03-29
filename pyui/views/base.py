@@ -315,7 +315,8 @@ class View(EnvironmentalView):
         inner = self.frame - self.env.padding - self.env.border
         self.draw(renderer, inner)
         for view in self.subviews:
-            view.render(renderer)
+            if self.frame.intersects(view.frame):
+                view.render(renderer)
 
     def disable(self, d):
         self.disabled = bool(d)
