@@ -64,6 +64,8 @@ class Font:
         self.glyphs = {}
 
     def load_font(self, path, size, search=None):
+        if path.startswith("/") and os.path.exists(path):
+            return TTF_OpenFont(path.encode("utf-8"), math.ceil(size * self.scale))
         search_dirs = [search] if search else []
         search_dirs.extend(self.search)
         for directory in search_dirs:

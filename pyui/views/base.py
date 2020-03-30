@@ -314,8 +314,11 @@ class View(EnvironmentalView):
     def render(self, renderer):
         inner = self.frame - self.env.padding - self.env.border
         self.draw(renderer, inner)
+        frame_check = self.parent.frame if self.parent else self.frame
         for view in self.subviews:
-            if self.frame.intersects(view.frame):
+            # Presumably all our subviews will be contained in our frame, but checking against our parent will allow
+            # us to skip rendering of i.e. scrolled views not in the ScrollView's frame.
+            if frame_check.intersects(view.frame):
                 view.render(renderer)
 
     def disable(self, d):
