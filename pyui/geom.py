@@ -35,6 +35,21 @@ class Alignment(enum.Enum):
     TRAILING = 1.0
 
 
+class Position(enum.Enum):
+    TOP = (0.5, 0.0)
+    BOTTOM = (0.5, 1.0)
+    LEADING = (0.0, 0.5)
+    TRAILING = (1.0, 0.5)
+    CENTER = (0.5, 0.5)
+    TOP_LEADING = (0.0, 0.0)
+    TOP_TRAILING = (1.0, 0.0)
+    BOTTOM_LEADING = (0.0, 1.0)
+    BOTTOM_TRAILING = (1.0, 1.0)
+
+    def __getitem__(self, idx):
+        return self.value[idx]
+
+
 class Rect:
     def __init__(self, origin=None, size=None):
         if isinstance(origin, int) and isinstance(size, int):

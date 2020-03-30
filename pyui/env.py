@@ -2,7 +2,7 @@ import os
 
 import sdl2
 
-from pyui.geom import Alignment, Axis, Insets, Priority, Size
+from pyui.geom import Alignment, Axis, Insets, Position, Priority, Size
 from pyui.utils import clamp
 
 from .theme import Theme
@@ -50,6 +50,7 @@ class Environment:
     border = Env(default=Insets(0))
     border_color = Env()
     priority = Env(default=Priority.NORMAL)
+    position = Env(default=Position.CENTER)
     alignment = Env(default=Alignment.CENTER)
     spacing = Env(default=0)
     size = Env(default=Size())
@@ -95,6 +96,8 @@ class Environment:
                 value = sdl2.SDL_Color(*value)
             elif key == "priority":
                 value = Priority[value.upper()]
+            elif key == "position":
+                value = Position[value.upper()]
             elif key == "alignment":
                 value = Alignment[value.upper()]
             elif key == "spacing":

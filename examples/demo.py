@@ -75,11 +75,15 @@ class BarChartView(pyui.View):
 class ImageSizerView(pyui.View):
     scale = pyui.State(int, default=50)
 
+    @property
+    def pct(self):
+        return self.scale.value / 100
+
     def content(self):
         # fmt: off
         yield pyui.VStack(
-            pyui.Slider(self.scale, 0, 100),
-            pyui.Image("images/python.png").size(height=self.scale.value / 100),
+            pyui.Slider(self.scale, 1, 100),
+            pyui.Image("images/python.png").size(width=self.pct, height=self.pct),
         )
         # fmt: on
 

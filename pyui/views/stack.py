@@ -1,4 +1,4 @@
-from pyui.geom import Axis, Point, Priority, Rect, Size
+from pyui.geom import Axis, Priority, Rect, Size
 
 from .base import View
 
@@ -77,10 +77,7 @@ class Stack(View):
         self.frame.size = self.axis.size(total, max_cross + self.env.padding[self.cross] + self.env.border[self.cross])
 
     def reposition(self, inside: Rect):
-        self.frame.origin = Point(
-            inside.left + max(0, (inside.width - self.frame.width) // 2),
-            inside.top + max(0, (inside.height - self.frame.height) // 2),
-        )
+        self.position_inside(inside)
         current = (
             self.frame.origin[self.axis] + self.env.padding.leading(self.axis) + self.env.border.leading(self.axis)
         )

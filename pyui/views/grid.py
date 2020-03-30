@@ -1,4 +1,4 @@
-from pyui.geom import Alignment, Axis, Point, Rect, Size
+from pyui.geom import Alignment, Axis, Rect, Size
 from pyui.utils import chunked
 
 from .base import View
@@ -94,10 +94,7 @@ class Grid(View):
         self.frame.size = self.axis.size(main, available[self.cross])
 
     def reposition(self, inside: Rect):
-        self.frame.origin = Point(
-            inside.left + max(0, (inside.width - self.frame.width) // 2),
-            inside.top + max(0, (inside.height - self.frame.height) // 2),
-        )
+        self.position_inside(inside)
         main = self.frame.origin[self.axis] + self.env.padding.leading(self.axis) + self.env.border.leading(self.axis)
         for views in chunked(self.subviews, self.count):
             max_main = 0

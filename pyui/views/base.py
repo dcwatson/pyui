@@ -6,7 +6,7 @@ from sdl2.sdlgfx import boxRGBA, roundedBoxRGBA
 
 from pyui.animation import Animation, parametric
 from pyui.env import Environment
-from pyui.geom import Alignment, Axis, Insets, Point, Priority, Rect, Size
+from pyui.geom import Alignment, Axis, Insets, Point, Position, Priority, Rect, Size
 from pyui.utils import clamp
 
 
@@ -69,6 +69,10 @@ class EnvironmentalView:
 
     def priority(self, p):
         self.env.priority = Priority[p.upper()] if isinstance(p, str) else Priority(p)
+        return self
+
+    def position(self, p):
+        self.env.position = Position[p.upper()] if isinstance(p, str) else Position(p)
         return self
 
     def alignment(self, a):
@@ -287,10 +291,7 @@ class View(EnvironmentalView):
         """
         Sets the view's frame origin.
         """
-        self.frame.origin = Point(
-            inside.left + ((inside.width - self.frame.width) // 2),
-            inside.top + ((inside.height - self.frame.height) // 2),
-        )
+        self.position_inside(inside)
         inner = inside - self.env.padding - self.env.border
         for view in self.subviews:
             view.reposition(inner)
@@ -303,6 +304,12 @@ class View(EnvironmentalView):
 
                 self.window.animate(self.env.animation(self._old_frame, self.frame, _set_frame))
             self._old_frame = None
+
+    def position_inside(self, inside: Rect):
+        self.frame.origin = Point(
+            inside.left + max(0, int((inside.width - self.frame.width) * self.env.position[Axis.HORIZONTAL])),
+            inside.top + max(0, int((inside.height - self.frame.height) * self.env.position[Axis.VERTICAL])),
+        )
 
     def layout(self, rect: Rect):
         if not self._subviews:

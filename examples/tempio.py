@@ -63,7 +63,7 @@ class TagView(pyui.View):
                     pyui.ForEach(self.files.value, lambda file: (
                         ThumbnailView(file=file)
                     )),
-                ).padding(10, 0, 10, 0),
+                ).padding(10, 0, 10, 0).position(pyui.Position.TOP),
             ).priority(pyui.Priority.LOW),
         )
         # fmt: on
