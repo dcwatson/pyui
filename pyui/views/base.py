@@ -444,8 +444,9 @@ class View(EnvironmentalView):
     def handle_state_change(self):
         self.rebuild()
         asyncio.create_task(self.updated())
+        # self.window.needs_layout = True
+        self.layout(self.frame)
         self.window.needs_render = True
-        self.window.needs_layout = True
 
 
 class ForEach(View):

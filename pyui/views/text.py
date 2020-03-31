@@ -12,19 +12,27 @@ class Text(View):
     def __init__(self, text, **options):
         super().__init__(**options)
         self.text = str(text)
+        self._min_cache = None
+        self._width_cache = None
+        self._size_cache = None
 
     def reuse(self, other):
-        return self.text == other.text
+        return self.text == other.text and self._font == other._font
 
     @property
     def _font(self):
         return self.env.theme.font(self.env.font, self.env.font_size)
 
     def minimum_size(self):
-        return self._font.measure(self.text)
+        if self._min_cache is None:
+            self._min_cache = self._font.measure(self.text)
+        return self._min_cache
 
     def content_size(self, available: Size):
-        return self._font.measure(self.text, width=available.w)
+        if self._size_cache is None or self._width_cache != available.w:
+            self._width_cache = available.w
+            self._size_cache = self._font.measure(self.text, width=available.w)
+        return self._size_cache
 
     def draw(self, renderer, rect):
         super().draw(renderer, rect)

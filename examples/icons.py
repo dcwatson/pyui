@@ -2,33 +2,49 @@ import pyui
 
 
 class SearchView(pyui.View):
-    search_text = pyui.State(default="")
+    # Separate state since live-searching is slow.
+    current_text = pyui.State(default="")
+
+    def __init__(self, search_binding):
+        super().__init__()
+        self.search_binding = search_binding
+
+    def search(self, text=None):
+        self.search_binding.value = self.current_text.value
 
     def content(self):
         # fmt: off
         yield pyui.HStack()(
-            pyui.TextField(self.search_text, placeholder="Search icons"),
-            pyui.Button("Search", asset="button.primary").priority("high")
+            pyui.TextField(self.current_text, placeholder="Search icons", action=self.search),
+            pyui.Button("Search", action=self.search, asset="button.primary").priority("high")
         ).padding(10)
         # fmt: on
 
 
 class IconsView(pyui.View):
+    search_text = pyui.State(default="")
+
+    def filtered_icons(self):
+        search = self.search_text.value.lower()
+        for name in pyui.Icon.data["icons"]:
+            if search == "" or search in name:
+                yield name
+
     def content(self):
         # fmt: off
         yield pyui.VStack(spacing=0)(
-            SearchView(),
+            SearchView(self.search_text),
             pyui.ScrollView()(
                 pyui.Grid(size=100, flex=True)(
-                    pyui.ForEach(pyui.Icon.data["icons"], lambda name: (
+                    pyui.ForEach(self.filtered_icons(), lambda name: (
                         pyui.Rectangle(
                             pyui.VStack()(
                                 pyui.Icon(name, size=32),
                                 pyui.Text(name).font(size=11)
                             )
-                        ).background(30, 30, 30).radius(5).padding(5)
+                        ).background(30, 30, 30).padding(5)
                     ))
-                )
+                ).position(pyui.Position.TOP_LEADING)
             )
         )
         # fmt: on
