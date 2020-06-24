@@ -15,6 +15,7 @@ class Text(View):
         self._min_cache = None
         self._width_cache = None
         self._size_cache = None
+        self._line_cache = None
 
     def reuse(self, other):
         return self.text == other.text and self._font == other._font
@@ -32,11 +33,12 @@ class Text(View):
         if self._size_cache is None or self._width_cache != available.w:
             self._width_cache = available.w
             self._size_cache = self._font.measure(self.text, width=available.w)
+            self._line_cache = None
         return self._size_cache
 
     def draw(self, renderer, rect):
         super().draw(renderer, rect)
-        self._font.draw(renderer, self.text, rect, self.env.blended_color)
+        self._line_cache = self._font.draw(renderer, self.text, rect, self.env.blended_color, lines=self._line_cache)
 
 
 class Icon(Text):

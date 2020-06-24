@@ -169,6 +169,7 @@ class TextField(View):
         self.action = action
         self._start = None
         self._end = None
+        self._line_cache = None
 
     @property
     def _font(self):
@@ -193,13 +194,22 @@ class TextField(View):
         else:
             size = self._font.measure(self.text.value, width=available.w)
             h = max(size.h, available.h)
+        # TODO: be smarter about when to invalidate this
+        self._line_cache = None
         return Size(available.w, h)
 
     def draw(self, renderer, rect):
         super().draw(renderer, rect)
         self.env.draw(renderer, "textfield", self.frame)
         if self.text.value:
-            self._font.draw(renderer, self.text_representation(), rect, self.env.color, selected=self.selection)
+            self._line_cache = self._font.draw(
+                renderer,
+                self.text_representation(),
+                rect,
+                self.env.color,
+                selected=self.selection,
+                lines=self._line_cache,
+            )
         elif self.placeholder:
             self._font.draw(renderer, self.placeholder, rect, sdl2.SDL_Color(150, 150, 150))
 
@@ -231,13 +241,13 @@ class TextField(View):
 
     async def mousedown(self, pt):
         inner = self.frame - self.env.padding - self.env.border
-        self._start = self._font.find(self.text.value, inner, pt)
+        self._start = self._font.find(self.text.value, inner, pt, lines=self._line_cache)
         self._end = None
         return self._start is not None
 
     async def mousemotion(self, pt):
         inner = self.frame - self.env.padding - self.env.border
-        idx = self._font.find(self.text.value, inner, pt)
+        idx = self._font.find(self.text.value, inner, pt, lines=self._line_cache)
         if idx is not None:
             self._end = idx
 

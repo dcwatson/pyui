@@ -210,12 +210,14 @@ class Font:
             y += self.line_height
         return Size(max_x, y)
 
-    def find(self, text, rect, pt, kerning=True):
+    def find(self, text, rect, pt, kerning=True, lines=None):
         """
         Given text laid out inside rect, finds the index in the text under the given point.
         """
         y = rect.top
-        for line in self.layout(text, rect.width, kerning=kerning):
+        if lines is None:
+            lines = self.layout(text, rect.width, kerning=kerning)
+        for line in lines:
             for pos, (idx, code, x, kern, extent), last in enumerate_last(line):
                 w = rect.width - x if last else extent - x
                 r = Rect(origin=(rect.left + x, y), size=(w, self.line_height))
@@ -224,13 +226,15 @@ class Font:
             y += self.line_height
         return None
 
-    def draw(self, renderer, text, rect, color, selected=None, kerning=True):
+    def draw(self, renderer, text, rect, color, selected=None, kerning=True, lines=None):
         """
         Renders text in the specified rect, using the specified color. If specified, selected is a set of indexes in
         text that should be highlighted.
         """
         y = rect.top
-        for line in self.layout(text, rect.width, kerning=kerning):
+        if lines is None:
+            lines = list(self.layout(text, rect.width, kerning=kerning))
+        for line in lines:
             for idx, code, x, kern, extent in line:
                 tex, size = self.glyph(renderer, code)
                 sdl2.SDL_SetTextureColorMod(tex, color.r, color.g, color.b)
@@ -242,3 +246,4 @@ class Font:
                     sdl2.SDL_SetRenderDrawBlendMode(renderer, sdl2.SDL_BLENDMODE_ADD)
                     sdl2.SDL_RenderFillRect(renderer, sdl2.SDL_Rect(rect.left + x, y, size.w + kern, size.h))
             y += self.line_height
+        return lines

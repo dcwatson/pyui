@@ -1,6 +1,7 @@
 import asyncio
 import ctypes
 import os
+import sys
 import time
 
 import rx
@@ -313,7 +314,9 @@ class Application:
         self.windows.append(win)
         return win
 
-    def run(self):
+    def run(self, switch=1.0):
+        # This significantly improves a bunch of the tight layout loops with lots of views.
+        sys.setswitchinterval(switch)
         asyncio.run(self.run_async())
 
     async def run_async(self):
