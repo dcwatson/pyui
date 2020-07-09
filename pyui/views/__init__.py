@@ -4,6 +4,7 @@ from .grid import Grid
 from .image import Image
 from .nav import List, Section, TabView
 from .picker import Picker
+from .progress import ProgressBar
 from .scroll import ScrollView
 from .shape import Rectangle
 from .spinner import Spinner
@@ -31,6 +32,8 @@ __all__ = [
     "TabView",
     # picker
     "Picker",
+    # progress
+    "ProgressBar",
     # scroll
     "ScrollView",
     # shape

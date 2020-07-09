@@ -5,9 +5,9 @@ import sys
 import time
 
 import rx
-import rx.operators as ops
 import rx.subject
 import sdl2
+from rx import operators as ops
 from rx.scheduler.eventloop import AsyncIOScheduler
 from sdl2.sdlimage import IMG_INIT_PNG, IMG_Init
 

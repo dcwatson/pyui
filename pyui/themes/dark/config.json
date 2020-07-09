@@ -143,6 +143,14 @@
             "file": "assets/slider_knob.png",
             "slice": [[20, 20], [0, 0]]
         },
+        "progress.track": {
+            "file": "assets/progress_track.png",
+            "slice": [[6, 6], [2, 2]]
+        },
+        "progress.bar": {
+            "file": "assets/progress_bar.png",
+            "slice": [[6, 6], [2, 2]]
+        },
         "textfield": {
             "file": "assets/textfield.png",
             "slice": [[12, 12], [1, 1]]
