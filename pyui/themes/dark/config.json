@@ -28,7 +28,8 @@
             "size": [16, 16]
         },
         "toggle": {
-            "spacing": 6
+            "spacing": 6,
+            "font_size": 15
         },
         "textfield": {
             "padding": [5, 10, 5, 10]

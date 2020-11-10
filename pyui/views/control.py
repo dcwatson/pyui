@@ -71,7 +71,7 @@ class Checkbox(View):
         # TODO: This is not great...
         if "checked" in self.asset:
             font = self.env.theme.font(self.env.font, self.env.font_size)
-            font.draw(renderer, "✓", rect + Insets(top=1, left=-6), sdl2.SDL_Color(255, 255, 255))
+            font.draw(renderer, "✓", rect + Insets(top=2, left=-6), sdl2.SDL_Color(255, 255, 255), wrap=False)
 
 
 class Toggle(HStack):

@@ -30,12 +30,10 @@ class Font:
     def initialize(cls, scale=None, search=None):
         TTF_Init()
         if scale is None:
-            ddpi = ctypes.c_float()
-            base_dpi = 96.0 if os.name == "nt" else 72.0
-            if sdl2.SDL_GetDisplayDPI(0, ctypes.byref(ddpi), None, None) == 0:
-                cls.scale = ddpi.value / base_dpi
-        else:
-            cls.scale = scale
+            from .env import Environment
+
+            scale = Environment.scale.default
+        cls.scale = scale
         if search:
             cls.search.insert(0, search)
 
@@ -155,7 +153,7 @@ class Font:
         if textlen > start:
             yield start, textlen, width
 
-    def layout(self, text, width, kerning=True):
+    def layout(self, text, width, kerning=True, wrap=True):
         """
         Yields a series of lines, laying out text with a maximum width. Each line contains 0 or more tuples containing:
             (index_in_text, code_point, start_x, kerning, max_x)
@@ -165,7 +163,7 @@ class Font:
         line = []
         continuation = False
         for start, end, w in self.words(text):
-            if x + w > width:
+            if wrap and (x + w > width):
                 prev = None
                 x = 0
                 continuation = True
@@ -184,7 +182,7 @@ class Font:
                     continue
                 kern = TTF_GetFontKerningSizeGlyphs(self.font, prev, code) if kerning and prev else 0
                 size = self.glyph_size(code)
-                if x + size.w + kern > width:
+                if wrap and (x + size.w + kern > width):
                     prev = None
                     kern = 0
                     x = 0
@@ -197,13 +195,13 @@ class Font:
                 continuation = False
         yield line
 
-    def measure(self, text, width=None, kerning=True):
+    def measure(self, text, width=None, kerning=True, wrap=True):
         """
         Returns how much space the given text would take up when rendered, optionally with a width constraint.
         """
         max_x = 0
         y = 0
-        for line in self.layout(text, width or 2 ** 14, kerning=kerning):
+        for line in self.layout(text, width or 2 ** 14, kerning=kerning, wrap=wrap):
             if line:
                 # Take the maximum extent of the last character on each line.
                 max_x = max(max_x, line[-1][-1])
@@ -226,14 +224,14 @@ class Font:
             y += self.line_height
         return None
 
-    def draw(self, renderer, text, rect, color, selected=None, kerning=True, lines=None):
+    def draw(self, renderer, text, rect, color, selected=None, kerning=True, wrap=True, lines=None):
         """
         Renders text in the specified rect, using the specified color. If specified, selected is a set of indexes in
         text that should be highlighted.
         """
         y = rect.top
         if lines is None:
-            lines = list(self.layout(text, rect.width, kerning=kerning))
+            lines = list(self.layout(text, rect.width, kerning=kerning, wrap=wrap))
         for line in lines:
             for idx, code, x, kern, extent in line:
                 tex, size = self.glyph(renderer, code)

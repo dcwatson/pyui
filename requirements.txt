@@ -1,3 +1,2 @@
 PySDL2==0.9.7
-pysdl2-dll==2.0.10
-Rx==3.0.1
+pysdl2-dll==2.0.12

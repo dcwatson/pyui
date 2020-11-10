@@ -2,13 +2,8 @@ import asyncio
 import ctypes
 import os
 import sys
-import time
 
-import rx
-import rx.subject
 import sdl2
-from rx import operators as ops
-from rx.scheduler.eventloop import AsyncIOScheduler
 from sdl2.sdlimage import IMG_INIT_PNG, IMG_Init
 
 from .env import Environment
@@ -55,33 +50,18 @@ class Window:
         self.focus = None
         # List of running animations.
         self.animations = []
-        # Debouncing state change observer.
-        self.bouncer = rx.subject.Subject()
         # Listen for events
-        self.listen(sdl2.SDL_MOUSEBUTTONDOWN, "button", self.mousedown)
-        self.listen(sdl2.SDL_MOUSEBUTTONUP, "button", self.mouseup, check_window=False)
-        self.listen(sdl2.SDL_MOUSEMOTION, "motion", self.mousemotion)
-        self.listen(sdl2.SDL_MOUSEWHEEL, "wheel", self.mousewheel)
-        self.listen(sdl2.SDL_WINDOWEVENT, "window", self.window_event)
-        self.listen(sdl2.SDL_KEYDOWN, "key", self.key_event)
-        self.listen(sdl2.SDL_KEYUP, "key", self.key_event)
-        self.listen(sdl2.SDL_TEXTINPUT, "text", self.text_event)
+        self.app.listen(sdl2.SDL_MOUSEBUTTONDOWN, "button", self.mousedown, check=self.check_window)
+        self.app.listen(sdl2.SDL_MOUSEBUTTONUP, "button", self.mouseup)
+        self.app.listen(sdl2.SDL_MOUSEMOTION, "motion", self.mousemotion, check=self.check_window)
+        self.app.listen(sdl2.SDL_MOUSEWHEEL, "wheel", self.mousewheel, check=self.check_window)
+        self.app.listen(sdl2.SDL_WINDOWEVENT, "window", self.window_event, check=self.check_window)
+        self.app.listen(sdl2.SDL_KEYDOWN, "key", self.key_event, check=self.check_window)
+        self.app.listen(sdl2.SDL_KEYUP, "key", self.key_event, check=self.check_window)
+        self.app.listen(sdl2.SDL_TEXTINPUT, "text", self.text_event, check=self.check_window)
 
-    def listen(self, event_type, event_attr, handler, check_window=True):
-        stream = self.app.events.pipe(ops.filter(lambda event: event.type == event_type), ops.pluck_attr(event_attr))
-        if check_window:
-            stream = stream.pipe(ops.filter(lambda event: event.windowID == self.id))
-        # TODO: dispose of these subscriptions when closing the window?
-        if asyncio.iscoroutinefunction(handler):
-
-            async def handle_and_render(event):
-                await handler(event)
-                self.needs_render = True
-                # self.render()
-
-            stream.subscribe(lambda event: asyncio.create_task(handle_and_render(event)))
-        else:
-            stream.subscribe(handler)
+    def check_window(self, event):
+        return event.windowID == self.id
 
     @property
     def window_size(self):
@@ -127,9 +107,6 @@ class Window:
         view.handle_state_change()
 
     def startup(self):
-        self.bouncer.pipe(ops.sample(1.0 / 60.0)).subscribe(
-            self.bounce_state_change, scheduler=AsyncIOScheduler(loop=asyncio.get_running_loop())
-        )
         self.layout()
         if self.pack:
             scale = self.window_size.w / self.render_size.w
@@ -202,6 +179,7 @@ class Window:
             found = self.view
         await found.mousedown(pt)
         self.tracking = found.id_path
+        self.needs_render = True
 
     async def mousemotion(self, event):
         pt = self.point(event.x, event.y)
@@ -218,6 +196,7 @@ class Window:
         tracking_view = self.resolve(self.tracking)
         if tracking_view:
             await tracking_view.mousemotion(pt)
+        self.needs_render = True
 
     async def mouseup(self, event):
         pt = self.point(event.x, event.y)
@@ -235,6 +214,7 @@ class Window:
                 await found.focus()
                 await found.click(pt)
         self.tracking = None
+        self.needs_render = True
 
     async def mousewheel(self, event):
         x = ctypes.c_int()
@@ -245,6 +225,7 @@ class Window:
         if found is None or found.disabled:
             found = self.view
         await found.mousewheel(Point(-event.x, event.y))
+        self.needs_render = True
 
     def window_event(self, event):
         # Note that this is not async because the loop is blocked during resizing.
@@ -265,12 +246,29 @@ class Window:
             await focus_view.keydown(event.keysym.sym, event.keysym.mod)
         elif event.type == sdl2.SDL_KEYUP:
             await focus_view.keyup(event.keysym.sym, event.keysym.mod)
+        self.needs_render = True
 
     async def text_event(self, event):
         focus_view = self.resolve(self.focus)
         if focus_view is None or focus_view.disabled:
             focus_view = self.view
         await focus_view.textinput(event.text.decode("utf-8"))
+        self.needs_render = True
+
+
+class EventListener:
+    def __init__(self, attr, handler, check=None):
+        self.attr = attr
+        self.handler = handler
+        self.is_async = asyncio.iscoroutinefunction(self.handler)
+        self.check = check
+
+    def __call__(self, event):
+        attr = getattr(event, self.attr, None)
+        if self.is_async:
+            asyncio.create_task(self.handler(attr))
+        else:
+            self.handler(attr)
 
 
 class Application:
@@ -279,16 +277,14 @@ class Application:
         self.settings = settings(app_id)
         self.windows = []
         self.running = False
-        self.events = rx.subject.Subject()
-        self.events.pipe(ops.filter(lambda event: event.type == sdl2.SDL_QUIT)).subscribe(self.quit)
+        self.listeners = {}
+        self.listen(sdl2.SDL_QUIT, "quit", self.quit)
 
     def initialize(self):
         if os.name == "nt":
             ctypes.windll.shcore.SetProcessDpiAwareness(1)
         sdl2.SDL_Init(sdl2.SDL_INIT_EVERYTHING)
         IMG_Init(IMG_INIT_PNG)
-        # Initialize our font cache and calculate DPI scaling.
-        Font.initialize()
         # Ugly hack to determine resolution scaling factor as early as possible.
         win = sdl2.SDL_CreateWindow(
             "ResolutionTest".encode("utf-8"),
@@ -308,6 +304,8 @@ class Application:
         Environment.scale.default = rend_w.value / 100.0
         sdl2.SDL_DestroyRenderer(rend)
         sdl2.SDL_DestroyWindow(win)
+        # Initialize our font cache and calculate DPI scaling.
+        Font.initialize()
 
     def window(self, title, view, **kwargs):
         win = Window(self, title, view, **kwargs)
@@ -319,6 +317,13 @@ class Application:
         sys.setswitchinterval(switch)
         asyncio.run(self.run_async())
 
+    def dispatch(self, event):
+        for listener in self.listeners.get(event.type, []):
+            listener(event)
+
+    def listen(self, event_type, event_attr, handler, check=None):
+        self.listeners.setdefault(event_type, []).append(EventListener(event_attr, handler, check=check))
+
     async def run_async(self):
         self.running = True
         self.startup()
@@ -328,24 +333,26 @@ class Application:
                 # SDL2 seems to re-use SDL_Event structures, so we need to make a copy.
                 event = sdl2.SDL_Event()
                 ctypes.pointer(event)[0] = event_ptr.contents
-                self.events.on_next(event)
+                self.dispatch(event)
             return 0
 
         watcher = sdl2.SDL_EventFilter(event_handler)
         sdl2.SDL_AddEventWatch(watcher, None)
 
+        loop = asyncio.get_running_loop()
+
         fps = 60.0
         frame_time = 1.0 / fps
-        last_tick = time.time()
+        last_tick = loop.time()
         while self.running:
             sdl2.SDL_PumpEvents()
             # dt here will be how much time since the last loop minus any event handling.
-            dt = time.time() - last_tick
+            dt = loop.time() - last_tick
             await asyncio.sleep(max(0, frame_time - dt))
             # dt here will be how much time since the last call to tick.
-            dt = time.time() - last_tick
+            dt = loop.time() - last_tick
             self.tick(dt)
-            last_tick = time.time()
+            last_tick = loop.time()
 
         sdl2.SDL_DelEventWatch(watcher, None)
         self.cleanup()

@@ -21,7 +21,7 @@ setup(
     license="BSD",
     packages=find_packages(),
     include_package_data=True,
-    install_requires=["PySDL2>=0.9.7", "Rx>=3.0.0"],
+    install_requires=["PySDL2>=0.9.7"],
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",

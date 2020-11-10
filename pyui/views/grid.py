@@ -106,7 +106,12 @@ class Grid(View):
             for idx, view in enumerate(views):
                 if idx > 0:
                     cross += self.spacing[self.cross]
-                view.reposition(Rect(origin=self.axis.point(main, cross), size=view.frame.size,))
+                view.reposition(
+                    Rect(
+                        origin=self.axis.point(main, cross),
+                        size=view.frame.size,
+                    )
+                )
                 cross += view.frame.size[self.cross]
                 max_main = max(max_main, view.frame.size[self.axis])
             main += max_main + self.spacing[self.axis]

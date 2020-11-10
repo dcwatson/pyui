@@ -47,7 +47,8 @@ class ScrollView(View):
         pct_w = self._position[Axis.HORIZONTAL] / delta_w if delta_w else 0
         pct_h = self._position[Axis.VERTICAL] / delta_h if delta_h else 0
         return Point(
-            max(0, int((self.frame.width - size.w) * pct_w)), max(0, int((self.frame.height - size.h) * pct_h)),
+            max(0, int((self.frame.width - size.w) * pct_w)),
+            max(0, int((self.frame.height - size.h) * pct_h)),
         )
 
     def knob_rect(self, axis):

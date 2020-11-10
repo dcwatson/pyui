@@ -439,7 +439,8 @@ class View(EnvironmentalView):
     # State management.
 
     def state_changed(self, name, value):
-        self.window.bouncer.on_next(self)
+        # self.window.bouncer.on_next(self)
+        self.handle_state_change()
 
     def handle_state_change(self):
         self.rebuild()
