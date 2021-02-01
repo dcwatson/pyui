@@ -19,10 +19,12 @@ See [the examples directory](examples) for code examples using PyUI.
 
 Example [TodoMVC](http://todomvc.com) App
 ![PyUI TodoMVC](docs/images/pyui-todomvc.png)
+
 Example Demo App
 ![PyUI Example Icon App](docs/images/pyui-example-demo.png)
+
 Example Calculator
 ![PyUI Example Calculator](docs/images/pyui-example-calc.png)
+
 Example Icon App
 ![PyUI Example Icon App](docs/images/pyui-example-icons.png)
-
