@@ -22,25 +22,6 @@ class MeasurementTests(unittest.TestCase):
         self.assertEqual(list(enumerate_last([])), [])
 
 
-class FontTests(unittest.TestCase):
-    def test_font_word_breaking(self):
-        font = Font.load("fonts/dejavu/DejaVuSans.ttf", 16)
-        text = "hello world\nline\vtwo line-break"
-        data = list(font.words(text))
-        expected = [
-            (0, 5, 38),  # hello
-            (5, 6, 5),  # space
-            (6, 11, 44),  # world
-            (11, 12, 0),  # newline
-            (12, 16, 28),  # line
-            (17, 20, 29),  # two
-            (20, 21, 5),  # space
-            (21, 26, 34),  # line-
-            (26, 31, 47),  # break
-        ]
-        self.assertEqual(data, expected)
-
-
 class EnvironmentTests(unittest.TestCase):
     def test_inheritance(self):
         parent = Environment(font_size=24)

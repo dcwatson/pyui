@@ -13,12 +13,14 @@ class SearchView(pyui.View):
         self.search_binding.value = self.current_text.value
 
     def content(self):
-        # fmt: off
         yield pyui.HStack()(
-            pyui.TextField(self.current_text, placeholder="Search icons", action=self.search),
-            pyui.Button("Search", action=self.search, asset="button.primary").priority("high")
+            pyui.TextField(
+                self.current_text, placeholder="Search icons", action=self.search
+            ),
+            pyui.Button("Search", action=self.search, asset="button.primary").priority(
+                "high"
+            ),
         ).padding(10)
-        # fmt: on
 
 
 class IconsView(pyui.View):
@@ -31,23 +33,26 @@ class IconsView(pyui.View):
                 yield name
 
     def content(self):
-        # fmt: off
         yield pyui.VStack(spacing=0)(
             SearchView(self.search_text),
             pyui.ScrollView()(
                 pyui.Grid(size=100, flex=True)(
-                    pyui.ForEach(self.filtered_icons(), lambda name: (
-                        pyui.Rectangle(
-                            pyui.VStack()(
-                                pyui.Icon(name, size=32),
-                                pyui.Text(name).font(size=11)
+                    pyui.ForEach(
+                        self.filtered_icons(),
+                        lambda name: (
+                            pyui.Rectangle(
+                                pyui.VStack()(
+                                    pyui.Icon(name, size=32),
+                                    pyui.Text(name).font(size=11),
+                                )
                             )
-                        ).background(30, 30, 30).padding(5)
-                    ))
+                            .background(30, 30, 30)
+                            .padding(5)
+                        ),
+                    )
                 ).position(pyui.Position.TOP_LEADING)
-            )
+            ),
         )
-        # fmt: on
 
 
 if __name__ == "__main__":

@@ -71,7 +71,13 @@ class Checkbox(View):
         # TODO: This is not great...
         if "checked" in self.asset:
             font = self.env.theme.font(self.env.font, self.env.font_size)
-            font.draw(renderer, "✓", rect + Insets(top=2, left=-6), sdl2.SDL_Color(255, 255, 255), wrap=False)
+            font.draw(
+                renderer,
+                "✓",
+                rect + Insets(top=2, left=-6),
+                sdl2.SDL_Color(255, 255, 255),
+                wrap=False,
+            )
 
 
 class Toggle(HStack):
@@ -90,12 +96,16 @@ class Toggle(HStack):
         super().__init__(*contents, **options)
 
     async def mousedown(self, pt):
-        self._checkbox.asset = "checkbox.checked.pressed" if self.checked else "checkbox.pressed"
+        self._checkbox.asset = (
+            "checkbox.checked.pressed" if self.checked else "checkbox.pressed"
+        )
         return True
 
     async def mousemotion(self, pt):
         if pt in self.frame:
-            self._checkbox.asset = "checkbox.checked.pressed" if self.checked else "checkbox.pressed"
+            self._checkbox.asset = (
+                "checkbox.checked.pressed" if self.checked else "checkbox.pressed"
+            )
         else:
             self._checkbox.asset = "checkbox.checked" if self.checked else "checkbox"
 
@@ -131,9 +141,19 @@ class Slider(View):
         return Size(available.w, self.env.scaled(20))
 
     def draw(self, renderer, rect):
-        offset = int((self.current.value - self.minimum) * (rect.width - self.env.scaled(20)) / (self.span - 1))
-        slider_rect = Rect(origin=(rect.left, rect.top + self.env.scaled(7)), size=(rect.width, self.env.scaled(6)))
-        knob_rect = Rect(origin=(rect.left + offset, rect.top), size=(self.env.scaled(20), self.env.scaled(20)))
+        offset = int(
+            (self.current.value - self.minimum)
+            * (rect.width - self.env.scaled(20))
+            / (self.span - 1)
+        )
+        slider_rect = Rect(
+            origin=(rect.left, rect.top + self.env.scaled(7)),
+            size=(rect.width, self.env.scaled(6)),
+        )
+        knob_rect = Rect(
+            origin=(rect.left + offset, rect.top),
+            size=(self.env.scaled(20), self.env.scaled(20)),
+        )
         self.env.draw(renderer, "slider.track", slider_rect)
         self.env.draw(renderer, "slider.knob", knob_rect)
 
@@ -211,7 +231,9 @@ class TextField(View):
                 lines=self._line_cache,
             )
         elif self.placeholder:
-            self._font.draw(renderer, self.placeholder, rect, sdl2.SDL_Color(150, 150, 150))
+            self._font.draw(
+                renderer, self.placeholder, rect, sdl2.SDL_Color(150, 150, 150)
+            )
 
     async def focus(self):
         sdl2.SDL_StartTextInput()
@@ -241,7 +263,9 @@ class TextField(View):
 
     async def mousedown(self, pt):
         inner = self.frame - self.env.padding - self.env.border
-        self._start = self._font.find(self.text.value, inner, pt, lines=self._line_cache)
+        self._start = self._font.find(
+            self.text.value, inner, pt, lines=self._line_cache
+        )
         self._end = None
         return self._start is not None
 
@@ -278,4 +302,6 @@ class SegmentedButton(HStack):
             asset = self._index_asset(idx, is_last)
             if idx == self.selection.value:
                 asset += ".selected"
-            yield Button(item, action=(self.select, idx), asset=asset).disable(self.disabled)
+            yield Button(item, action=(self.select, idx), asset=asset).disable(
+                self.disabled
+            )

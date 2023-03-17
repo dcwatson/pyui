@@ -8,7 +8,9 @@ from .control import SegmentedButton
 from .stack import HStack, Spacer, VStack
 from .text import Text
 
-ListHeaderStyle = lambda view: view.padding(10, 10, 5, 10).color(120, 120, 120).font(size=13)
+
+def ListHeaderStyle(view):
+    return view.padding(10, 10, 5, 10).color(120, 120, 120).font(size=13)
 
 
 class ListItem(HStack):
@@ -52,12 +54,16 @@ class List(VStack):
         if self.selection is not None:
             self.window.focus = self.id_path
             if self.selection.value and index in self.selection.value:
-                self.selection.value = [idx for idx in self.selection.value if idx != index]
+                self.selection.value = [
+                    idx for idx in self.selection.value if idx != index
+                ]
             else:
                 self.selection.value = [index]
 
     def wrap(self, item, index):
-        wrapped = ListItem(spacing=0)(item, Spacer()).action(self.item_click).padding(10)
+        wrapped = (
+            ListItem(spacing=0)(item, Spacer()).action(self.item_click).padding(10)
+        )
         if self.selection and self.selection.value and index in self.selection.value:
             wrapped.background(200, 200, 255, 16)
         return wrapped
@@ -109,18 +115,31 @@ class TabView(View):
                 self.env.background.b,
             )
             mid = self.env.scaled(13)
-            roundedBoxRGBA(renderer, rect.left, rect.top + mid, rect.right, rect.bottom, 4, *rgb, 64)
-            roundedRectangleRGBA(renderer, rect.left, rect.top + mid, rect.right, rect.bottom, 4, *rgb, 255)
+            roundedBoxRGBA(
+                renderer,
+                rect.left,
+                rect.top + mid,
+                rect.right,
+                rect.bottom,
+                4,
+                *rgb,
+                64
+            )
+            roundedRectangleRGBA(
+                renderer,
+                rect.left,
+                rect.top + mid,
+                rect.right,
+                rect.bottom,
+                4,
+                *rgb,
+                255
+            )
 
     def content(self):
         tabs = list(super().content())
         show = tabs[self.selected.value] if tabs else View()
-        # fmt: off
+
         yield VStack(alignment=self.env.alignment, spacing=0)(
-            SegmentedButton(self.selected)(
-                *[t.item_view for t in tabs]
-            ),
-            show,
-            Spacer()
+            SegmentedButton(self.selected)(*[t.item_view for t in tabs]), show, Spacer()
         )
-        # fmt: on

@@ -37,7 +37,10 @@ class Env:
 
 
 class Environment:
-    theme = Env(inherit=True, default=Theme(os.path.join(BASE_DIR, "themes/dark/config.json")))
+    theme = Env(
+        inherit=True,
+        default=Theme(os.path.join(BASE_DIR, "themes/dark/config.json")),
+    )
     scale = Env(inherit=True, default=1.0)
 
     font = Env(inherit=True, default="default")
@@ -60,7 +63,12 @@ class Environment:
 
     alpha = property(lambda self: round(self.opacity * 255))
     blended_color = property(
-        lambda self: sdl2.SDL_Color(self.color.r, self.color.g, self.color.b, round((self.color.a * self.alpha) / 255))
+        lambda self: sdl2.SDL_Color(
+            self.color.r,
+            self.color.g,
+            self.color.b,
+            round((self.color.a * self.alpha) / 255),
+        )
     )
 
     def __init__(self, class_name=None, **overrides):
@@ -109,8 +117,8 @@ class Environment:
             setattr(self, key, value)
 
     def draw(self, renderer, asset_name, rect, alpha=None):
-        # Mostly lives here because it's where I have access to the theme and the scale, not because it's a good place
-        # for it to live.
+        # Mostly lives here because it's where I have access to the theme and the scale,
+        # not because it's a good place for it to live.
         asset = self.theme.load_asset(asset_name)
         if alpha is None:
             alpha = self.alpha

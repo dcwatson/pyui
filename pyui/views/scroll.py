@@ -32,10 +32,24 @@ class ScrollView(View):
 
     def knob_size(self):
         return Size(
-            max(self.track_size, int(self.frame.width * self.frame.width / self.scroll_size[Axis.HORIZONTAL]))
+            max(
+                self.track_size,
+                int(
+                    self.frame.width
+                    * self.frame.width
+                    / self.scroll_size[Axis.HORIZONTAL]
+                ),
+            )
             if self.scroll_size[Axis.HORIZONTAL] > self.frame.width
             else 0,
-            max(self.track_size, int(self.frame.height * self.frame.height / self.scroll_size[Axis.VERTICAL]))
+            max(
+                self.track_size,
+                int(
+                    self.frame.height
+                    * self.frame.height
+                    / self.scroll_size[Axis.VERTICAL]
+                ),
+            )
             if self.scroll_size[Axis.VERTICAL] > self.frame.height
             else 0,
         )
@@ -57,11 +71,13 @@ class ScrollView(View):
         inner = self.frame - self.env.padding - self.env.border
         if axis == Axis.VERTICAL:
             return Rect(
-                origin=(inner.right - self.env.scaled(13), inner.top + pos.y), size=(self.env.scaled(11), size.h)
+                origin=(inner.right - self.env.scaled(13), inner.top + pos.y),
+                size=(self.env.scaled(11), size.h),
             )
         else:
             return Rect(
-                origin=(inner.left + pos.x, inner.bottom - self.env.scaled(13)), size=(size.w, self.env.scaled(11))
+                origin=(inner.left + pos.x, inner.bottom - self.env.scaled(13)),
+                size=(size.w, self.env.scaled(11)),
             )
 
     def resize(self, available: Size):
@@ -128,12 +144,15 @@ class ScrollView(View):
 
     async def mousewheel(self, amt):
         axis = Axis.VERTICAL if amt.y != 0 else Axis.HORIZONTAL
-        new_pos = self._position[axis] - (self.env.scaled(amt[axis]) * self.scroll_interval)
+        new_pos = self._position[axis] - (
+            self.env.scaled(amt[axis]) * self.scroll_interval
+        )
         self.set_position(axis, new_pos)
         self.reposition(self.frame)
 
     def render(self, renderer):
-        # This is overridden so we can clip rendering to the visible bounds, and so we can draw our scrollbars last.
+        # This is overridden so we can clip rendering to the visible bounds, and so we
+        # can draw our scrollbars last.
         inner = self.frame - self.env.padding - self.env.border
         sdl2.SDL_RenderSetClipRect(renderer, ctypes.byref(inner.sdl))
         for view in self.subviews:
@@ -141,8 +160,8 @@ class ScrollView(View):
                 view.render(renderer)
         self.draw(renderer, inner)
         # sdl2.SDL_RenderSetClipRect(renderer, None)
-        # Setting the clip rect to None/NULL work on OSX, but does strange things on Windows.
-        # This is a hack, but seems to work.
+        # Setting the clip rect to None/NULL work on OSX, but does strange things on
+        # Windows. This is a hack, but seems to work.
         sdl2.SDL_RenderSetClipRect(renderer, ctypes.byref(self.root.frame.sdl))
 
     def draw(self, renderer, rect):
@@ -150,7 +169,10 @@ class ScrollView(View):
 
         if self.axis in (Axis.HORIZONTAL, None):
             w = rect.width - (0 if self.axis == Axis.HORIZONTAL else self.track_size)
-            track_rect = Rect(origin=(rect.left, rect.bottom - self.track_size), size=(w, self.track_size))
+            track_rect = Rect(
+                origin=(rect.left, rect.bottom - self.track_size),
+                size=(w, self.track_size),
+            )
             self.env.draw(renderer, "scroll.horizontal.track", track_rect)
             knob_rect = self.knob_rect(Axis.HORIZONTAL)
             if knob_rect.width:
@@ -158,7 +180,10 @@ class ScrollView(View):
 
         if self.axis in (Axis.VERTICAL, None):
             h = rect.height - (0 if self.axis == Axis.VERTICAL else self.track_size)
-            track_rect = Rect(origin=(rect.right - self.track_size, rect.top), size=(self.track_size, h))
+            track_rect = Rect(
+                origin=(rect.right - self.track_size, rect.top),
+                size=(self.track_size, h),
+            )
             self.env.draw(renderer, "scroll.vertical.track", track_rect)
             knob_rect = self.knob_rect(Axis.VERTICAL)
             if knob_rect.height:

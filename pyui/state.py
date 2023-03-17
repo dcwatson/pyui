@@ -51,14 +51,17 @@ class State:
         if self.name not in instance.__dict__:
             value = self.get_default()
             if isinstance(value, Observable):
-                # If the state's value is Observable, listen for changes to trigger instance.state_changed.
+                # If the state's value is Observable, listen for changes to trigger
+                # instance.state_changed.
                 value.listen(self.name, instance)
-            # Set the default value the first time it's accessed, so it's not changing on every access.
+            # Set the default value the first time it's accessed, so it's not changing
+            # on every access.
             instance.__dict__[self.name] = self.check_value(instance, value)
             # TODO: firing the state_changed for default values seems unnecessary?
             # self.__set__(instance, value)
         if isinstance(instance.__dict__[self.name], Observable):
-            # No need for Bindings if the state is Observable. It triggers state_changed as necessary.
+            # No need for Bindings if the state is Observable. It triggers state_changed
+            # as necessary.
             return instance.__dict__[self.name]
         return Binding(self, instance)
 
@@ -73,10 +76,17 @@ class State:
         return self.default() if callable(self.default) else self.default
 
     def check_value(self, instance, value):
-        if value is None or self.python_type is None or isinstance(value, self.python_type):
+        if (
+            value is None
+            or self.python_type is None
+            or isinstance(value, self.python_type)
+        ):
             return value
         raise AttributeError(
             "{}.{} must be of type {} (got {})".format(
-                instance.__class__.__name__, self.name, self.python_type.__name__, value.__class__.__name__
+                instance.__class__.__name__,
+                self.name,
+                self.python_type.__name__,
+                value.__class__.__name__,
             )
         )

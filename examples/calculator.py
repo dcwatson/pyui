@@ -2,9 +2,17 @@ import sdl2
 
 import pyui
 
-BTN_DEFAULT = lambda view: view.background(128, 128, 128)
-BTN_TOP = lambda view: view.background(80, 80, 80)
-BTN_OPERATOR = lambda view: view.background(200, 148, 20)
+
+def BTN_DEFAULT(view):
+    return view.background(128, 128, 128)
+
+
+def BTN_TOP(view):
+    return view.background(80, 80, 80)
+
+
+def BTN_OPERATOR(view):
+    return view.background(200, 148, 20)
 
 
 class CalcButton(pyui.View):
@@ -17,11 +25,7 @@ class CalcButton(pyui.View):
         self.mod = mod or BTN_DEFAULT
 
     def content(self):
-        # fmt: off
-        yield pyui.Rectangle()(
-            pyui.Text(self.label)
-        ).modify(self.mod)
-        # fmt: on
+        yield pyui.Rectangle()(pyui.Text(self.label)).modify(self.mod)
 
     async def click(self, pt):
         if self.action:
@@ -67,11 +71,13 @@ class CalculatorView(pyui.View):
         self.result = "0"
 
     def content(self):
-        # fmt: off
         yield pyui.VStack(spacing=0)(
             pyui.HStack()(
                 pyui.Spacer(),
-                pyui.Text(self.formula.value).font(size=11).color(180, 180, 180).padding(5, 10, 0, 5),
+                pyui.Text(self.formula.value)
+                .font(size=11)
+                .color(180, 180, 180)
+                .padding(5, 10, 0, 5),
             ),
             pyui.HStack()(
                 pyui.Spacer(),
@@ -98,9 +104,8 @@ class CalculatorView(pyui.View):
                 CalcButton("0", self.add),
                 CalcButton(".", self.add),
                 CalcButton("=", self.compute, BTN_OPERATOR),
-            )
+            ),
         )
-        # fmt: on
 
 
 if __name__ == "__main__":

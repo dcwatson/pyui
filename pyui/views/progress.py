@@ -18,8 +18,14 @@ class ProgressBar(View):
         return Size(available.w, self.env.scaled(20))
 
     def draw(self, renderer, rect):
-        width = int((self.current.value - self.minimum) * rect.width / (self.maximum - self.minimum))
-        track_rect = Rect(origin=(rect.left, rect.top), size=(rect.width, self.env.scaled(6)))
+        width = int(
+            (self.current.value - self.minimum)
+            * rect.width
+            / (self.maximum - self.minimum)
+        )
+        track_rect = Rect(
+            origin=(rect.left, rect.top), size=(rect.width, self.env.scaled(6))
+        )
         bar_rect = Rect(origin=(rect.left, rect.top), size=(width, self.env.scaled(6)))
         self.env.draw(renderer, "progress.track", track_rect)
         if width > 0:

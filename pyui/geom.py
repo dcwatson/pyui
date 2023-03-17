@@ -114,7 +114,12 @@ class Rect:
 
     def __contains__(self, other):
         if isinstance(other, Point):
-            return other.x >= self.left and other.y >= self.top and other.x <= self.right and other.y <= self.bottom
+            return (
+                other.x >= self.left
+                and other.y >= self.top
+                and other.x <= self.right
+                and other.y <= self.bottom
+            )
         elif isinstance(other, Rect):
             return (other.origin in self) and (other.extent in self)
         raise ValueError()
@@ -155,7 +160,9 @@ class Insets:
             self.right = int(right or 0)
 
     def __repr__(self):
-        return "Insets({}, {}, {}, {})".format(self.top, self.left, self.bottom, self.right)
+        return "Insets({}, {}, {}, {})".format(
+            self.top, self.left, self.bottom, self.right
+        )
 
     @property
     def width(self):
@@ -166,7 +173,9 @@ class Insets:
         return self.top + self.bottom
 
     def scaled(self, by):
-        return self.__class__(self.top * by, self.left * by, self.bottom * by, self.right * by)
+        return self.__class__(
+            self.top * by, self.left * by, self.bottom * by, self.right * by
+        )
 
     def __getitem__(self, axis):
         if isinstance(axis, Axis):

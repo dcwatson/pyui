@@ -1,7 +1,12 @@
 import pyui
 
-ITEM_ACTIVE = lambda view: view
-ITEM_COMPLETE = lambda view: view.color(255, 255, 255, 128)
+
+def ITEM_ACTIVE(view):
+    return view
+
+
+def ITEM_COMPLETE(view):
+    return view.color(255, 255, 255, 128)
 
 
 class TodoItem:
@@ -75,29 +80,42 @@ class TodoMVC(pyui.View):
         self.new_item.value = ""
 
     def content(self):
-        # fmt: off
         yield pyui.VStack(alignment=pyui.Alignment.LEADING)(
             pyui.HStack()(
                 pyui.Toggle(self.items.all_complete, action=self.items.toggle_all),
-                pyui.TextField(self.new_item, "What needs to be done?", action=self.add),
+                pyui.TextField(
+                    self.new_item,
+                    "What needs to be done?",
+                    action=self.add,
+                ),
             ),
             pyui.ScrollView()(
-                pyui.List(self.selected, builder=lambda item: (
-                    pyui.HStack()(
-                        pyui.Toggle(item.complete, label=item.text, action=(self.items.toggle, item))
-                            .modify(ITEM_COMPLETE if item.complete else ITEM_ACTIVE),
-                        pyui.Spacer(),
-                        pyui.Button(action=(self.items.delete, item), asset=None)(
-                            pyui.Icon("trash-alt")
-                        ).font(size=12).padding(0)
-                    )
-                )),
+                pyui.List(
+                    self.selected,
+                    builder=lambda item: (
+                        pyui.HStack()(
+                            pyui.Toggle(
+                                item.complete,
+                                label=item.text,
+                                action=(self.items.toggle, item),
+                            ).modify(ITEM_COMPLETE if item.complete else ITEM_ACTIVE),
+                            pyui.Spacer(),
+                            pyui.Button(action=(self.items.delete, item), asset=None)(
+                                pyui.Icon("trash-alt")
+                            )
+                            .font(size=12)
+                            .padding(0),
+                        )
+                    ),
+                ),
             ).priority(pyui.Priority.HIGH),
             pyui.HStack(
                 pyui.Text(self.remaining_text),
                 pyui.Button(action=self.items.clear_complete, asset=None)(
                     pyui.Text("Clear Completed").color(60, 150, 255)
-                ).padding(5).disable(not self.items.any_complete),
+                )
+                .padding(5)
+                .disable(not self.items.any_complete),
                 pyui.Spacer(),
                 # TODO: would be nice to pass SegmentedButton an enum?
                 pyui.SegmentedButton(self.selected_filter)(
@@ -105,9 +123,8 @@ class TodoMVC(pyui.View):
                     pyui.Text("Active"),
                     pyui.Text("Completed"),
                 ),
-            )
+            ),
         ).padding(20)
-        # fmt: on
 
 
 if __name__ == "__main__":

@@ -76,7 +76,9 @@ class EnvironmentalView:
         return self
 
     def alignment(self, a):
-        self.env.alignment = Alignment[a.upper()] if isinstance(a, str) else Alignment(a)
+        self.env.alignment = (
+            Alignment[a.upper()] if isinstance(a, str) else Alignment(a)
+        )
         return self
 
     def spacing(self, s):
@@ -132,7 +134,8 @@ class View(EnvironmentalView):
         # The raw (un-built) View instances under this one.
         self.contents = contents
         # Resolved and built list of subviews, after evaluating e.g. ForEach constructs.
-        # This will be empty until rebuild is called, which happens on first layout and state changes.
+        # This will be empty until rebuild is called, which happens on first layout and
+        # state changes.
         self._subviews = []
 
     @property
@@ -176,13 +179,18 @@ class View(EnvironmentalView):
                 return view
 
     def rebuild(self):
-        # TODO: this is not great. I'm using id_path out of convenience, but ideally this would use some sort of View
-        # hash value and equality testing to be able to detect if a view moves around in the hierarchy.
+        # TODO: this is not great. I'm using id_path out of convenience, but ideally
+        # this would use some sort of View hash value and equality testing to be able to
+        # detect if a view moves around in the hierarchy.
         old = {v.id_path: v for v in self.subviews}
         self._subviews = []
         for idx, view in enumerate(self.content()):
             if not isinstance(view, View):
-                raise ValueError("Subviews must be instances of View (got {}).".format(view.__class__.__name__))
+                raise ValueError(
+                    "Subviews must be instances of View (got {}).".format(
+                        view.__class__.__name__
+                    )
+                )
             # Set up the view/environment hierarchy.
             view.parent = self
             view.index = idx
@@ -225,47 +233,100 @@ class View(EnvironmentalView):
 
     def minimum_size(self):
         """
-        Returns the minimum size in each dimension of this view's content, not including any padding or borders.
+        Returns the minimum size in each dimension of this view's content, not including
+        any padding or borders.
         """
         min_w = 0
         min_h = 0
         for view in self.subviews:
             m = view.minimum_size()
-            min_w = max(m.w, min_w + view.env.padding[Axis.HORIZONTAL] + view.env.border[Axis.HORIZONTAL])
-            min_h = max(m.h, min_h + view.env.padding[Axis.VERTICAL] + view.env.border[Axis.VERTICAL])
+            min_w = max(
+                m.w,
+                min_w
+                + view.env.padding[Axis.HORIZONTAL]
+                + view.env.border[Axis.HORIZONTAL],
+            )
+            min_h = max(
+                m.h,
+                min_h
+                + view.env.padding[Axis.VERTICAL]
+                + view.env.border[Axis.VERTICAL],
+            )
         return Size(min_w, min_h)
 
     def content_size(self, available: Size):
         """
-        Given an available amount of space, returns the content size for this view's content, not including padding
-        or borders.
+        Given an available amount of space, returns the content size for this view's
+        content, not including padding or borders.
         """
         return self.env.size
 
     def draw(self, renderer, rect):
-        if self.env.border and self.env.border_color and self.env.background and self.env.background.a == 255:
+        if (
+            self.env.border
+            and self.env.border_color
+            and self.env.background
+            and self.env.background.a == 255
+        ):
             adjusted = self.frame  # + self.env.border
-            rgba = (self.env.border_color.r, self.env.border_color.g, self.env.border_color.b, self.env.border_color.a)
+            rgba = (
+                self.env.border_color.r,
+                self.env.border_color.g,
+                self.env.border_color.b,
+                self.env.border_color.a,
+            )
             if self.env.radius:
                 roundedBoxRGBA(
-                    renderer, adjusted.left, adjusted.top, adjusted.right, adjusted.bottom, self.env.radius, *rgba
+                    renderer,
+                    adjusted.left,
+                    adjusted.top,
+                    adjusted.right,
+                    adjusted.bottom,
+                    self.env.radius,
+                    *rgba
                 )
             else:
-                boxRGBA(renderer, adjusted.left, adjusted.top, adjusted.right, adjusted.bottom, *rgba)
+                boxRGBA(
+                    renderer,
+                    adjusted.left,
+                    adjusted.top,
+                    adjusted.right,
+                    adjusted.bottom,
+                    *rgba
+                )
 
         if self.env.background:
             adjusted = self.frame - self.env.border
-            rgba = (self.env.background.r, self.env.background.g, self.env.background.b, self.env.background.a)
+            rgba = (
+                self.env.background.r,
+                self.env.background.g,
+                self.env.background.b,
+                self.env.background.a,
+            )
             if self.env.radius:
                 roundedBoxRGBA(
-                    renderer, adjusted.left, adjusted.top, adjusted.right, adjusted.bottom, self.env.radius, *rgba
+                    renderer,
+                    adjusted.left,
+                    adjusted.top,
+                    adjusted.right,
+                    adjusted.bottom,
+                    self.env.radius,
+                    *rgba
                 )
             else:
-                boxRGBA(renderer, adjusted.left, adjusted.top, adjusted.right, adjusted.bottom, *rgba)
+                boxRGBA(
+                    renderer,
+                    adjusted.left,
+                    adjusted.top,
+                    adjusted.right,
+                    adjusted.bottom,
+                    *rgba
+                )
 
     def resize(self, available: Size):
         """
-        Sets the view's frame size, taking into account content size, padding, and borders.
+        Sets the view's frame size, taking into account content size, padding, and
+        borders.
         """
         available = self.env.constrain(available)
         max_w = 0
@@ -302,13 +363,29 @@ class View(EnvironmentalView):
                     self.frame = new_frame
                     self.window.needs_render = True
 
-                self.window.animate(self.env.animation(self._old_frame, self.frame, _set_frame))
+                self.window.animate(
+                    self.env.animation(self._old_frame, self.frame, _set_frame)
+                )
             self._old_frame = None
 
     def position_inside(self, inside: Rect):
         self.frame.origin = Point(
-            inside.left + max(0, int((inside.width - self.frame.width) * self.env.position[Axis.HORIZONTAL])),
-            inside.top + max(0, int((inside.height - self.frame.height) * self.env.position[Axis.VERTICAL])),
+            inside.left
+            + max(
+                0,
+                int(
+                    (inside.width - self.frame.width)
+                    * self.env.position[Axis.HORIZONTAL]
+                ),
+            ),
+            inside.top
+            + max(
+                0,
+                int(
+                    (inside.height - self.frame.height)
+                    * self.env.position[Axis.VERTICAL]
+                ),
+            ),
         )
 
     def layout(self, rect: Rect):
@@ -323,8 +400,9 @@ class View(EnvironmentalView):
         self.draw(renderer, inner)
         frame_check = self.parent.frame if self.parent else self.frame
         for view in self.subviews:
-            # Presumably all our subviews will be contained in our frame, but checking against our parent will allow
-            # us to skip rendering of i.e. scrolled views not in the ScrollView's frame.
+            # Presumably all our subviews will be contained in our frame, but checking
+            # against our parent will allow us to skip rendering of i.e. scrolled views
+            # not in the ScrollView's frame.
             if frame_check.intersects(view.frame):
                 view.render(renderer)
 
@@ -364,7 +442,9 @@ class View(EnvironmentalView):
                 found = view.find(pt, **filters)
                 if found:
                     return found
-            if all(getattr(self, attr, None) == value for attr, value in filters.items()):
+            if all(
+                getattr(self, attr, None) == value for attr, value in filters.items()
+            ):
                 return self
         return None
 

@@ -13,7 +13,6 @@ class TimestampView(pyui.View):
         self.timestamp = datetime.datetime.now()
 
     def content(self):
-        # fmt: off
         yield pyui.VStack()(
             pyui.HStack()(
                 pyui.Text(self.timestamp.value.strftime("%H:%M:%S.%f")),
@@ -23,7 +22,6 @@ class TimestampView(pyui.View):
                 ),
             ),
         )
-        # fmt: on
 
 
 def random_bars(num=5):
@@ -43,25 +41,30 @@ class BarChartView(pyui.View):
         self.bars = random_bars(len(self.bars.value) - 1)
 
     def content(self):
-        # fmt: off
         yield pyui.VStack(spacing=10)(
             pyui.Text("Bar Chart"),
             pyui.Spacer(),
             pyui.HStack(alignment=pyui.Alignment.TRAILING)(
-                pyui.ForEach(self.bars.value, lambda height, idx: (
-                    pyui.Rectangle()(
-                        pyui.Text("{:.0f}%".format(height * 100.0))
+                pyui.ForEach(
+                    self.bars.value,
+                    lambda height, idx: (
+                        pyui.Rectangle()(
+                            pyui.Text("{:.0f}%".format(height * 100.0))
                             .color(230, 230, 230)
                             .background(0, 0, 0, 160)
                             .padding(3)
                             .font(size=11)
                             .radius(2)
-                    ).background(
-                        random.randint(0, 255),
-                        random.randint(0, 255),
-                        random.randint(0, 255)
-                    ).size(height=height).animate(pyui.spring(), 0.3, delay=0.03 * idx)
-                ))
+                        )
+                        .background(
+                            random.randint(0, 255),
+                            random.randint(0, 255),
+                            random.randint(0, 255),
+                        )
+                        .size(height=height)
+                        .animate(pyui.spring(), 0.3, delay=0.03 * idx)
+                    ),
+                )
             ).priority(pyui.Priority.HIGH),
             pyui.HStack()(
                 pyui.Button("Fewer Bars", action=self.fewer_bars),
@@ -69,7 +72,6 @@ class BarChartView(pyui.View):
                 pyui.Button("More Bars", action=self.more_bars),
             ),
         )
-        # fmt: on
 
 
 class ImageSizerView(pyui.View):
@@ -80,24 +82,20 @@ class ImageSizerView(pyui.View):
         return self.scale.value / 100
 
     def content(self):
-        # fmt: off
         yield pyui.VStack(
             pyui.Slider(self.scale, 1, 100),
             pyui.Image("images/python.png").size(width=self.pct, height=self.pct),
         )
-        # fmt: on
 
 
 class DescriptionView(pyui.View):
     description = pyui.State(str, default="")
 
     def content(self):
-        # fmt: off
         yield pyui.VStack(alignment=pyui.Alignment.LEADING, spacing=5)(
             pyui.Text(self.lang),
             pyui.TextField(self.description, "Description for {}".format(self.lang)),
         )
-        # fmt: on
 
 
 class FormView(pyui.View):
@@ -109,8 +107,11 @@ class FormView(pyui.View):
         self.language = ""
 
     def content(self):
-        # fmt: off
-        fg = pyui.Environment("text").color if self.language.value else sdl2.SDL_Color(150, 150, 150)
+        fg = (
+            pyui.Environment("text").color
+            if self.language.value
+            else sdl2.SDL_Color(150, 150, 150)
+        )
         yield pyui.VStack(spacing=20)(
             pyui.HStack()(
                 pyui.TextField(self.language, "Add a new language"),
@@ -119,11 +120,10 @@ class FormView(pyui.View):
                 ).disable(self.language.value == ""),
                 pyui.Spacer(),
             ),
-            pyui.ForEach(self.languages.value, lambda lang: (
-                DescriptionView(lang=lang)
-            )),
+            pyui.ForEach(
+                self.languages.value, lambda lang: (DescriptionView(lang=lang))
+            ),
         )
-        # fmt: on
 
 
 class ListView(pyui.View):
@@ -138,15 +138,14 @@ class ListView(pyui.View):
         self.selection.value = []
 
     def content(self):
-        # fmt: off
         yield pyui.HStack(alignment=pyui.Alignment.LEADING, spacing=20)(
             pyui.VStack(spacing=10, alignment=pyui.Alignment.LEADING)(
                 pyui.ScrollView()(
                     pyui.List(selection=self.selection)(
                         pyui.Text("First Row"),
-                        pyui.ForEach(self.dynamic_items.value, lambda item: (
-                            pyui.Text(item),
-                        )),
+                        pyui.ForEach(
+                            self.dynamic_items.value, lambda item: (pyui.Text(item),)
+                        ),
                     ),
                 ).priority(pyui.Priority.HIGH),
                 pyui.HStack()(
@@ -158,12 +157,10 @@ class ListView(pyui.View):
             pyui.Text("Selected rows: {}".format(self.selection.value)),
             pyui.Spacer(),
         )
-        # fmt: on
 
 
 class DemoView(pyui.View):
     def content(self):
-        # fmt: off
         yield pyui.TabView()(
             TimestampView().padding(20).item("Time"),
             BarChartView().padding(20).item("Bar Chart"),
@@ -171,7 +168,6 @@ class DemoView(pyui.View):
             FormView().padding(20).item("Form"),
             ListView().padding(20).item("Lists"),
         )
-        # fmt: on
 
 
 if __name__ == "__main__":

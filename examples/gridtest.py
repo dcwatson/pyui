@@ -3,17 +3,19 @@ import pyui
 
 class ItemGridView(pyui.View):
     def content(self):
-        # fmt: off
         yield pyui.ScrollView(axis=self.axis)(
             pyui.Grid(num=self.num, size=self.size, axis=self.axis, flex=self.flex)(
-                pyui.ForEach(range(self.item_count), lambda num: (
-                    pyui.Rectangle()(
-                        pyui.Text(num + 1).color(255, 255, 255)
-                    ).background(120, 120, 120).radius(5).animate()
-                ))
+                pyui.ForEach(
+                    range(self.item_count),
+                    lambda num: (
+                        pyui.Rectangle()(pyui.Text(num + 1).color(255, 255, 255))
+                        .background(120, 120, 120)
+                        .radius(5)
+                        .animate()
+                    ),
+                )
             )
         )
-        # fmt: on
 
 
 class GridTest(pyui.View):
@@ -25,7 +27,6 @@ class GridTest(pyui.View):
     flex = pyui.State(default=False)
 
     def content(self):
-        # fmt: off
         if self.size_or_num.value == 0:
             size = None
             num = self.num.value
@@ -42,7 +43,9 @@ class GridTest(pyui.View):
                 pyui.HStack(
                     pyui.Text("Number of items"),
                     pyui.Spacer(),
-                    pyui.Text(self.item_count.value).color(128, 128, 128).priority("high"),
+                    pyui.Text(self.item_count.value)
+                    .color(128, 128, 128)
+                    .priority("high"),
                 ),
                 pyui.Slider(self.item_count, maximum=200),
                 pyui.Text("Fill rows/columns by"),
@@ -55,15 +58,23 @@ class GridTest(pyui.View):
                     pyui.Spacer(),
                     pyui.Text(self.num.value).color(128, 128, 128).priority("high"),
                 ),
-                pyui.Slider(self.num, minimum=1, maximum=10).disable(self.size_or_num.value == 1),
+                pyui.Slider(self.num, minimum=1, maximum=10).disable(
+                    self.size_or_num.value == 1
+                ),
                 pyui.HStack(
                     pyui.Text("Item size"),
                     pyui.Spacer(),
                     pyui.Text(self.size.value).color(128, 128, 128).priority("high"),
                 ),
-                pyui.Slider(self.size, minimum=50, maximum=200).disable(self.size_or_num.value == 0),
-                pyui.Toggle(self.flex, label="Adjust size to fit").disable(self.size_or_num.value == 0),
-            ).padding(10).size(width=300),
+                pyui.Slider(self.size, minimum=50, maximum=200).disable(
+                    self.size_or_num.value == 0
+                ),
+                pyui.Toggle(self.flex, label="Adjust size to fit").disable(
+                    self.size_or_num.value == 0
+                ),
+            )
+            .padding(10)
+            .size(width=300),
             ItemGridView(
                 item_count=self.item_count.value,
                 size=size,
@@ -72,7 +83,6 @@ class GridTest(pyui.View):
                 flex=self.flex.value,
             ),
         )
-        # fmt: on
 
 
 if __name__ == "__main__":

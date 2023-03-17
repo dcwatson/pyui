@@ -56,7 +56,8 @@ class Font:
             raise Exception("Could not load font: {}".format(path))
         TTF_SetFontHinting(self.font, TTF_HINTING_LIGHT)
         self.line_height = TTF_FontLineSkip(self.font)
-        # A cache of surfaces that have been loaded for measuring, but not yet loaded into a texture.
+        # A cache of surfaces that have been loaded for measuring, but not yet loaded
+        # into a texture.
         self.surfaces = {}
         # A cache of loaded textures and sizes per glyph.
         self.glyphs = {}
@@ -69,7 +70,9 @@ class Font:
         for directory in search_dirs:
             full_path = os.path.join(directory, path)
             if os.path.exists(full_path):
-                return TTF_OpenFont(full_path.encode("utf-8"), math.ceil(size * self.scale))
+                return TTF_OpenFont(
+                    full_path.encode("utf-8"), math.ceil(size * self.scale)
+                )
 
     def __del__(self):
         TTF_CloseFont(self.font)
@@ -83,19 +86,27 @@ class Font:
         if ch in self.glyphs:
             return self.glyphs[ch][1]
         elif ch not in self.surfaces:
-            surface = TTF_RenderGlyph_Blended(self.font, ch, sdl2.SDL_Color(255, 255, 255))
+            surface = TTF_RenderGlyph_Blended(
+                self.font, ch, sdl2.SDL_Color(255, 255, 255)
+            )
             self.surfaces[ch] = (surface, Size(surface.contents.w, surface.contents.h))
         return self.surfaces[ch][1]
 
     def glyph(self, renderer, ch):
         assert isinstance(ch, int)
         if ch not in self.glyphs:
-            # Pop the surface out of the cache and load it into a texture and the glyph cache.
+            # Pop the surface out of the cache and load it into a texture and the glyph
+            # cache.
             surface, size = self.surfaces.pop(ch, (None, None))
             if surface is None:
-                surface = TTF_RenderGlyph_Blended(self.font, ch, sdl2.SDL_Color(255, 255, 255))
+                surface = TTF_RenderGlyph_Blended(
+                    self.font, ch, sdl2.SDL_Color(255, 255, 255)
+                )
                 size = Size(surface.contents.w, surface.contents.h)
-            self.glyphs[ch] = (sdl2.SDL_CreateTextureFromSurface(renderer, surface), size)
+            self.glyphs[ch] = (
+                sdl2.SDL_CreateTextureFromSurface(renderer, surface),
+                size,
+            )
             sdl2.SDL_FreeSurface(surface)
         return self.glyphs[ch]
 
@@ -106,8 +117,9 @@ class Font:
 
     def words(self, text, kerning=True):
         """
-        Yields a series of words (start/end index range) and the width of the word. Words are automatically broken by
-        punctuation, spaces, or newlines. Unprintable characters are skipped (but break words).
+        Yields a series of words (start/end index range) and the width of the word.
+        Words are automatically broken by punctuation, spaces, or newlines. Unprintable
+        characters are skipped (but break words).
         """
         start = 0
         width = 0
@@ -129,10 +141,15 @@ class Font:
                     yield start, idx, width
                 start = idx + 1
                 width = 0
-                # Leave prev alone, so the next letter kerns over the unprintable character.
+                # Leave prev alone, so the next letter kerns over the unprintable
+                # character.
             else:
                 size = self.glyph_size(code)
-                kern = TTF_GetFontKerningSizeGlyphs(self.font, prev, code) if kerning and prev else 0
+                kern = (
+                    TTF_GetFontKerningSizeGlyphs(self.font, prev, code)
+                    if kerning and prev
+                    else 0
+                )
                 if code == 32:
                     # Space, break word.
                     if idx > start:
@@ -155,7 +172,8 @@ class Font:
 
     def layout(self, text, width, kerning=True, wrap=True):
         """
-        Yields a series of lines, laying out text with a maximum width. Each line contains 0 or more tuples containing:
+        Yields a series of lines, laying out text with a maximum width. Each line
+        contains 0 or more tuples containing:
             (index_in_text, code_point, start_x, kerning, max_x)
         """
         x = 0
@@ -180,7 +198,11 @@ class Font:
                     continue
                 if code == 32 and continuation:
                     continue
-                kern = TTF_GetFontKerningSizeGlyphs(self.font, prev, code) if kerning and prev else 0
+                kern = (
+                    TTF_GetFontKerningSizeGlyphs(self.font, prev, code)
+                    if kerning and prev
+                    else 0
+                )
                 size = self.glyph_size(code)
                 if wrap and (x + size.w + kern > width):
                     prev = None
@@ -197,11 +219,12 @@ class Font:
 
     def measure(self, text, width=None, kerning=True, wrap=True):
         """
-        Returns how much space the given text would take up when rendered, optionally with a width constraint.
+        Returns how much space the given text would take up when rendered, optionally
+        with a width constraint.
         """
         max_x = 0
         y = 0
-        for line in self.layout(text, width or 2 ** 14, kerning=kerning, wrap=wrap):
+        for line in self.layout(text, width or 2**14, kerning=kerning, wrap=wrap):
             if line:
                 # Take the maximum extent of the last character on each line.
                 max_x = max(max_x, line[-1][-1])
@@ -210,7 +233,8 @@ class Font:
 
     def find(self, text, rect, pt, kerning=True, lines=None):
         """
-        Given text laid out inside rect, finds the index in the text under the given point.
+        Given text laid out inside rect, finds the index in the text under the given
+        point.
         """
         y = rect.top
         if lines is None:
@@ -224,10 +248,20 @@ class Font:
             y += self.line_height
         return None
 
-    def draw(self, renderer, text, rect, color, selected=None, kerning=True, wrap=True, lines=None):
+    def draw(
+        self,
+        renderer,
+        text,
+        rect,
+        color,
+        selected=None,
+        kerning=True,
+        wrap=True,
+        lines=None,
+    ):
         """
-        Renders text in the specified rect, using the specified color. If specified, selected is a set of indexes in
-        text that should be highlighted.
+        Renders text in the specified rect, using the specified color. If specified,
+        selected is a set of indexes in text that should be highlighted.
         """
         y = rect.top
         if lines is None:
@@ -242,6 +276,8 @@ class Font:
                 if selected and idx in selected:
                     sdl2.SDL_SetRenderDrawColor(renderer, 20, 60, 120, 255)
                     sdl2.SDL_SetRenderDrawBlendMode(renderer, sdl2.SDL_BLENDMODE_ADD)
-                    sdl2.SDL_RenderFillRect(renderer, sdl2.SDL_Rect(rect.left + x, y, size.w + kern, size.h))
+                    sdl2.SDL_RenderFillRect(
+                        renderer, sdl2.SDL_Rect(rect.left + x, y, size.w + kern, size.h)
+                    )
             y += self.line_height
         return lines

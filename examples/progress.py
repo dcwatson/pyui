@@ -5,13 +5,11 @@ class ProgressTest(pyui.View):
     current = pyui.State(default=50)
 
     def content(self):
-        # fmt: off
         yield pyui.VStack()(
             pyui.Slider(self.current),
             pyui.ProgressBar(self.current),
             pyui.Text(self.current.value),
         ).padding(20)
-        # fmt: on
 
 
 if __name__ == "__main__":

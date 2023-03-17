@@ -17,7 +17,17 @@ class Settings:
 
 
 class Window:
-    def __init__(self, app, title, view, width=640, height=480, resize=True, border=True, pack=False):
+    def __init__(
+        self,
+        app,
+        title,
+        view,
+        width=640,
+        height=480,
+        resize=True,
+        border=True,
+        pack=False,
+    ):
         self.app = app
         self.pack = pack
         self.needs_layout = True
@@ -36,7 +46,9 @@ class Window:
             flags,
         )
         self.id = sdl2.SDL_GetWindowID(self.win)
-        self.renderer = sdl2.SDL_CreateRenderer(self.win, -1, sdl2.SDL_RENDERER_ACCELERATED)
+        self.renderer = sdl2.SDL_CreateRenderer(
+            self.win, -1, sdl2.SDL_RENDERER_ACCELERATED
+        )
         self.view = view
         self.view._window = self
         self.view.env.theme.prepare(self.renderer)
@@ -44,21 +56,34 @@ class Window:
         self.menu = None
         self.background = self.view.env.theme.config["background"]
         # self.view.dump()
-        # Which view is currently tracking mouse events (i.e. was clicked but not released yet)
+        # Which view is currently tracking mouse events (i.e. was clicked but not
+        # released yet)
         self.tracking = None
         # Which view has keyboard focus.
         self.focus = None
         # List of running animations.
         self.animations = []
         # Listen for events
-        self.app.listen(sdl2.SDL_MOUSEBUTTONDOWN, "button", self.mousedown, check=self.check_window)
+        self.app.listen(
+            sdl2.SDL_MOUSEBUTTONDOWN, "button", self.mousedown, check=self.check_window
+        )
         self.app.listen(sdl2.SDL_MOUSEBUTTONUP, "button", self.mouseup)
-        self.app.listen(sdl2.SDL_MOUSEMOTION, "motion", self.mousemotion, check=self.check_window)
-        self.app.listen(sdl2.SDL_MOUSEWHEEL, "wheel", self.mousewheel, check=self.check_window)
-        self.app.listen(sdl2.SDL_WINDOWEVENT, "window", self.window_event, check=self.check_window)
-        self.app.listen(sdl2.SDL_KEYDOWN, "key", self.key_event, check=self.check_window)
+        self.app.listen(
+            sdl2.SDL_MOUSEMOTION, "motion", self.mousemotion, check=self.check_window
+        )
+        self.app.listen(
+            sdl2.SDL_MOUSEWHEEL, "wheel", self.mousewheel, check=self.check_window
+        )
+        self.app.listen(
+            sdl2.SDL_WINDOWEVENT, "window", self.window_event, check=self.check_window
+        )
+        self.app.listen(
+            sdl2.SDL_KEYDOWN, "key", self.key_event, check=self.check_window
+        )
         self.app.listen(sdl2.SDL_KEYUP, "key", self.key_event, check=self.check_window)
-        self.app.listen(sdl2.SDL_TEXTINPUT, "text", self.text_event, check=self.check_window)
+        self.app.listen(
+            sdl2.SDL_TEXTINPUT, "text", self.text_event, check=self.check_window
+        )
 
     def check_window(self, event):
         return event.windowID == self.id
@@ -114,9 +139,10 @@ class Window:
 
     def animate(self, animation):
         self.animations.append(animation)
-        # This is kind of a hack. The animations are triggered during layout, where the new frames are computed.
-        # If we render that layout before starting the animation, it flashes at the new location, then back to the
-        # original location and starts animating.
+        # This is kind of a hack. The animations are triggered during layout, where the
+        # new frames are computed. If we render that layout before starting the
+        # animation, it flashes at the new location, then back to the original location
+        # and starts animating.
         self.needs_render = False
 
     def render(self, force=False):
@@ -124,7 +150,9 @@ class Window:
             return
         # Set this up front, so that the act of rendering can request another render.
         self.needs_render = False
-        sdl2.SDL_SetRenderDrawColor(self.renderer, *self.background, sdl2.SDL_ALPHA_OPAQUE)
+        sdl2.SDL_SetRenderDrawColor(
+            self.renderer, *self.background, sdl2.SDL_ALPHA_OPAQUE
+        )
         sdl2.SDL_RenderClear(self.renderer)
         self.view.render(self.renderer)
         focus_view = self.view.resolve(self.focus)
@@ -239,7 +267,9 @@ class Window:
             focus_view = self.view
         if event.type == sdl2.SDL_KEYDOWN:
             if event.keysym.sym == sdl2.SDLK_TAB:
-                self.advance_focus(-1 if (event.keysym.mod & sdl2.KMOD_SHIFT) != 0 else 1)
+                self.advance_focus(
+                    -1 if (event.keysym.mod & sdl2.KMOD_SHIFT) != 0 else 1
+                )
             elif event.keysym.sym == sdl2.SDLK_SPACE:
                 if focus_view.interactive:
                     await focus_view.click(focus_view.frame.center)
@@ -299,7 +329,8 @@ class Application:
         rend_w = ctypes.c_int()
         sdl2.SDL_GetWindowSize(win, ctypes.byref(win_w), None)
         sdl2.SDL_GetRendererOutputSize(rend, ctypes.byref(rend_w), None)
-        # Windows HiDPI is silly like this. You get back different window sizes than you put in.
+        # Windows HiDPI is silly like this. You get back different window sizes than you
+        # put in.
         self.win_scale = win_w.value / 100.0
         Environment.scale.default = rend_w.value / 100.0
         sdl2.SDL_DestroyRenderer(rend)
@@ -313,7 +344,8 @@ class Application:
         return win
 
     def run(self, switch=1.0):
-        # This significantly improves a bunch of the tight layout loops with lots of views.
+        # This significantly improves a bunch of the tight layout loops with lots of
+        # views.
         sys.setswitchinterval(switch)
         asyncio.run(self.run_async())
 
@@ -322,7 +354,9 @@ class Application:
             listener(event)
 
     def listen(self, event_type, event_attr, handler, check=None):
-        self.listeners.setdefault(event_type, []).append(EventListener(event_attr, handler, check=check))
+        self.listeners.setdefault(event_type, []).append(
+            EventListener(event_attr, handler, check=check)
+        )
 
     async def run_async(self):
         self.running = True
@@ -346,7 +380,8 @@ class Application:
         last_tick = loop.time()
         while self.running:
             sdl2.SDL_PumpEvents()
-            # dt here will be how much time since the last loop minus any event handling.
+            # dt here will be how much time since the last loop minus any event
+            # handling.
             dt = loop.time() - last_tick
             await asyncio.sleep(max(0, frame_time - dt))
             # dt here will be how much time since the last call to tick.

@@ -17,7 +17,7 @@ setup(
     author="Dan Watson",
     author_email="dcwatson@gmail.com",
     url="https://github.com/dcwatson/pyui",
-    project_urls={"Documentation": "https://dcwatson.github.io/pyui/"},
+    project_urls={"Documentation": "https://pyui.net"},
     license="BSD",
     packages=find_packages(),
     include_package_data=True,

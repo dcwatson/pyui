@@ -39,16 +39,29 @@ class SlicedAsset:
             Rect((self.center.right, 0), (self.w - self.center.right, self.center.top)),
             Rect((0, self.center.top), (self.center.left, self.center.height)),
             self.center,
-            Rect((self.center.right, self.center.top), (self.w - self.center.right, self.center.height)),
-            Rect((0, self.center.bottom), (self.center.left, self.h - self.center.bottom)),
-            Rect((self.center.left, self.center.bottom), (self.center.width, self.h - self.center.bottom)),
-            Rect((self.center.right, self.center.bottom), (self.w - self.center.right, self.h - self.center.bottom)),
+            Rect(
+                (self.center.right, self.center.top),
+                (self.w - self.center.right, self.center.height),
+            ),
+            Rect(
+                (0, self.center.bottom), (self.center.left, self.h - self.center.bottom)
+            ),
+            Rect(
+                (self.center.left, self.center.bottom),
+                (self.center.width, self.h - self.center.bottom),
+            ),
+            Rect(
+                (self.center.right, self.center.bottom),
+                (self.w - self.center.right, self.h - self.center.bottom),
+            ),
         ]
 
     def get_texture(self, renderer):
         key = id(renderer)
         if key not in self.texture_cache:
-            self.texture_cache[key] = sdl2.SDL_CreateTextureFromSurface(renderer, self.surface)
+            self.texture_cache[key] = sdl2.SDL_CreateTextureFromSurface(
+                renderer, self.surface
+            )
         return self.texture_cache[key]
 
     def render(self, renderer, rect, alpha=255, scale=1.0):
@@ -78,4 +91,6 @@ class SlicedAsset:
         for idx in range(len(s)):
             src = s[idx]
             dst = rects[idx]
-            sdl2.SDL_RenderCopy(renderer, texture, ctypes.byref(src.sdl), ctypes.byref(dst.sdl))
+            sdl2.SDL_RenderCopy(
+                renderer, texture, ctypes.byref(src.sdl), ctypes.byref(dst.sdl)
+            )

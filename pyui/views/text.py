@@ -5,7 +5,9 @@ from pyui.geom import Size
 
 from .base import View
 
-DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
+DATA_DIR = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data"
+)
 
 
 class Text(View):
@@ -38,7 +40,9 @@ class Text(View):
 
     def draw(self, renderer, rect):
         super().draw(renderer, rect)
-        self._line_cache = self._font.draw(renderer, self.text, rect, self.env.blended_color, lines=self._line_cache)
+        self._line_cache = self._font.draw(
+            renderer, self.text, rect, self.env.blended_color, lines=self._line_cache
+        )
 
 
 class Icon(Text):
